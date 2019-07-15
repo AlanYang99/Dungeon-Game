@@ -1,5 +1,9 @@
 package unsw.dungeon;
-
+/*
+ * [BC] I want to get rid of this class, splitting it into 2 interfaces (StaticEntity and MovableEntity)
+ * 		MovableEntity inherits from static entity and would have similar methods
+ * 		Methods below are default methods in StaticEntity
+ */
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -39,4 +43,5 @@ public class Entity {
     public int getX() {
         return x().get();
     }
+    
 }

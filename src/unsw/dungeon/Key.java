@@ -1,8 +1,7 @@
 package unsw.dungeon;
 
-public class Key implements StaticEntity {
+public class Key extends StaticEntity {
 	
-    private Dungeon dungeon;
     private int id;
 
     /**
@@ -12,9 +11,14 @@ public class Key implements StaticEntity {
      * @param id 
      */
     public Key (Dungeon dungeon, int x, int y, int id) {
-        setup(x, y);
-        this.dungeon = dungeon;
+        super(dungeon, x, y);
         this.id = id;
     }
+
+	@Override
+	public void setState(State state) {
+		throw new UnsupportedOperationException("Entity does not have a state.");
+		
+	}
 
 }

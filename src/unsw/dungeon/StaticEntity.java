@@ -3,33 +3,41 @@ package unsw.dungeon;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public interface StaticEntity{
+public abstract class StaticEntity {
     
+	Dungeon dungeon;
+	SimpleIntegerProperty x,y;
+	State state;
+	
     /**
      *  Create an entity positioned in square (x,y)
      *  Use this method in all implementing class constructors
      *  @param x
      *  @param y
      */
-    default public void setup(int x, int y) {
+    public StaticEntity (Dungeon dungeon, int x, int y) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
+        this.dungeon = dungeon;
+        this.state = new Closed();
     }
 
-    default public IntegerProperty x() {
+    public IntegerProperty x() {
         return x;
     }
 
-    default public IntegerProperty y() {
+    public IntegerProperty y() {
         return y;
     }
 
-    default public int getY() {
+    public int getY() {
         return y().get();
     }
 
-    default public int getX() {
+    public int getX() {
         return x().get();
     }
+    
+    public abstract void setState(State state); 
 
 }

@@ -1,8 +1,7 @@
 package unsw.dungeon;
 
-public class Sword implements StaticEntity {
+public class Sword extends StaticEntity {
 	
-	private Dungeon dungeon;
 	private int hitsRemaining;
 	
     /**
@@ -11,8 +10,14 @@ public class Sword implements StaticEntity {
      * @param y
      */
     public Sword(Dungeon dungeon, int x, int y) {
-        setup(x, y);
+        super(dungeon, x, y);
         hitsRemaining = 5;
     }
+    
+	@Override
+	public void setState(State state) {
+		throw new UnsupportedOperationException("Entity does not have a state.");
+		
+	}
 
 }

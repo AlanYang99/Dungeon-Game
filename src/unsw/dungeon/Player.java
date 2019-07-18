@@ -1,7 +1,7 @@
 package unsw.dungeon;
 
 
-public class Player implements MovableEntity {
+public class Player extends MovableEntity {
 
     private Dungeon dungeon;
 
@@ -11,9 +11,14 @@ public class Player implements MovableEntity {
      * @param y
      */
     public Player(Dungeon dungeon, int x, int y) {
-        setup(x, y);
-        this.dungeon = dungeon;
+        super(dungeon, x, y);
     }
+    
+	@Override
+	public void setState(State state) {
+		throw new UnsupportedOperationException("Entity does not have a state.");
+		
+	}
 
 
 }

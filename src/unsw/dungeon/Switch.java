@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public class Switch implements StaticEntity, StatefulEntity {
+public class Switch extends StaticEntity {
 	
 	private Dungeon dungeon;
 
@@ -10,19 +10,12 @@ public class Switch implements StaticEntity, StatefulEntity {
      * @param y
      */
     public Switch(Dungeon dungeon, int x, int y) {
-        setup(x, y);
-        this.dungeon = dungeon;
+        super(dungeon, x, y);
     }
 
 	@Override
-	public void setOpen() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setClose() {
-		// TODO Auto-generated method stub
+	public void setState(State state) {
+		//TODO
 		
 	}
 

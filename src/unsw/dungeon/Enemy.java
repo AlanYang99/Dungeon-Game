@@ -1,8 +1,7 @@
 package unsw.dungeon;
 
-public class Enemy implements MovableEntity {
+public class Enemy extends MovableEntity {
 
-    private Dungeon dungeon;
 
     /**
      * Create an enemy positioned in square (x,y)
@@ -10,8 +9,13 @@ public class Enemy implements MovableEntity {
      * @param y
      */
     public Enemy(Dungeon dungeon, int x, int y) {
-        setup(x, y);
-        this.dungeon = dungeon;
+        super(dungeon, x, y);
     }
+
+	@Override
+	public void setState(State state) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

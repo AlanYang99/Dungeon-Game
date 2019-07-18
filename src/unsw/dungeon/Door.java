@@ -1,8 +1,7 @@
 package unsw.dungeon;
 
-public class Door implements StaticEntity, StatefulEntity {
-	  
-    private Dungeon dungeon;
+public class Door extends StaticEntity {
+
     private int id;
 
     /**
@@ -12,19 +11,12 @@ public class Door implements StaticEntity, StatefulEntity {
      * @param id 
      */
     public Door (Dungeon dungeon, int x, int y, int id) {
-        setup(x, y);
-        this.dungeon = dungeon;
+        super(dungeon, x, y);
         this.id = id;
     }
 
 	@Override
-	public void setOpen() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setClose() {
+	public void setState(State state) {
 		// TODO Auto-generated method stub
 		
 	}

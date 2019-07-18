@@ -1,8 +1,7 @@
 package unsw.dungeon;
 
-public class Exit implements StaticEntity, StatefulEntity {
-	
-	private Dungeon dungeon;
+public class Exit extends StaticEntity {
+
 
     /**
      * Create an exit positioned in square (x,y)
@@ -10,18 +9,11 @@ public class Exit implements StaticEntity, StatefulEntity {
      * @param y
      */
     public Exit(Dungeon dungeon, int x, int y) {
-        setup(x, y);
-        this.dungeon = dungeon;
+        super(dungeon, x, y);
     }
 
 	@Override
-	public void setOpen() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setClose() {
+	public void setState(State state) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -1,12 +1,15 @@
 package unsw.dungeon;
 
-public class Wall implements StaticEntity {
-	
-	private Dungeon dungeon;
+public class Wall extends StaticEntity {
 
     public Wall(Dungeon dungeon, int x, int y) {
-        setup(x, y);
-        this.dungeon = dungeon;
+        super(dungeon, x, y);
     }
+    
+	@Override
+	public void setState(State state) {
+		throw new UnsupportedOperationException("Entity does not have a state.");
+		
+	}
 
 }

@@ -18,14 +18,17 @@ import java.util.List;
 public class Dungeon {
 
     private int width, height;
-    private List<Entity> entities;
+    // private List<Entity> entities;
     private Player player;
+    private List<Entity>[][] map;
 
-    public Dungeon(int width, int height) {
+    @SuppressWarnings("unchecked")
+	public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
-        this.entities = new ArrayList<>();
+        // this.entities = new ArrayList<>();
         this.player = null;
+        this.map = new ArrayList[width][height];
     }
 
     public int getWidth() {
@@ -43,8 +46,41 @@ public class Dungeon {
     public void setPlayer(Player player) {
         this.player = player;
     }
+    
+    public List<Entity>[][] getMap() {
+        return map;
+    }
 
     public void addEntity(Entity entity) {
-        entities.add(entity);
+        // entities.add(entity);
+    	map[entity.getX()][entity.getY()].add(entity);
     }
+    
+    
+    
+    /**
+     *  Returns true if the given coordinate exists, otherwise  false.
+     *  @inv	width > 0 && height > 0
+     *  	
+     *  @param	x
+     *  @param	y
+     */
+    public boolean check(int x, int y) {
+    	if (x >= 0 && x < width && y >= 0 && y < height) return true;
+    	return false;	
+    }
+    
+    /**
+     *  Returns item found at the coordinate (x,y), otherwise null.
+     *  @inv 	width > 0 && height > 0
+     *  @inv	only one entity can be on the coordinate
+     *  
+     *  @param 	x
+     *  @param 	y
+     */
+    public List<Entity> getEntities (int x, int y) {
+    	if (check(x,y) == false || map[x][y] == null) return null;
+    	return map[x][y];
+    }
+    
 }

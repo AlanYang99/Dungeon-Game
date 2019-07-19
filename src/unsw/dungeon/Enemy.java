@@ -12,10 +12,4 @@ public class Enemy extends MovableEntity {
         super(dungeon, x, y);
     }
 
-	@Override
-	public void setState(State state) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

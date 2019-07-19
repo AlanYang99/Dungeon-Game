@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public class Door extends StaticEntity {
+public class Door extends Entity {
 
     private int id;
 
@@ -14,11 +14,5 @@ public class Door extends StaticEntity {
         super(dungeon, x, y);
         this.id = id;
     }
-
-	@Override
-	public void setState(State state) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

@@ -11,10 +11,4 @@ public class Boulder extends MovableEntity {
         super(dungeon, x, y);
     }
 
-	@Override
-	public void setState(State state) {
-		throw new UnsupportedOperationException("Entity does not have a state.");
-		
-	}
-
 }

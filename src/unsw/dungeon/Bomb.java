@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public class Bomb extends StaticEntity { 
+public class Bomb extends Entity { 
 
     /**
      * Create an bomb positioned in square (x,y)
@@ -9,11 +9,6 @@ public class Bomb extends StaticEntity {
      */
     public Bomb(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
-    }
-    
-    @Override
-    public void setState(State state) {
-    	//TODO
     }
 
 }

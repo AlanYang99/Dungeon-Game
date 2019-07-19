@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public class Potion extends StaticEntity {
+public class Potion extends Entity {
 
     /**
      * Create a potion positioned in square (x,y)
@@ -10,11 +10,5 @@ public class Potion extends StaticEntity {
     public Potion(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
     }
-    
-	@Override
-	public void setState(State state) {
-		//TODO
-		
-	}
 
 }

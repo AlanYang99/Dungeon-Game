@@ -13,10 +13,4 @@ public class Switch extends StaticEntity {
         super(dungeon, x, y);
     }
 
-	@Override
-	public void setState(State state) {
-		//TODO
-		
-	}
-
 }

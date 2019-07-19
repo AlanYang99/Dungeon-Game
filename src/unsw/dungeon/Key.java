@@ -15,10 +15,4 @@ public class Key extends StaticEntity {
         this.id = id;
     }
 
-	@Override
-	public void setState(State state) {
-		throw new UnsupportedOperationException("Entity does not have a state.");
-		
-	}
-
 }

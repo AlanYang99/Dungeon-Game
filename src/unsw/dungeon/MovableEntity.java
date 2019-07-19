@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public abstract class MovableEntity extends StaticEntity {
+public abstract class MovableEntity extends Entity {
 	
 	
 	public MovableEntity(Dungeon dungeon, int x, int y) {
@@ -28,7 +28,4 @@ public abstract class MovableEntity extends StaticEntity {
             x().set(getX() + 1);
     }
     
-    public void setOpen();
-    
-    public void setClose();
 }

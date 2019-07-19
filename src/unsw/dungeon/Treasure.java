@@ -1,19 +1,19 @@
 package unsw.dungeon;
 
-public class Boulder extends MovableEntity {
-
+public class Treasure extends Entity {
+	
     /**
-     * Create an boulder positioned in square (x,y)
+     * Create a treasure positioned in square (x,y)
      * @param x
      * @param y
      */
-    public Boulder (Dungeon dungeon, int x, int y) {
+    public Treasure(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
     }
 
 	@Override
 	public boolean collect() {
-		return false;
+		return true;
 	}
 
 	@Override

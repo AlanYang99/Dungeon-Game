@@ -15,4 +15,15 @@ public class Door extends Entity {
         this.id = id;
     }
 
+	@Override
+	public boolean collect() {
+		return false;
+	}
+
+	@Override
+	public boolean drop(Entity item) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

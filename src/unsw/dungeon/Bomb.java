@@ -11,4 +11,15 @@ public class Bomb extends Entity {
         super(dungeon, x, y);
     }
 
+	@Override
+	public boolean collect() {
+		return true;
+	}
+
+	@Override
+	public boolean drop(Entity item) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

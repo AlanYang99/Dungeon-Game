@@ -12,4 +12,15 @@ public class Enemy extends MovableEntity {
         super(dungeon, x, y);
     }
 
+	@Override
+	public boolean collect() {
+		return false;
+	}
+
+	@Override
+	public boolean drop(Entity item) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

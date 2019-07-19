@@ -11,7 +11,7 @@ public abstract class MovableEntity extends Entity {
 	}
 	
     public void moveUp() {
-    	Dictionary<String,Entity> surrondings = getSurrounding();
+//    	Dictionary<String,Entity> surrondings = getSurrounding();
     	// TODO
         if (getY() > 0)
             y().set(getY() - 1);

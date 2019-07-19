@@ -39,6 +39,7 @@ public abstract class Entity {
     public int getX() {
         return x().get();
     }
+    
     /**
      * Returns a list of items in order of up/down/left/right. If there is no coordinate in a given direction, or no entity, it returns null
      * @inv		width > 0 && height > 0
@@ -61,6 +62,7 @@ public abstract class Entity {
     /**
      * Returns a boolean based on whether an item has been collected by a player
      * Item 	|	Collectable
+     * ---------+-------------------------------------------------------------------
      * Wall		|	No
      * Exit		|	No
      * Door		|	No
@@ -78,14 +80,30 @@ public abstract class Entity {
      */
     public boolean collect() {
     	return false;
-    }
-
+    }  
+	
+    /**
+     * Returns a boolean based on whether an item has been used by a player.
+     * Only items that can be collected may be used. After usage expires, the item must be expired (ie. removed).
+     * 
+     * Usable items
+     * 	Key
+     * 	Sword
+     * 	Bomb
+     * 	
+     * Note a potion is used when it is collected (hence will return false in this method)
+     */
+	public boolean use() {
+		return false;
+	}
+	
 	/**
 	 * Returns a boolean based on whether share a grid with any other entity.
 	 * Item 	|	Sharable
+	 * ---------+-------------------------------------------------------------------
 	 * Wall		|	No
 	 * Exit		|	Player only
-	 * Door		|	No
+	 * Door		|	Player only
 	 * Switch	|	Sword, Potion, Key, Treasure, Bomb, Player, Enemy and Boulder only
 	 * Boulder	|	Switch only
 	 * Sword	|	Switch only
@@ -94,14 +112,13 @@ public abstract class Entity {
 	 * Treasure	|	Switch only
 	 * Bomb		|	Switch only
 	 * Enemy	|	Switch and Player only
-	 * Player	| 	Exit, Switch and Enemy only
+	 * Player	| 	Switch Exit, and Enemy only
 	 * 
 	 * @inv		width > 0 && height > 0
 	 */
-
-	public boolean drop() {
-		return false;
-	}
+    public boolean share(Entity entity) {
+    	return false;
+    }
 	
     
 }

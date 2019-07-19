@@ -15,11 +15,18 @@ public class Bomb extends Entity {
 	public boolean collect() {
 		return true;
 	}
+	
+	@Override
+	public boolean use() {
+		if (dungeon.getPlayer().getNumBombs() == 0) return false;
+		// TODO
+		return true;
+	}
 
 	@Override
-	public boolean drop(Entity item) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    public boolean share(Entity item) {
+    	if (item instanceof Switch) return true;
+		return super.share(item);
+    }
 
 }

@@ -1,27 +1,42 @@
 package unsw.dungeon;
 
 public class Sword extends Entity {
-	private int hits_remaining;
-	
-    /**
+	private static final int HITS = 5;
+	private int hits; // hits remaining
+
+	/**
      * Create an sword positioned in square (x,y)
      * @param x
      * @param y
      */
     public Sword(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
-        hits_remaining = 5;
+        hits = HITS;
     }
-
-	@Override
-	public boolean collect() {
-		return true;
+    
+	
+    public int getHits() {
+		return hits;
 	}
 
 	@Override
-	public boolean drop(Entity item) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean collect() {
+		if (dungeon.getPlayer().getSword() != null) return false;
+		
+		dungeon.getPlayer().setSword(this);
+		return true;
+	}
+	
+	@Override
+	/**
+     * @inv		If player has a sword, hits remaining is > 0
+     */
+	public boolean use() {
+		if(dungeon.getPlayer().getSword() == null) return false;
+		
+		hits --;
+		if (hits == 0) dungeon.getPlayer().setSword(null);
+		return true;
 	}
 
 }

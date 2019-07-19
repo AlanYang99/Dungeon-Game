@@ -14,16 +14,11 @@ public class Door extends Entity {
         super(dungeon, x, y);
         this.id = id;
     }
-
+    
 	@Override
-	public boolean collect() {
-		return false;
-	}
-
-	@Override
-	public boolean drop(Entity item) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    public boolean share(Entity item) {
+    	if (item instanceof Player) return true;
+		return super.share(item);
+    }
 
 }

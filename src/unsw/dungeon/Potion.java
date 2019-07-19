@@ -15,10 +15,11 @@ public class Potion extends Entity {
 	public boolean collect() {
 		return true;
 	}
-
+	
 	@Override
-	public boolean drop(Entity item) {
-		return false;
-	}
+    public boolean share(Entity item) {
+    	if (item instanceof Switch) return true;
+		return super.share(item);
+    }
 
 }

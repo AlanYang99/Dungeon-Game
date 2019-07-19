@@ -12,14 +12,11 @@ public class Switch extends Entity {
     }
 
 	@Override
-	public boolean collect() {
+    public boolean share(Entity entity) {
+    	//TODO
 		return false;
-	}
+    }
 
-	@Override
-	public boolean drop(Entity item) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 
 }

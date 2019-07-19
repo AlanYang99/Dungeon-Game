@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import java.util.*;
+
 public abstract class MovableEntity extends Entity {
 	
 	
@@ -9,7 +11,8 @@ public abstract class MovableEntity extends Entity {
 	}
 	
     public void moveUp() {
-    	Dictonary<String,Entity> surrondings = getSurrounding();
+    	Dictionary<String,Entity> surrondings = getSurrounding();
+    	// TODO
         if (getY() > 0)
             y().set(getY() - 1);
     }

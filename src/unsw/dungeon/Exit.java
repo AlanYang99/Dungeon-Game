@@ -11,5 +11,11 @@ public class Exit extends Entity {
     public Exit(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
     }
+    
+	@Override
+    public boolean share(Entity item) {
+    	if (item instanceof Player) return true;
+		return super.share(item);
+    }
 
 }

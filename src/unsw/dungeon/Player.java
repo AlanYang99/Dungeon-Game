@@ -94,14 +94,10 @@ public class Player extends MovableEntity {
 	 *  ==============================================
 	 */
     
-    @Override
-    public boolean collect() {
-    	return false;
-    }
-    
 	@Override
-	public boolean drop(Entity item) {
-		return false;
-	}
+    public boolean share(Entity item) {
+    	if (item instanceof Switch || item instanceof Exit || item instanceof Enemy ) return true;
+		return super.share(item);
+    }
 
 }

@@ -1,8 +1,11 @@
 package unsw.dungeon;
 
-public class Enemy extends MovableEntity {
+import unsw.dungeon.enemyStates.*;
 
-
+public class Enemy extends MovableEntity  {
+	
+	MovementBehaviour movement;
+	Player playerTracking;
     /**
      * Create an enemy positioned in square (x,y)
      * @param x
@@ -10,6 +13,16 @@ public class Enemy extends MovableEntity {
      */
     public Enemy(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
+        playerTracking = dungeon.getPlayer();
+        movement = new enemyAttacking();
+    }
+    
+    public void setState(MovementBehaviour state) {
+    	this.movement = state;
+    }
+    
+    public void move() {
+    	movement.move(playerTracking, this);
     }
     
 	@Override
@@ -17,5 +30,9 @@ public class Enemy extends MovableEntity {
     	if (item instanceof Switch) return true;
 		return super.share(item);
     }
+	
+	
+	
+	
 	
 }

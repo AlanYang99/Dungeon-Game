@@ -57,7 +57,7 @@ public class Player extends MovableEntity implements Observer {
     	for (Entity e : entities) {
     		if (e instanceof Boulder) {
     			// attempt to move boulder
-    			((Boulder) e).moveUp();
+    			((Boulder) e).moveDown();
     		}
     	}
     	if (super.moveDown()) {
@@ -79,7 +79,7 @@ public class Player extends MovableEntity implements Observer {
     	for (Entity e : entities) {
     		if (e instanceof Boulder) {
     			// attempt to move boulder
-    			((Boulder) e).moveUp();
+    			((Boulder) e).moveLeft();
     		}
     	}
     	if (super.moveLeft()) {
@@ -101,7 +101,7 @@ public class Player extends MovableEntity implements Observer {
     	for (Entity e : entities) {
     		if (e instanceof Boulder) {
     			// attempt to move boulder
-    			((Boulder) e).moveUp();
+    			((Boulder) e).moveRight();
     		}
     	}
     	if (super.moveRight()) {

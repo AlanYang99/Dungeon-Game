@@ -43,13 +43,13 @@ public class Key extends Entity {
 	
 	@Override
 	public boolean use() {
-		if (dungeon.getPlayer())
+		// TODO
 		dungeon.getPlayer().setKey(null);
 	}
 	
 	@Override
     public boolean share(Entity item) {
-    	if (item instanceof Switch) return true;
+    	if (item instanceof Switch || item instanceof Player) return true;
 		return super.share(item);
     }
 

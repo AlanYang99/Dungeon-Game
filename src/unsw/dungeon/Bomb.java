@@ -33,7 +33,7 @@ public class Bomb extends Entity {
 
 	@Override
     public boolean share(Entity item) {
-    	if (item instanceof Switch) return true;
+    	if (item instanceof Switch || item instanceof Player) return true;
 		return super.share(item);
     }
 

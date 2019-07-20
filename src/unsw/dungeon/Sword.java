@@ -19,11 +19,19 @@ public class Sword extends Entity {
 		return hits;
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public boolean collect() {
+		// check player isn't already holding a sword
 		if (dungeon.getPlayer().getSword() != null) return false;
 		
+		//give to player
 		dungeon.getPlayer().setSword(this);
+		// remove from dungeon map
+		dungeon.getMap()[getX()][getY()].remove(this);
+		// set entity coordinates to null
+		setX((Integer)null);
+		setY((Integer)null);
 		return true;
 	}
 	

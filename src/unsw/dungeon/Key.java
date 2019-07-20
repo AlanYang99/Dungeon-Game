@@ -20,23 +20,26 @@ public class Key extends Entity {
      * @pre		
      * @post	Player holds new key. If player held an older key, that key is in the new key's original spot
      * @inv		Player holds maximum 1 key
-     */
+     */	
+	@SuppressWarnings("null")
 	@Override
-    public boolean collect() { 
+	public boolean collect() {
+		// check player isn't already holding a sword
 		if (dungeon.getPlayer().getKey() != null) {
-			// Drop old key and set new coordinates
-			dungeon.getMap()[this.getX()][this.getY()] = dungeon.getPlayer().getKey();		
-			dungeon.getPlayer().getKey().x().set(this.getX());
-			dungeon.getPlayer().getKey().y().set(this.getY());
-
-			// Replace old key and set new coordinates
-			dungeon.getPlayer().setKey(this);
-			x().set(null);
-			y().set(null);
-			
+			// set map coordinates for old key
+			dungeon.getPlayer().getKey().setX(getX());
+			dungeon.getPlayer().getKey().setX(getY());
 		}
-    	return true;
-    }
+		
+		//give to player
+		dungeon.getPlayer().setKey(this);
+		// remove from dungeon map
+		dungeon.getMap()[getX()][getY()].remove(this);
+		// set entity coordinates to null
+		setX((Integer)null);
+		setY((Integer)null);
+		return true;
+	}
 	
 	@Override
 	public boolean use() {

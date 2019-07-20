@@ -58,15 +58,15 @@ public abstract class Entity {
      * 
      * @return	surroundings 	Dictionary of Entity to the immediate up/down/left/right of the reference
      */
-    public Dictionary<String, Entity> getSurrounding() {
-    	Dictionary<String, Entity> surroundings = new Hashtable<String, Entity>();
+    public Dictionary<String, List<Entity>> getSurrounding() {
+    	Dictionary<String, List<Entity>> surroundings = new Hashtable<String, List<Entity>>();
     	int x = getX();
     	int y = getY();
     	
-    	surroundings.put("up", 		dungeon.getEntity(x,y-1));
-    	surroundings.put("down", 	dungeon.getEntity(x,y+1));
-    	surroundings.put("left", 	dungeon.getEntity(x-1,y));
-    	surroundings.put("right", 	dungeon.getEntity(x+1,y));
+    	surroundings.put("up", 		dungeon.getEntities(x,y-1));
+    	surroundings.put("down", 	dungeon.getEntities(x,y+1));
+    	surroundings.put("left", 	dungeon.getEntities(x-1,y));
+    	surroundings.put("right", 	dungeon.getEntities(x+1,y));
     	
     	return surroundings;
     }

@@ -11,11 +11,16 @@ public class Bomb extends Entity {
         super(dungeon, x, y);
     }
 
+	@SuppressWarnings("null")
 	@Override
 	public boolean collect() {
+		//give to player
 		dungeon.getPlayer().addBomb(this);
-		this.x() = null;
-		this.y() = null;
+		// remove from dungeon map
+		dungeon.getMap()[getX()][getY()].remove(this);
+		// set entity coordinates to null
+		setX((Integer)null);
+		setY((Integer)null);
 		return true;
 	}
 	

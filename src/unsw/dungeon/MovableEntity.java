@@ -22,8 +22,8 @@ public abstract class MovableEntity extends Entity {
 	 */
     public boolean moveUp() {
     	boolean sharable = true;
-    	List<Entity> above = getSurrounding().get("up");
-    	for (Entity e : above) {
+    	List<Entity> entities = getSurrounding().get("up");
+    	for (Entity e : entities) {
     		if ((!share(e))) {
     			sharable = false;
     		}
@@ -37,8 +37,8 @@ public abstract class MovableEntity extends Entity {
 	 */
     public boolean moveDown() {
     	boolean sharable = true;
-    	List<Entity> above = getSurrounding().get("up");
-    	for (Entity e : above) {
+    	List<Entity> entities = getSurrounding().get("down");
+    	for (Entity e : entities) {
     		if ((!share(e))) {
     			sharable = false;
     		}
@@ -52,8 +52,8 @@ public abstract class MovableEntity extends Entity {
 	 */
     public boolean moveLeft() {
     	boolean sharable = true;
-    	List<Entity> above = getSurrounding().get("up");
-    	for (Entity e : above) {
+    	List<Entity> entities = getSurrounding().get("left");
+    	for (Entity e : entities) {
     		if ((!share(e))) {
     			sharable = false;
     		}
@@ -67,8 +67,8 @@ public abstract class MovableEntity extends Entity {
 	 */
     public boolean moveRight() {
     	boolean sharable = true;
-    	List<Entity> above = getSurrounding().get("up");
-    	for (Entity e : above) {
+    	List<Entity> entities = getSurrounding().get("right");
+    	for (Entity e : entities) {
     		if ((!share(e))) {
     			sharable = false;
     		}

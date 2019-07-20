@@ -75,7 +75,7 @@ public class Player extends MovableEntity implements Observer {
 	 */
     @Override
     public boolean moveLeft() {
-    	List<Entity> entities = getSurrounding().get("down");
+    	List<Entity> entities = getSurrounding().get("left");
     	for (Entity e : entities) {
     		if (e instanceof Boulder) {
     			// attempt to move boulder
@@ -97,7 +97,7 @@ public class Player extends MovableEntity implements Observer {
 	 */
     @Override
     public boolean moveRight() {
-    	List<Entity> entities = getSurrounding().get("down");
+    	List<Entity> entities = getSurrounding().get("right");
     	for (Entity e : entities) {
     		if (e instanceof Boulder) {
     			// attempt to move boulder

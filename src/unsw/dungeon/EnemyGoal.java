@@ -10,7 +10,7 @@ public class EnemyGoal implements Goal {
 	
 	@Override
 	public void update(Subject subject) {
-		if (subject instanceof Enemy) {
+		if (subject instanceof Enemy) { // Enemy will change to whichever class holds all enemy information
 			livingEnemies--;
 		}
 		evaluate();

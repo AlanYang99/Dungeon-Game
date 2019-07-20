@@ -22,7 +22,7 @@ public abstract class Entity {
         this.y = new SimpleIntegerProperty(y);
         this.dungeon = dungeon;
         this.state = new Closed();
-//        this.dungeon.getMap()[x][y].add(this);
+        this.dungeon.getMap()[x][y].add(this);
     }
 
     public Dungeon getDungeon() {
@@ -49,11 +49,17 @@ public abstract class Entity {
      */
     
     public void setX(int x) {
-    	this.x = new SimpleIntegerProperty(x);
+    	if (x == (Integer)null) 
+    		this.x = new SimpleIntegerProperty();
+    	else
+    		this.x = new SimpleIntegerProperty(x);
     }
 
     public void setY(int y) {
-    	this.y = new SimpleIntegerProperty(y);
+    	if (y == (Integer)null) 
+    		this.y = new SimpleIntegerProperty();
+    	else
+    		this.y = new SimpleIntegerProperty(y);
     }
     
     /**
@@ -123,16 +129,17 @@ public abstract class Entity {
 	 * Switch	|	Sword, Potion, Key, Treasure, Bomb, Player, Enemy and Boulder only
 	 * Boulder	|	Switch only
 	 * Sword	|	Switch only
-	 * Potion	|	Switch only
-	 * Key		|	Switch only
+	 * Potion	|	Switch or Player only
+	 * Key		|	Switch or Player only
 	 * Treasure	|	Switch only
-	 * Bomb		|	Switch only
+	 * Bomb		|	Switch or Player only
 	 * Enemy	|	Switch and Player only
 	 * Player	| 	Switch Exit, and Enemy only
 	 * 
 	 * @inv		width > 0 && height > 0
 	 */
     public boolean share(Entity entity) {
+    	if (entity == null) return true;
     	return false;
     }
 	

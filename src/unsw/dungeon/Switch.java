@@ -12,9 +12,9 @@ public class Switch extends Entity {
     }
 
 	@Override
-    public boolean share(Entity entity) {
-    	//TODO
-		return false;
+    public boolean share(Entity item) {
+		if (item instanceof Door || item instanceof Exit || item instanceof Wall || item instanceof Switch) return false;
+		return true;
     }
 
 

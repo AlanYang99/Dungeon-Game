@@ -7,7 +7,7 @@ import unsw.dungeon.Wall;
 
 import org.junit.jupiter.api.Test;
 
-class PlayerTest {
+class TestPlayer {
 
 	@Test
 	void position() {
@@ -33,15 +33,6 @@ class PlayerTest {
 		Player player1 = new Player(dungeon,10,10);
 		player1.moveLeft();
 		assertEquals(player1.getX(),9);
-		player1.moveRight();
-		assertEquals(player1.getX(),10);		
-	}
-	
-	@Test
-	void movingWalls() {
-		Dungeon dungeon = new Dungeon(20,20);
-		Player player1 = new Player(dungeon,10,10);
-		Wall wall1 = new Wall(dungeon,11,10);
 		player1.moveRight();
 		assertEquals(player1.getX(),10);		
 	}

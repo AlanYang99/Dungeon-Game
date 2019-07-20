@@ -20,7 +20,6 @@ class TestBomb {
 		Bomb bomb2 = new Bomb(dungeon,10,12);
 		bomb2.collect();
 		assertEquals(player1.getNumBombs(),2);
-		
 	}
 
 }

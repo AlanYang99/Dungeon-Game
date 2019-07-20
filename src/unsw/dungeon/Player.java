@@ -17,7 +17,7 @@ public class Player extends MovableEntity {
     private Sword sword;
     private Potion potion;
     private Key key;
-//    private List<Treasure> treasures;
+    private List<Treasure> treasures;
     private List<Bomb> bombs;
 
 	/**
@@ -29,6 +29,7 @@ public class Player extends MovableEntity {
         super(dungeon, x, y);
         dungeon.setPlayer(this);
         bombs = new ArrayList <Bomb>(); //changed this
+        treasures = new ArrayList <Treasure>(); //changed this
     }
     
 	/** ==============================================
@@ -60,9 +61,9 @@ public class Player extends MovableEntity {
 		this.key = key;
 	}
 
-//	public void addTreasures(Treasure treasure) {
-//		treasures.add(treasure);
-//	}
+	public void addTreasures(Treasure treasure) {
+		treasures.add(treasure);
+	}
 	
 	public void addBomb(Bomb bomb) {
 		bombs.add(bomb);
@@ -73,9 +74,9 @@ public class Player extends MovableEntity {
 	 *  ==============================================
 	 */
 
-//	public int getNumTreasures() {
-//		return treasures.size();
-//	}
+	public int getNumTreasures() {
+		return treasures.size();
+	}
 	
 	public int getNumBombs() {
 		return bombs.size();

@@ -19,8 +19,8 @@ public class Treasure extends Entity {
 		// remove from dungeon map
 		dungeon.getMap()[getX()][getY()].remove(this);
 		// set entity coordinates to null
-		setX((Integer)null);
-		setY((Integer)null);
+		setX(-1);
+		setY(-1);
 		return true;
 	}
 

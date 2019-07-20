@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import java.util.List;
+
 public class Key extends Entity {
 	
     private int id;
@@ -42,8 +44,17 @@ public class Key extends Entity {
 	}
 	
 	@Override
-	public boolean use() {
-		// TODO
+	public boolean use(int dx, int dy) {
+		Player player = dungeon.getPlayer();
+		List<Entity> doorPos = dungeon.getMap()[player.getX()+dx][player.getY()+dy];
+		Door door = null;
+		for (Entity e : doorPos) {
+			if (e instanceof Door)
+				door = (Door) e;
+		}
+		
+		
+		
 		
 		dungeon.getPlayer().setKey(null);
 	}

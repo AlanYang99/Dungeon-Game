@@ -6,5 +6,10 @@ public class Closed implements State {
 	public State changeToOpen() {
 		return new Open();
 	}
+	
+	@Override
+	public State changeToOpenIndefinitely() {
+		return new OpenIndefinitely();
+	}
 
 }

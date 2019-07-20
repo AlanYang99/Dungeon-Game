@@ -22,6 +22,7 @@ public class Dungeon implements Observer {
     private Player player;
     private List<Entity>[][] map;
     private List<Enemy> enemies;
+    private List<Treasure> treasure;
 
     @SuppressWarnings("unchecked")
 	public Dungeon(int width, int height) {
@@ -74,10 +75,14 @@ public class Dungeon implements Observer {
     	
     	if (entity instanceof Enemy)
     		enemies.add((Enemy)entity);
+    	if (entity instanceof Treasure)
+    		treasure.add((Treasure)entity);
     	
     }
     
-    
+    public List<Treasure> getTreasure() {
+    	return treasure;
+    }
     
     /**
      *  Returns true if the given coordinate exists, otherwise  false.

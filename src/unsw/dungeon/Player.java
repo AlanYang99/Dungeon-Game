@@ -17,7 +17,7 @@ public class Player extends MovableEntity implements Observer {
     private Sword sword;
     private Potion potion;
     private Key key;
-//    private List<Treasure> treasures;
+    private List<Treasure> treasures;
     private List<Bomb> bombs;
     private boolean invulnerable;
 
@@ -128,9 +128,9 @@ public class Player extends MovableEntity implements Observer {
 		return this.invulnerable;
 	}
 	
-//	public void addTreasures(Treasure treasure) {
-//		treasures.add(treasure);
-//	}
+	public void addTreasures(Treasure treasure) {
+		treasures.add(treasure);
+	}
 	
 	public void addBomb(Bomb bomb) {
 		bombs.add(bomb);
@@ -145,9 +145,9 @@ public class Player extends MovableEntity implements Observer {
 	 *  ==============================================
 	 */
 
-//	public int getNumTreasures() {
-//		return treasures.size();
-//	}
+	public int getNumTreasures() {
+		return treasures.size();
+	}
 	
 	public int getNumBombs() {
 		return bombs.size();

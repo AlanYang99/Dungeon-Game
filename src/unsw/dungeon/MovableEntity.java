@@ -14,6 +14,9 @@ public abstract class MovableEntity extends Entity {
     	Dictionary<String,List<Entity>> surrondings = getSurrounding();
     	// TODO
         if (getY() > 0)
+        	for(Entity e : surroundings) {
+        		if (!share(e)) 
+        	}
             y().set(getY() - 1);
     }
 

@@ -13,6 +13,9 @@ public class Bomb extends Entity {
 
 	@Override
 	public boolean collect() {
+		dungeon.getPlayer().addBomb(this);
+		this.x() = null;
+		this.y() = null;
 		return true;
 	}
 	

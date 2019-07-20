@@ -41,6 +41,18 @@ public abstract class Entity {
     }
     
     /**
+     * Setters for when items are collected by the player
+     */
+    
+    public void setX(int x) {
+    	this.x = new SimpleIntegerProperty(x);
+    }
+
+    public void setY(int y) {
+    	this.y = new SimpleIntegerProperty(y);
+    }
+    
+    /**
      * Returns a list of items in order of up/down/left/right. If there is no coordinate in a given direction, or no entity, it returns null
      * @inv		width > 0 && height > 0
      * 
@@ -98,7 +110,7 @@ public abstract class Entity {
 	}
 	
 	/**
-	 * Returns a boolean based on whether share a grid with any other entity.
+	 * Returns a boolean based on whether the entity can share a grid with any other entity.
 	 * Item 	|	Sharable
 	 * ---------+-------------------------------------------------------------------
 	 * Wall		|	No

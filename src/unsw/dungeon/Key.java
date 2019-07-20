@@ -40,7 +40,7 @@ public class Key extends Entity {
 	
 	@Override
 	public boolean use() {
-		if (dungeon.getPlayer().)
+		if (dungeon.getPlayer())
 		dungeon.getPlayer().setKey(null);
 	}
 	

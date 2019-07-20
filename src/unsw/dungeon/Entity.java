@@ -42,10 +42,6 @@ public abstract class Entity {
         return x().get();
     }
     
-    public Dungeon getDungeon() {
-    	return dungeon;
-    }
-    
     /**
      * Setters for when items are collected by the player
      */

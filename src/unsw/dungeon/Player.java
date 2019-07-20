@@ -70,6 +70,10 @@ public class Player extends MovableEntity implements Observer {
 		bombs.add(bomb);
 	}
 	
+	public void dropBomb(Bomb bomb) {
+		bombs.remove(bomb);
+	}
+	
 	/** ==============================================
 	 *  Get quantities of items collected
 	 *  ==============================================

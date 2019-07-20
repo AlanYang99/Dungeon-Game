@@ -61,7 +61,11 @@ public class Player extends MovableEntity implements Observer {
 	public void setKey(Key key) {
 		this.key = key;
 	}
-
+	
+	public boolean isInvulnerable() {
+		return this.invulnerable;
+	}
+	
 //	public void addTreasures(Treasure treasure) {
 //		treasures.add(treasure);
 //	}

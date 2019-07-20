@@ -5,7 +5,7 @@ import java.util.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public abstract class Entity {
+public abstract class Entity implements Subject {
     
 	Dungeon dungeon;
 	SimpleIntegerProperty x,y;
@@ -40,10 +40,6 @@ public abstract class Entity {
 
     public int getX() {
         return x().get();
-    }
-    
-    public Dungeon getDungeon() {
-    	return dungeon;
     }
     
     /**

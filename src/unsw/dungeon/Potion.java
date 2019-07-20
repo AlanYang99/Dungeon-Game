@@ -1,6 +1,7 @@
 package unsw.dungeon;
 
-import java.util.concurrent.TimeUnit;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Potion extends Entity implements Subject {
 	
@@ -38,14 +39,20 @@ public class Potion extends Entity implements Subject {
 	public void activate() {
 		notifyObservers();
 		
-		try {
-			TimeUnit.SECONDS.sleep(length);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		Timer timer = new Timer();
+        
+        timer.schedule(new TimerTask() {
+        	@Override
+        	public void run() {
+        	  deactivate();
+        	}
+        }, length*1000);
+        
+	}
+	
+	public void deactivate() {
 		notifyObservers();
 	}
+	
 
 }

@@ -44,6 +44,7 @@ public class Key extends Entity {
 	@Override
 	public boolean use() {
 		// TODO
+		
 		dungeon.getPlayer().setKey(null);
 	}
 	

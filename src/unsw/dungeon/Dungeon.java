@@ -29,6 +29,13 @@ public class Dungeon {
         // this.entities = new ArrayList<>();
         this.player = null;
         this.map = new ArrayList[width][height];
+        
+        int row, col;
+        for (row = 0; row < height; row++) {
+        	for (col = 0; col < width; row++) {
+        		this.map[row][col] = new ArrayList<Entity>();
+        	}
+        }
     }
 
     public int getWidth() {

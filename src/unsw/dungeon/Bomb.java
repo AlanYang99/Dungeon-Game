@@ -11,7 +11,6 @@ public class Bomb extends Entity {
         super(dungeon, x, y);
     }
 
-	@SuppressWarnings("null")
 	@Override
 	public boolean collect() {
 		//give to player
@@ -19,8 +18,8 @@ public class Bomb extends Entity {
 		// remove from dungeon map
 		dungeon.getMap()[getX()][getY()].remove(this);
 		// set entity coordinates to null
-		setX((Integer)null);
-		setY((Integer)null);
+		setX(-1);
+		setY(-1);
 		return true;
 	}
 	

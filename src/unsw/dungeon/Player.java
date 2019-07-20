@@ -1,7 +1,7 @@
 package unsw.dungeon;
 
 import java.util.List;
-
+import java.util.ArrayList;
 public class Player extends MovableEntity {
 
     private Dungeon dungeon;
@@ -28,6 +28,7 @@ public class Player extends MovableEntity {
     public Player(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
         dungeon.setPlayer(this);
+        bombs = new ArrayList <Bomb>(); //changed this
     }
     
 	/** ==============================================
@@ -79,6 +80,7 @@ public class Player extends MovableEntity {
 	public int getNumBombs() {
 		return bombs.size();
 	}
+	
     
 	/** ==============================================
 	 *  Player specific functions

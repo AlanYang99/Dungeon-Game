@@ -2,8 +2,6 @@ package unsw.dungeon.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-
 import unsw.dungeon.Potion;
 import unsw.dungeon.Entity;
 import unsw.dungeon.Dungeon;
@@ -13,7 +11,7 @@ import org.junit.jupiter.api.Test;
 class PotionTest {
 
 	@Test
-	void addingPotion() {
+	void collectPotion() {
 		Dungeon dungeon = new Dungeon(20,20);
 		Player player1 = new Player(dungeon,10,10);
 		Potion invisPotion = new Potion(dungeon,11,11);

@@ -49,16 +49,10 @@ public abstract class Entity {
      */
     
     public void setX(int x) {
-    	if (x == (Integer)null) 
-    		this.x = new SimpleIntegerProperty();
-    	else
     		this.x = new SimpleIntegerProperty(x);
     }
 
     public void setY(int y) {
-    	if (y == (Integer)null) 
-    		this.y = new SimpleIntegerProperty();
-    	else
     		this.y = new SimpleIntegerProperty(y);
     }
     

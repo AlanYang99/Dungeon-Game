@@ -11,11 +11,8 @@ public abstract class MovableEntity extends Entity {
 	}
 	
     public void moveUp() {
-<<<<<<< HEAD
-//    	Dictionary<String,Entity> surrondings = getSurrounding();
-=======
+
     	Dictionary<String,List<Entity>> surrondings = getSurrounding();
->>>>>>> origin/collect-use-2
     	// TODO
         if (getY() > 0)
         	for(Entity e : surroundings) {

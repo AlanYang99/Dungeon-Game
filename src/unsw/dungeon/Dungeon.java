@@ -32,7 +32,7 @@ public class Dungeon {
         
         int row, col;
         for (row = 0; row < height; row++) {
-        	for (col = 0; col < width; row++) {
+        	for (col = 0; col < width; col++) {
         		this.map[row][col] = new ArrayList<Entity>();
         	}
         }

@@ -17,24 +17,16 @@ class PotionTest {
 		Dungeon dungeon = new Dungeon(20,20);
 		Player player1 = new Player(dungeon,10,10);
 		Potion invisPotion = new Potion(dungeon,11,11);
-		dungeon.getMap()[11][11] = new ArrayList<Entity>();
-		dungeon.getMap()[11][11].add(invisPotion);
+//		dungeon.getMap()[11][11] = new ArrayList<Entity>();
+//		dungeon.getMap()[11][11].add(invisPotion);
 		//System.out.println(dungeon.getPlayer());
 		player1.moveDown();
 		assertEquals(invisPotion.getX(),11);
 		assertEquals(invisPotion.getY(),11);
-		
-		System.out.println(dungeon.getMap());
 		assertEquals(dungeon.getMap()[11][11].get(0),invisPotion);
-		
 		player1.moveRight();
 		invisPotion.collect();
-		
-//		System.out.println(invisPotion.getX());
-//		
-//		System.out.println(player1.getPotion());
-//		System.out.println(invisPotion);
-//		assertEquals(player1.getPotion(),invisPotion);
+		assertEquals(player1.getPotion(),invisPotion);
 	}
 
 }

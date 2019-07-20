@@ -25,7 +25,6 @@ class TestSword {
 		assertEquals(player1.getSword().getHits(),1);
 		assertEquals(player1.getSword().use(),true);	
 		assertEquals(player1.getSword(),null);
-		assertEquals(player1.getSword().use(),false);		
 	}
 
 }

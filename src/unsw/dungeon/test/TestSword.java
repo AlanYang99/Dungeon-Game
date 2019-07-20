@@ -10,6 +10,17 @@ import org.junit.jupiter.api.Test;
 class TestSword {
 
 	@Test
+	void collectSword() {
+		Dungeon dungeon = new Dungeon(20,20);
+		Player player1 = new Player(dungeon,10,10);
+		Sword infinitySword = new Sword(dungeon,10,11);
+		player1.moveRight();
+		infinitySword.collect();
+		assertEquals(player1.getSword(),infinitySword);
+		assertEquals(player1.getSword().getHits(),5);
+	}
+	
+	@Test
 	void useSword() {
 		Dungeon dungeon = new Dungeon(20,20);
 		Player player1 = new Player(dungeon,10,10);

@@ -11,8 +11,18 @@ public class Potion extends Entity {
         super(dungeon, x, y);
     }
 
+	@SuppressWarnings("null")
 	@Override
 	public boolean collect() {
+		//give to player
+		dungeon.getPlayer().setPotion(this);
+		// remove from dungeon map
+		dungeon.getMap()[getX()][getY()].remove(this);
+		// set entity coordinates to null
+		setX((Integer)null);
+		setY((Integer)null);
+		
+		// TODO: USE FUNCTIONALITY
 		return true;
 	}
 	

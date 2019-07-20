@@ -41,20 +41,32 @@ public abstract class Entity {
     }
     
     /**
+     * Setters for when items are collected by the player
+     */
+    
+    public void setX(int x) {
+    	this.x = new SimpleIntegerProperty(x);
+    }
+
+    public void setY(int y) {
+    	this.y = new SimpleIntegerProperty(y);
+    }
+    
+    /**
      * Returns a list of items in order of up/down/left/right. If there is no coordinate in a given direction, or no entity, it returns null
      * @inv		width > 0 && height > 0
      * 
      * @return	surroundings 	Dictionary of Entity to the immediate up/down/left/right of the reference
      */
-    public Dictionary<String, Entity> getSurrounding() {
-    	Dictionary<String, Entity> surroundings = new Hashtable<String, Entity>();
+    public Dictionary<String, List<Entity>> getSurrounding() {
+    	Dictionary<String, List<Entity>> surroundings = new Hashtable<String, List<Entity>>();
     	int x = getX();
     	int y = getY();
     	
-    	surroundings.put("up", 		dungeon.getEntity(x,y-1));
-    	surroundings.put("down", 	dungeon.getEntity(x,y+1));
-    	surroundings.put("left", 	dungeon.getEntity(x-1,y));
-    	surroundings.put("right", 	dungeon.getEntity(x+1,y));
+    	surroundings.put("up", 		dungeon.getEntities(x,y-1));
+    	surroundings.put("down", 	dungeon.getEntities(x,y+1));
+    	surroundings.put("left", 	dungeon.getEntities(x-1,y));
+    	surroundings.put("right", 	dungeon.getEntities(x+1,y));
     	
     	return surroundings;
     }
@@ -98,7 +110,7 @@ public abstract class Entity {
 	}
 	
 	/**
-	 * Returns a boolean based on whether share a grid with any other entity.
+	 * Returns a boolean based on whether the entity can share a grid with any other entity.
 	 * Item 	|	Sharable
 	 * ---------+-------------------------------------------------------------------
 	 * Wall		|	No

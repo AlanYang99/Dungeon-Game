@@ -20,7 +20,7 @@ public abstract class MovableEntity extends Entity {
 	/**
 	 * Moves an entity upwards if it is legal to do so
 	 */
-    public void moveUp() {
+    public boolean moveUp() {
     	boolean sharable = true;
     	List<Entity> above = getSurrounding().get("up");
     	for (Entity e : above) {
@@ -35,7 +35,7 @@ public abstract class MovableEntity extends Entity {
 	/**
 	 * Moves an entity downwards if it is legal to do so
 	 */
-    public void moveDown() {
+    public boolean moveDown() {
     	boolean sharable = true;
     	List<Entity> above = getSurrounding().get("up");
     	for (Entity e : above) {
@@ -50,7 +50,7 @@ public abstract class MovableEntity extends Entity {
 	/**
 	 * Moves an entity to the left if it is legal to do so
 	 */
-    public void moveLeft() {
+    public boolean moveLeft() {
     	boolean sharable = true;
     	List<Entity> above = getSurrounding().get("up");
     	for (Entity e : above) {
@@ -65,7 +65,7 @@ public abstract class MovableEntity extends Entity {
 	/**
 	 * Moves an entity to the right if it is legal to do so
 	 */
-    public void moveRight() {
+    public boolean moveRight() {
     	boolean sharable = true;
     	List<Entity> above = getSurrounding().get("up");
     	for (Entity e : above) {

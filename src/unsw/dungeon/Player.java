@@ -30,7 +30,7 @@ public class Player extends MovableEntity implements Observer {
 	 * the boulder will be moved before the player is moved.
 	 */
     @Override
-    public void moveUp() {
+    public boolean moveUp() {
     	List<Entity> entities = getSurrounding().get("up");
     	for (Entity e : entities) {
     		if (e instanceof Boulder) {
@@ -38,7 +38,13 @@ public class Player extends MovableEntity implements Observer {
     			((Boulder) e).moveUp();
     		}
     	}
-    	super.moveUp();
+    	if (super.moveUp()) {
+    		for (Entity e : entities) {
+    			collectItem(e);
+    		}
+    		return true;
+    	}
+    	return false;
     }
     
 	/**
@@ -46,7 +52,7 @@ public class Player extends MovableEntity implements Observer {
 	 * the boulder will be moved before the player is moved.
 	 */
     @Override
-    public void moveDown() {
+    public boolean moveDown() {
     	List<Entity> entities = getSurrounding().get("down");
     	for (Entity e : entities) {
     		if (e instanceof Boulder) {
@@ -54,7 +60,13 @@ public class Player extends MovableEntity implements Observer {
     			((Boulder) e).moveUp();
     		}
     	}
-    	super.moveUp();
+    	if (super.moveDown()) {
+    		for (Entity e : entities) {
+    			collectItem(e);
+    		}
+    		return true;
+    	}
+    	return false;
     }
     
 	/**
@@ -62,7 +74,7 @@ public class Player extends MovableEntity implements Observer {
 	 * the boulder will be moved before the player is moved.
 	 */
     @Override
-    public void moveLeft() {
+    public boolean moveLeft() {
     	List<Entity> entities = getSurrounding().get("down");
     	for (Entity e : entities) {
     		if (e instanceof Boulder) {
@@ -70,7 +82,13 @@ public class Player extends MovableEntity implements Observer {
     			((Boulder) e).moveUp();
     		}
     	}
-    	super.moveUp();
+    	if (super.moveLeft()) {
+    		for (Entity e : entities) {
+    			collectItem(e);
+    		}
+    		return true;
+    	}
+    	return false;
     }
     
 	/**
@@ -78,7 +96,7 @@ public class Player extends MovableEntity implements Observer {
 	 * the boulder will be moved before the player is moved.
 	 */
     @Override
-    public void moveRight() {
+    public boolean moveRight() {
     	List<Entity> entities = getSurrounding().get("down");
     	for (Entity e : entities) {
     		if (e instanceof Boulder) {
@@ -86,7 +104,13 @@ public class Player extends MovableEntity implements Observer {
     			((Boulder) e).moveUp();
     		}
     	}
-    	super.moveUp();
+    	if (super.moveRight()) {
+    		for (Entity e : entities) {
+    			collectItem(e);
+    		}
+    		return true;
+    	}
+    	return false;
     }
     
 	/** ==============================================

@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import java.util.List;
+
 public class Boulder extends MovableEntity {
 
     /**
@@ -16,5 +18,16 @@ public class Boulder extends MovableEntity {
     	if (item instanceof Switch) return true;
 		return super.share(item);
     }
-
+	
+	public boolean canMove(int dx, int dy) {
+		List<Entity> entities = dungeon.getMap()[getX()+dx][getY()+dy];
+		
+		boolean canMoveTo = true;
+		for (Entity e : entities) {
+			canMoveTo = canMoveTo && this.share(e);
+		}
+		
+		return canMoveTo;
+	}
+	
 }

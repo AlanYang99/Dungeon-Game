@@ -33,6 +33,68 @@ public class Player extends MovableEntity implements Observer {
 
     }
     
+    @Override
+    public void moveUp() {
+    	Boulder potentialBoulder = boulderAhead(0, -1);
+    	if (potentialBoulder != null) {
+    		if (potentialBoulder.canMove(0, -1)) {
+    			potentialBoulder.moveUp();
+    		}
+    	}
+    	
+    	
+    	if (getY() > 0)
+            y().set(getY() - 1);
+    }
+    @Override
+    public void moveDown() {
+    	Boulder potentialBoulder = boulderAhead(0, 1);
+    	if (potentialBoulder != null) {
+    		if (potentialBoulder.canMove(0, 1)) {
+    			potentialBoulder.moveDown();
+    		}
+    	}
+    	
+    	
+        if (getY() < dungeon.getHeight() - 1)
+            y().set(getY() + 1);
+    }
+    @Override
+    public void moveLeft() {
+    	Boulder potentialBoulder = boulderAhead(-1, 0);
+    	if (potentialBoulder != null) {
+    		if (potentialBoulder.canMove(-1, 0)) {
+    			potentialBoulder.moveUp();
+    		}
+    	}
+    	
+    	
+        if (getX() > 0)
+            x().set(getX() - 1);
+    }
+    @Override
+    public void moveRight() {
+    	Boulder potentialBoulder = boulderAhead(1, 0);
+    	if (potentialBoulder != null) {
+    		if (potentialBoulder.canMove(1, 0)) {
+    			potentialBoulder.moveUp();
+    		}
+    	}
+    	
+    	
+        if (getX() < dungeon.getWidth() - 1)
+            x().set(getX() + 1);
+    }
+    
+    public Boulder boulderAhead(int dx, int dy) {
+    	List<Entity> entities = dungeon.getMap()[getX()+dx][getY()+dy];
+    	for (Entity e : entities) {
+    		if (e instanceof Boulder)
+    			return (Boulder) e;
+    	}
+    	return null;
+    }
+    
 	/** ==============================================
 	 *  Getters and setters
 	 *  ==============================================

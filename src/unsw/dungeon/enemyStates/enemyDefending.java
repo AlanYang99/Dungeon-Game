@@ -55,10 +55,10 @@ public class enemyDefending implements MovementBehaviour {
 		
 		switch (maxI) {
 		case 0:
-			me.moveUp();
+			me.moveDown();
 			break;
 		case 1:
-			me.moveDown();
+			me.moveUp();
 			break;
 		case 2:
 			me.moveRight();

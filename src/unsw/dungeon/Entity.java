@@ -111,6 +111,10 @@ public abstract class Entity implements Subject {
 		return false;
 	}
 	
+	public boolean use(int dx, int dy) {
+		return false;
+	}
+	
 	/**
 	 * Returns a boolean based on whether the entity can share a grid with any other entity.
 	 * Item 	|	Sharable

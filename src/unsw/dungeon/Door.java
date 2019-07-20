@@ -23,6 +23,10 @@ public class Door extends Entity implements State {
 		return super.share(item);
     }
 	
+	public int getId() {
+		return id;
+	}
+	
 	public State getState() {
 		return state;
 	}

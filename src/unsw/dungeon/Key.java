@@ -53,10 +53,34 @@ public class Key extends Entity {
 				door = (Door) e;
 		}
 		
+		boolean doorOpen = false;
 		
+		// If the door is already open.
+		if (door.getState() instanceof Open) {
+			doorOpen = true;
+		} else {
+			// Check IDs of key and door match
+			if (door.getId() == id) {
+				// Unlock door
+				door.getState().changeToOpenIndefinitely();
+				
+				doorOpen = true;
+				
+				// Move player.
+				if (dx == 1 && dy == 0)
+					player.moveRight();
+				else if(dx == -1 && dy == 0)
+					player.moveLeft();
+				else if(dx == 0 && dy == 1)
+					player.moveDown();
+				else if(dx == 0 && dy == -1)
+					player.moveUp();
+				
+				dungeon.getPlayer().setKey(null);
+			}
+		}
 		
-		
-		dungeon.getPlayer().setKey(null);
+		return doorOpen;
 	}
 	
 	@Override

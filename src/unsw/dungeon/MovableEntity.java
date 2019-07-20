@@ -10,6 +10,16 @@ public abstract class MovableEntity extends Entity {
 		
 	}
 	
+	/*=====================================================================================================
+	 * Methods below move any time of movable entity, with additional functionality in individual classes.
+	 * Note that it is possible that an entity may not move after one of the functions are called due to
+	 * surrounding entities.
+	 * =====================================================================================================
+	 */
+	
+	/**
+	 * Moves an entity upwards if it is legal to do so
+	 */
     public void moveUp() {
     	boolean sharable = true;
     	List<Entity> above = getSurrounding().get("up");
@@ -22,6 +32,9 @@ public abstract class MovableEntity extends Entity {
             y().set(getY() - 1);
     }
 
+	/**
+	 * Moves an entity downwards if it is legal to do so
+	 */
     public void moveDown() {
     	boolean sharable = true;
     	List<Entity> above = getSurrounding().get("up");
@@ -34,6 +47,9 @@ public abstract class MovableEntity extends Entity {
     		y().set(getY() + 1);
     }
 
+	/**
+	 * Moves an entity to the left if it is legal to do so
+	 */
     public void moveLeft() {
     	boolean sharable = true;
     	List<Entity> above = getSurrounding().get("up");
@@ -46,6 +62,9 @@ public abstract class MovableEntity extends Entity {
             x().set(getX() - 1);
     }
 
+	/**
+	 * Moves an entity to the right if it is legal to do so
+	 */
     public void moveRight() {
     	boolean sharable = true;
     	List<Entity> above = getSurrounding().get("up");

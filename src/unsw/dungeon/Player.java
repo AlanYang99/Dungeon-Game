@@ -17,7 +17,7 @@ public class Player extends MovableEntity implements Observer {
     private Sword sword;
     private Potion potion;
     private Key key;
-//    private List<Treasure> treasures;
+    private List<Treasure> treasures;
     private List<Bomb> bombs;
     private boolean invulnerable;
 
@@ -35,64 +35,50 @@ public class Player extends MovableEntity implements Observer {
     
     @Override
     public void moveUp() {
-    	Boulder potentialBoulder = boulderAhead(0, -1);
-    	if (potentialBoulder != null) {
-    		if (potentialBoulder.canMove(0, -1)) {
-    			potentialBoulder.moveUp();
+    	List<Entity> entities = getSurrounding().get("up");
+    	for (Entity e : entities) {
+    		if (e instanceof Boulder) {
+    			// attempt to move boulder first
+    			((Boulder) e).moveUp();
     		}
     	}
-    	
-    	
-    	if (getY() > 0)
-            y().set(getY() - 1);
-    }
-    @Override
-    public void moveDown() {
-    	Boulder potentialBoulder = boulderAhead(0, 1);
-    	if (potentialBoulder != null) {
-    		if (potentialBoulder.canMove(0, 1)) {
-    			potentialBoulder.moveDown();
-    		}
-    	}
-    	
-    	
-        if (getY() < dungeon.getHeight() - 1)
-            y().set(getY() + 1);
-    }
-    @Override
-    public void moveLeft() {
-    	Boulder potentialBoulder = boulderAhead(-1, 0);
-    	if (potentialBoulder != null) {
-    		if (potentialBoulder.canMove(-1, 0)) {
-    			potentialBoulder.moveUp();
-    		}
-    	}
-    	
-    	
-        if (getX() > 0)
-            x().set(getX() - 1);
-    }
-    @Override
-    public void moveRight() {
-    	Boulder potentialBoulder = boulderAhead(1, 0);
-    	if (potentialBoulder != null) {
-    		if (potentialBoulder.canMove(1, 0)) {
-    			potentialBoulder.moveUp();
-    		}
-    	}
-    	
-    	
-        if (getX() < dungeon.getWidth() - 1)
-            x().set(getX() + 1);
+    	super.moveUp();
     }
     
-    public Boulder boulderAhead(int dx, int dy) {
-    	List<Entity> entities = dungeon.getMap()[getX()+dx][getY()+dy];
+    @Override
+    public void moveDown() {
+    	List<Entity> entities = getSurrounding().get("down");
     	for (Entity e : entities) {
-    		if (e instanceof Boulder)
-    			return (Boulder) e;
+    		if (e instanceof Boulder) {
+    			// attempt to move boulder
+    			((Boulder) e).moveUp();
+    		}
     	}
-    	return null;
+    	super.moveUp();
+    }
+    
+    @Override
+    public void moveLeft() {
+    	List<Entity> entities = getSurrounding().get("down");
+    	for (Entity e : entities) {
+    		if (e instanceof Boulder) {
+    			// attempt to move boulder
+    			((Boulder) e).moveUp();
+    		}
+    	}
+    	super.moveUp();
+    }
+    
+    @Override
+    public void moveRight() {
+    	List<Entity> entities = getSurrounding().get("down");
+    	for (Entity e : entities) {
+    		if (e instanceof Boulder) {
+    			// attempt to move boulder
+    			((Boulder) e).moveUp();
+    		}
+    	}
+    	super.moveUp();
     }
     
 	/** ==============================================
@@ -128,9 +114,9 @@ public class Player extends MovableEntity implements Observer {
 		return this.invulnerable;
 	}
 	
-//	public void addTreasures(Treasure treasure) {
-//		treasures.add(treasure);
-//	}
+	public void addTreasures(Treasure treasure) {
+		treasures.add(treasure);
+	}
 	
 	public void addBomb(Bomb bomb) {
 		bombs.add(bomb);
@@ -145,9 +131,9 @@ public class Player extends MovableEntity implements Observer {
 	 *  ==============================================
 	 */
 
-//	public int getNumTreasures() {
-//		return treasures.size();
-//	}
+	public int getNumTreasures() {
+		return treasures.size();
+	}
 	
 	public int getNumBombs() {
 		return bombs.size();
@@ -160,6 +146,11 @@ public class Player extends MovableEntity implements Observer {
     
     public boolean collectItem(Entity item) {
     	if(item.collect()) return true;
+    	return false;
+    }
+    
+    public boolean useItem(Entity item) {
+    	if (item.use()) return true;
     	return false;
     }
     

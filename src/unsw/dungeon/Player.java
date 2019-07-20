@@ -5,14 +5,6 @@ import java.util.List;
 public class Player extends MovableEntity implements Observer {
 
     private Dungeon dungeon;
-   /*
-    * Collectables
-    * 	Sword
-    * 	Potion	
-    * 	Key	
-    * 	Treasure	
-    * 	Bomb	
-    */
     
     private Sword sword;
     private Potion potion;
@@ -33,66 +25,68 @@ public class Player extends MovableEntity implements Observer {
 
     }
     
+	/**
+	 * Moves an player upwards if it is legal to do so. If a boulder can be moved in the same direction,
+	 * the boulder will be moved before the player is moved.
+	 */
     @Override
     public void moveUp() {
-    	Boulder potentialBoulder = boulderAhead(0, -1);
-    	if (potentialBoulder != null) {
-    		if (potentialBoulder.canMove(0, -1)) {
-    			potentialBoulder.moveUp();
+    	List<Entity> entities = getSurrounding().get("up");
+    	for (Entity e : entities) {
+    		if (e instanceof Boulder) {
+    			// attempt to move boulder first
+    			((Boulder) e).moveUp();
     		}
     	}
-    	
-    	
-    	if (getY() > 0)
-            y().set(getY() - 1);
-    }
-    @Override
-    public void moveDown() {
-    	Boulder potentialBoulder = boulderAhead(0, 1);
-    	if (potentialBoulder != null) {
-    		if (potentialBoulder.canMove(0, 1)) {
-    			potentialBoulder.moveDown();
-    		}
-    	}
-    	
-    	
-        if (getY() < dungeon.getHeight() - 1)
-            y().set(getY() + 1);
-    }
-    @Override
-    public void moveLeft() {
-    	Boulder potentialBoulder = boulderAhead(-1, 0);
-    	if (potentialBoulder != null) {
-    		if (potentialBoulder.canMove(-1, 0)) {
-    			potentialBoulder.moveUp();
-    		}
-    	}
-    	
-    	
-        if (getX() > 0)
-            x().set(getX() - 1);
-    }
-    @Override
-    public void moveRight() {
-    	Boulder potentialBoulder = boulderAhead(1, 0);
-    	if (potentialBoulder != null) {
-    		if (potentialBoulder.canMove(1, 0)) {
-    			potentialBoulder.moveUp();
-    		}
-    	}
-    	
-    	
-        if (getX() < dungeon.getWidth() - 1)
-            x().set(getX() + 1);
+    	super.moveUp();
     }
     
-    public Boulder boulderAhead(int dx, int dy) {
-    	List<Entity> entities = dungeon.getMap()[getX()+dx][getY()+dy];
+	/**
+	 * Moves an player downwards if it is legal to do so. If a boulder can be moved in the same direction,
+	 * the boulder will be moved before the player is moved.
+	 */
+    @Override
+    public void moveDown() {
+    	List<Entity> entities = getSurrounding().get("down");
     	for (Entity e : entities) {
-    		if (e instanceof Boulder)
-    			return (Boulder) e;
+    		if (e instanceof Boulder) {
+    			// attempt to move boulder
+    			((Boulder) e).moveUp();
+    		}
     	}
-    	return null;
+    	super.moveUp();
+    }
+    
+	/**
+	 * Moves an player to the left if it is legal to do so. If a boulder can be moved in the same direction,
+	 * the boulder will be moved before the player is moved.
+	 */
+    @Override
+    public void moveLeft() {
+    	List<Entity> entities = getSurrounding().get("down");
+    	for (Entity e : entities) {
+    		if (e instanceof Boulder) {
+    			// attempt to move boulder
+    			((Boulder) e).moveUp();
+    		}
+    	}
+    	super.moveUp();
+    }
+    
+	/**
+	 * Moves an player to the right if it is legal to do so. If a boulder can be moved in the same direction,
+	 * the boulder will be moved before the player is moved.
+	 */
+    @Override
+    public void moveRight() {
+    	List<Entity> entities = getSurrounding().get("down");
+    	for (Entity e : entities) {
+    		if (e instanceof Boulder) {
+    			// attempt to move boulder
+    			((Boulder) e).moveUp();
+    		}
+    	}
+    	super.moveUp();
     }
     
 	/** ==============================================
@@ -128,14 +122,24 @@ public class Player extends MovableEntity implements Observer {
 		return this.invulnerable;
 	}
 	
+	/**
+	 * Adds treasure to the player's treasure collection
+	 */
+
 	public void addTreasures(Treasure treasure) {
 		treasures.add(treasure);
 	}
 	
+	/**
+	 * Adds bomb to the player's bomb collection
+	 */
 	public void addBomb(Bomb bomb) {
 		bombs.add(bomb);
 	}
 	
+	/**
+	 * Removes bomb from the player's bomb collection
+	 */
 	public void dropBomb(Bomb bomb) {
 		bombs.remove(bomb);
 	}
@@ -145,10 +149,17 @@ public class Player extends MovableEntity implements Observer {
 	 *  ==============================================
 	 */
 
+	/**
+	 * @return number of treasure in player's treasure collection
+	 */
+
 	public int getNumTreasures() {
 		return treasures.size();
 	}
 	
+	/**
+	 * @return number of bombs in player's bomb collection
+	 */
 	public int getNumBombs() {
 		return bombs.size();
 	}
@@ -158,8 +169,19 @@ public class Player extends MovableEntity implements Observer {
 	 *  ==============================================
 	 */
     
+	/**
+	 * @return whether a player was able to collect an item
+	 */
     public boolean collectItem(Entity item) {
     	if(item.collect()) return true;
+    	return false;
+    }
+    
+	/**
+	 * @return whether a player was able to use an item
+	 */
+    public boolean useItem(Entity item) {
+    	if (item.use()) return true;
     	return false;
     }
     

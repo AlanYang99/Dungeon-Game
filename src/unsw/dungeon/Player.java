@@ -2,7 +2,7 @@ package unsw.dungeon;
 
 import java.util.List;
 
-public class Player extends MovableEntity {
+public class Player extends MovableEntity implements Observer {
 
     private Dungeon dungeon;
    /*
@@ -19,6 +19,7 @@ public class Player extends MovableEntity {
     private Key key;
 //    private List<Treasure> treasures;
     private List<Bomb> bombs;
+    private boolean invulnerable;
 
 	/**
      * Create a player positioned in square (x,y)
@@ -28,6 +29,8 @@ public class Player extends MovableEntity {
     public Player(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
         dungeon.setPlayer(this);
+        invulnerable = false;
+
     }
     
 	/** ==============================================
@@ -100,5 +103,14 @@ public class Player extends MovableEntity {
     	if (item instanceof Switch || item instanceof Exit || item instanceof Enemy ) return true;
 		return super.share(item);
     }
+
+	@Override
+	public void update(Subject subject) {
+		// If the potion updates the player, it has either started or run out.
+		if (subject instanceof Potion) {
+			invulnerable = !invulnerable;
+		}
+		
+	}
 
 }

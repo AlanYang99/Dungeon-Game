@@ -21,15 +21,17 @@ public class Switch extends Entity {
 		return true;
     }
 	
+	//TOD0: add to each boulder movement
+	
 	public void checkTriggered() {
 		List<Entity> entities = dungeon.getMap()[getX()][getY()];
 		
 		for (Entity e : entities) {
 			if (e instanceof Boulder) {
-				this.state.setTriggered();
+				this.state.changeToClosed();
 				break;
 			} else {
-				this.state.setUntriggered();
+				this.state.changeToOpen();
 			}
 		}
 	}

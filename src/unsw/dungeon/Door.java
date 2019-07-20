@@ -14,5 +14,11 @@ public class Door extends Entity {
         super(dungeon, x, y);
         this.id = id;
     }
+    
+	@Override
+    public boolean share(Entity item) {
+    	if (item instanceof Player) return true;
+		return super.share(item);
+    }
 
 }

@@ -1,8 +1,6 @@
 package unsw.dungeon;
 
-public class Switch extends StaticEntity {
-	
-	private Dungeon dungeon;
+public class Switch extends Entity {
 
     /**
      * Create an switch positioned in square (x,y)
@@ -12,5 +10,13 @@ public class Switch extends StaticEntity {
     public Switch(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
     }
+
+	@Override
+    public boolean share(Entity entity) {
+    	//TODO
+		return false;
+    }
+
+
 
 }

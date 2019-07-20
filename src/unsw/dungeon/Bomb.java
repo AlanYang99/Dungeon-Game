@@ -11,4 +11,25 @@ public class Bomb extends Entity {
         super(dungeon, x, y);
     }
 
+	@Override
+	public boolean collect() {
+		dungeon.getPlayer().addBomb(this);
+		this.x() = null;
+		this.y() = null;
+		return true;
+	}
+	
+	@Override
+	public boolean use() {
+		if (dungeon.getPlayer().getNumBombs() == 0) return false;
+		// TODO
+		return true;
+	}
+
+	@Override
+    public boolean share(Entity item) {
+    	if (item instanceof Switch) return true;
+		return super.share(item);
+    }
+
 }

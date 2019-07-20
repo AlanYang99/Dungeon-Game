@@ -22,8 +22,12 @@ public abstract class Entity {
         this.y = new SimpleIntegerProperty(y);
         this.dungeon = dungeon;
         this.state = new Closed();
+//        this.dungeon.getMap()[x][y].add(this);
     }
 
+    public Dungeon getDungeon() {
+    	return dungeon;
+    }
     public IntegerProperty x() {
         return x;
     }

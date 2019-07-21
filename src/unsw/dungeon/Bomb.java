@@ -54,28 +54,13 @@ public class Bomb extends Entity {
 		this.setX(y);
 		dungeon.getMap()[x][y].add(this);
 		
-		// set subsequent states with timer
-		setBombTimer();
-		
-		// remove bomb from map after exploded
-		dungeon.getMap()[x][y].remove(this);
-		setX(-2);
-		setY(-2);
-		
-		return true;
-	}
-
-	@Override
-    public boolean share(Entity item) {
-    	if (item instanceof Switch || item instanceof Player) return true;
-		return super.share(item);
-    }
-	
-    /**
-     * Bomb timer, controls the state of the bomb after it has been "dropped".
-     * The bomb will go through unlit, lit1, lit2, and exploded states.
-     */
-    public class BombTimer extends TimerTask {
+        /**
+         * Bomb timer, controls the state of the bomb after it has been "dropped".
+         * The bomb will go through unlit, lit1, lit2, and exploded states.
+         */
+        
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
 
         	@Override
 	        public void run() { 
@@ -93,7 +78,25 @@ public class Bomb extends Entity {
 	            }
 	            seconds++;
 	        }
+        	
+        }, 0, 9999999);
+        
+        
+		// remove bomb from map after exploded
+		dungeon.getMap()[x][y].remove(this);
+		setX(-2);
+		setY(-2);
+		
+		return true;
+	}
+
+	@Override
+    public boolean share(Entity item) {
+    	if (item instanceof Switch || item instanceof Player) return true;
+		return super.share(item);
     }
+	
+
     
     /**
      * Destroy method, used when bomb is exploding.

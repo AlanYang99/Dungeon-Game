@@ -111,7 +111,7 @@ public class Bomb extends Entity {
     	entities.addAll(surroundings.get("right"));
     	
     	for (Entity e : entities) {
-    		if (e instanceof Door || e instanceof Switch || e instanceof Wall) break;
+    		if (e instanceof Door || e instanceof Switch || e instanceof Wall) continue;
     		
     		int x = e.getX();
     		int y = e.getY();

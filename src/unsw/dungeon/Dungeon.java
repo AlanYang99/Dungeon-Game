@@ -106,6 +106,7 @@ public class Dungeon implements Observer {
      *  @param 	y
      */
     public List<Entity> getEntities (int x, int y) {
+    	
     	if (check(x,y) == false || map[x][y] == null) return null;
     	return map[x][y];
     }

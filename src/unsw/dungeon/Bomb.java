@@ -24,16 +24,15 @@ public class Bomb extends Entity {
         super(dungeon, x, y);
     }
 
-	@SuppressWarnings("null")
 	@Override
 	public boolean collect() {
 		//give to player
 		dungeon.getPlayer().addBomb(this);
 		// remove from dungeon map
-		dungeon.getMap()[getX()][getY()].remove(this);
+//		dungeon.getMap()[getX()][getY()].remove(this);
 		// set entity coordinates to null
-		setX((Integer)null);
-		setY((Integer)null);
+//		setX(-1);
+//		setY(-1);
 		return true;
 	}
 	
@@ -108,6 +107,7 @@ public class Bomb extends Entity {
     	entities.addAll(surroundings.get("down"));
     	entities.addAll(surroundings.get("left"));
     	entities.addAll(surroundings.get("right"));
+    	
     	
     	for (Entity e : entities) {
     		if (e instanceof Door || e instanceof Switch || e instanceof Wall) continue;

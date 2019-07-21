@@ -10,6 +10,7 @@ public abstract class MovableEntity extends Entity {
 		
 	}
 	
+
 	/*=====================================================================================================
 	 * Methods below move any time of movable entity, with additional functionality in individual classes.
 	 * Note that it is possible that an entity may not move after one of the functions are called due to

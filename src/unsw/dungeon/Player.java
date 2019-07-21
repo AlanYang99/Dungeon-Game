@@ -1,6 +1,8 @@
 package unsw.dungeon;
 
 import java.util.List;
+import java.util.ArrayList;
+
 
 public class Player extends MovableEntity implements Observer {
 
@@ -21,8 +23,9 @@ public class Player extends MovableEntity implements Observer {
     public Player(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
         dungeon.setPlayer(this);
+        bombs = new ArrayList <Bomb>(); //changed this
+        treasures = new ArrayList <Treasure>(); //changed this
         invulnerable = false;
-
     }
     
 	/**
@@ -32,6 +35,7 @@ public class Player extends MovableEntity implements Observer {
     @Override
     public boolean moveUp() {
     	List<Entity> entities = getSurrounding().get("up");
+    	
     	for (Entity e : entities) {
     		if (e instanceof Boulder) {
     			// attempt to move boulder first
@@ -39,8 +43,14 @@ public class Player extends MovableEntity implements Observer {
     		}
     	}
     	if (super.moveUp()) {
+    		List<Entity> entitiesToDelete = new ArrayList<Entity>();
     		for (Entity e : entities) {
-    			collectItem(e);
+    			if(collectItem(e)) entitiesToDelete.add(e);
+    		}
+    		for (Entity a : entitiesToDelete) {
+    			getDungeon().getMap()[a.getX()][a.getY()].remove(a);
+    			a.setX(-1);
+    			a.setY(-1);    			
     		}
     		return true;
     	}
@@ -61,21 +71,51 @@ public class Player extends MovableEntity implements Observer {
     		}
     	}
     	if (super.moveDown()) {
+    		List<Entity> entitiesToDelete = new ArrayList<Entity>();
     		for (Entity e : entities) {
-    			collectItem(e);
+    			if(collectItem(e)) entitiesToDelete.add(e);
+    		}
+    		for (Entity a : entitiesToDelete) {
+    			getDungeon().getMap()[a.getX()][a.getY()].remove(a);
+    			a.setX(-1);
+    			a.setY(-1);    			
     		}
     		return true;
     	}
     	return false;
     }
-    
+    @Override
+    public boolean moveRight() {
+    	List<Entity> entities = super.getSurrounding().get("right");
+    	for (Entity e : entities) {
+    		if (e instanceof Boulder) {
+    			// attempt to move boulder
+    			((Boulder) e).moveRight();
+    		}
+    	}
+    	if (super.moveRight()) {
+    	
+    		List<Entity> entitiesToDelete = new ArrayList<Entity>();
+    		for (Entity e : entities) {
+    			if(collectItem(e)) entitiesToDelete.add(e);
+    		}
+    		for (Entity a : entitiesToDelete) {
+    			getDungeon().getMap()[a.getX()][a.getY()].remove(a);
+    			a.setX(-1);
+    			a.setY(-1);    			
+    		}
+    		return true;
+    		
+    	}
+    	return false;
+    }        
 	/**
 	 * Moves an player to the left if it is legal to do so. If a boulder can be moved in the same direction,
 	 * the boulder will be moved before the player is moved.
 	 */
     @Override
     public boolean moveLeft() {
-    	List<Entity> entities = getSurrounding().get("left");
+    	List<Entity> entities = super.getSurrounding().get("left");
     	for (Entity e : entities) {
     		if (e instanceof Boulder) {
     			// attempt to move boulder
@@ -83,10 +123,18 @@ public class Player extends MovableEntity implements Observer {
     		}
     	}
     	if (super.moveLeft()) {
+    	
+    		List<Entity> entitiesToDelete = new ArrayList<Entity>();
     		for (Entity e : entities) {
-    			collectItem(e);
+    			if(collectItem(e)) entitiesToDelete.add(e);
+    		}
+    		for (Entity a : entitiesToDelete) {
+    			getDungeon().getMap()[a.getX()][a.getY()].remove(a);
+    			a.setX(-1);
+    			a.setY(-1);    			
     		}
     		return true;
+    		
     	}
     	return false;
     }
@@ -95,32 +143,13 @@ public class Player extends MovableEntity implements Observer {
 	 * Moves an player to the right if it is legal to do so. If a boulder can be moved in the same direction,
 	 * the boulder will be moved before the player is moved.
 	 */
-    @Override
-    public boolean moveRight() {
-    	List<Entity> entities = getSurrounding().get("right");
-    	for (Entity e : entities) {
-    		if (e instanceof Boulder) {
-    			// attempt to move boulder
-    			((Boulder) e).moveRight();
-    		}
-    	}
-    	if (super.moveRight()) {
-    		for (Entity e : entities) {
-    			collectItem(e);
-    		}
-    		return true;
-    	}
-    	return false;
-    }
+
     
 	/** ==============================================
 	 *  Getters and setters
 	 *  ==============================================
 	 */
 
-	/**
-	 * @return	sword a player is holding, otherwise null
-	 */
     public Sword getSword() {
 		return sword;
 	}
@@ -129,9 +158,6 @@ public class Player extends MovableEntity implements Observer {
 		this.sword = sword;
 	}
 
-	/**
-	 * @return	potion a player is holding, otherwise null
-	 */
 	public Potion getPotion() {
 		return potion;
 	}
@@ -140,9 +166,6 @@ public class Player extends MovableEntity implements Observer {
 		this.potion = potion;
 	}
 
-	/**
-	 * @return	key a player is holding, otherwise null
-	 */
 	public Key getKey() {
 		return key;
 	}
@@ -151,6 +174,7 @@ public class Player extends MovableEntity implements Observer {
 		this.key = key;
 	}
 	
+
 	public boolean isInvulnerable() {
 		return this.invulnerable;
 	}
@@ -182,6 +206,7 @@ public class Player extends MovableEntity implements Observer {
 	 *  ==============================================
 	 */
 
+
 	/**
 	 * @return number of treasure in player's treasure collection
 	 */
@@ -196,6 +221,7 @@ public class Player extends MovableEntity implements Observer {
 	public int getNumBombs() {
 		return bombs.size();
 	}
+	
     
 	/** ==============================================
 	 *  Player specific functions
@@ -227,7 +253,7 @@ public class Player extends MovableEntity implements Observer {
     public boolean share(Entity item) {
     	if (item instanceof Switch || item instanceof Exit || item instanceof Enemy || 
     			item instanceof Key || item instanceof Treasure || item instanceof Bomb ||
-    			item instanceof Potion) return true;
+    			item instanceof Potion || item instanceof Sword) return true;
     	
 		return super.share(item);
     }
@@ -243,5 +269,5 @@ public class Player extends MovableEntity implements Observer {
 		}
 		
 	}
-
+	
 }

@@ -40,7 +40,7 @@ public class Potion extends Entity implements Subject {
 		notifyObservers();
 		
 		Timer timer = new Timer();
-        
+		
         timer.schedule(new TimerTask() {
         	@Override
         	public void run() {

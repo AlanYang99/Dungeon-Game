@@ -53,10 +53,32 @@ class TestKey {
 		Key key1 = new Key(dungeon,10,11,1);
 		Door door1 = new Door(dungeon,10,12,1);
 		key1.collect();
-		player1.moveUp();
+		player1.moveDown();
 		assertEquals(player1.getY(),11);
-		
-		
+		assertEquals(key1.use(0,1),true);
+		assertEquals(player1.getKey(),null);
+	}
+	
+	@Test
+	void incorrectDoor() {
+		Dungeon dungeon = new Dungeon(20,20);
+		Player player1 = new Player(dungeon,10,10);
+		Key key1 = new Key(dungeon,10,11,1);
+		Door door2 = new Door(dungeon,10,12,2);
+		key1.collect();
+		player1.moveDown();		
+		assertEquals(player1.getY(),11);
+		assertEquals(key1.use(0,1),false);
+		assertNotEquals(player1.getKey(),null);		
+	}
+	
+	@Test
+	void noDoor() {
+		Dungeon dungeon = new Dungeon(20,20);
+		Player player1 = new Player(dungeon,10,10);
+		Key key1 = new Key(dungeon,10,11,1);
+		key1.collect();
+		assertEquals(key1.use(0,1),false);		
 	}
 
 }

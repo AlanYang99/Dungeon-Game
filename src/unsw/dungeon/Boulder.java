@@ -21,25 +21,7 @@ public class Boulder extends MovableEntity {
 		return super.share(item);
 	}
 
-    @Override
-    public void moveUp() {
-    	// trigger update all switches
-    }
-    
-    @Override
-    public void moveDown() {
-    	// trigger update all switches
-    }
-    
-    @Override
-    public void moveLeft() {
-    	// trigger update all switches	
-    }
-    
-    @Override
-    public void moveRight() {
-    	// trigger update all switches	
-    }
+
     
 
 }

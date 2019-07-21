@@ -68,7 +68,7 @@ public class Key extends Entity {
 			if (e instanceof Door)
 				door = (Door) e;
 		}
-		
+		if(door == null) return false;
 		boolean doorOpen = false;
 		
 		// If the door is already open.

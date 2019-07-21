@@ -60,7 +60,7 @@ public class Player extends MovableEntity implements Observer {
     	for (Entity e : entities) {
     		if (e instanceof Boulder) {
     			// attempt to move boulder
-    			((Boulder) e).moveDown();
+    			((Boulder) e).moveUp();
     		}
     	}
     	if (super.moveDown()) {
@@ -78,11 +78,11 @@ public class Player extends MovableEntity implements Observer {
 	 */
     @Override
     public boolean moveLeft() {
-    	List<Entity> entities = getSurrounding().get("left");
+    	List<Entity> entities = getSurrounding().get("down");
     	for (Entity e : entities) {
     		if (e instanceof Boulder) {
     			// attempt to move boulder
-    			((Boulder) e).moveLeft();
+    			((Boulder) e).moveUp();
     		}
     	}
     	if (super.moveLeft()) {
@@ -100,15 +100,16 @@ public class Player extends MovableEntity implements Observer {
 	 */
     @Override
     public boolean moveRight() {
-    	List<Entity> entities = getSurrounding().get("right");
+    	List<Entity> entities = getSurrounding().get("down");
     	for (Entity e : entities) {
     		if (e instanceof Boulder) {
     			// attempt to move boulder
-    			((Boulder) e).moveRight();
+    			((Boulder) e).moveUp();
     		}
     	}
     	if (super.moveRight()) {
     		for (Entity e : entities) {
+    			System.out.println(e instanceof Potion);
     			collectItem(e);
     		}
     		return true;
@@ -121,9 +122,6 @@ public class Player extends MovableEntity implements Observer {
 	 *  ==============================================
 	 */
 
-	/**
-	 * @return	sword a player is holding, otherwise null
-	 */
     public Sword getSword() {
 		return sword;
 	}
@@ -132,9 +130,6 @@ public class Player extends MovableEntity implements Observer {
 		this.sword = sword;
 	}
 
-	/**
-	 * @return	potion a player is holding, otherwise null
-	 */
 	public Potion getPotion() {
 		return potion;
 	}
@@ -143,9 +138,6 @@ public class Player extends MovableEntity implements Observer {
 		this.potion = potion;
 	}
 
-	/**
-	 * @return	key a player is holding, otherwise null
-	 */
 	public Key getKey() {
 		return key;
 	}
@@ -230,10 +222,7 @@ public class Player extends MovableEntity implements Observer {
     
 	@Override
     public boolean share(Entity item) {
-    	if (item instanceof Switch || item instanceof Exit || item instanceof Enemy || 
-    			item instanceof Key || item instanceof Treasure || item instanceof Bomb ||
-    			item instanceof Potion) return true;
-    	
+    	if (item instanceof Switch || item instanceof Exit || item instanceof Enemy ) return true;
 		return super.share(item);
     }
 

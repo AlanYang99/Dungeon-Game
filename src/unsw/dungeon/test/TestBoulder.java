@@ -61,5 +61,7 @@ class TestBoulder {
 		assertEquals(infinitySword.getX(),12);
 		assertEquals(infinitySword.getY(),10);		
 	}
+	
+//	@Test 
 
 }

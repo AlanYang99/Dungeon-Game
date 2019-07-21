@@ -31,6 +31,7 @@ public abstract class MovableEntity extends Entity {
     	}
     	if (sharable && getY() > 0)
             y().set(getY() - 1);
+    	return sharable;
     }
 
 	/**
@@ -46,6 +47,7 @@ public abstract class MovableEntity extends Entity {
     	}
     	if (sharable && getY() < dungeon.getHeight() - 1)
     		y().set(getY() + 1);
+    	return sharable;
     }
 
 	/**
@@ -61,6 +63,7 @@ public abstract class MovableEntity extends Entity {
     	}
         if (sharable && getX() > 0)
             x().set(getX() - 1);
+        return sharable;
     }
 
 	/**
@@ -76,6 +79,7 @@ public abstract class MovableEntity extends Entity {
     	}
         if (sharable && getX() < dungeon.getWidth() - 1)
             x().set(getX() + 1);
+        return sharable;
     }
     
 }

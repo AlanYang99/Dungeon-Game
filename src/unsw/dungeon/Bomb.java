@@ -110,7 +110,6 @@ public class Bomb extends Entity {
     	
     	for (Entity e : entities) {
     		if (e instanceof Door || e instanceof Switch || e instanceof Wall) continue;
-    		System.out.println(e);
     		
     		int x = e.getX();
     		int y = e.getY();

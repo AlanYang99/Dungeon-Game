@@ -8,6 +8,11 @@ public abstract class MovableEntity extends Entity {
 	public MovableEntity(Dungeon dungeon, int x, int y) {
 		super(dungeon, x, y);
 		
+		// Attach all switches to observe all moving entities for movement.
+		for (Switch s : dungeon.getSwitches()) {
+			this.attach(s);
+		}
+		
 	}
 	
 	/*=====================================================================================================
@@ -28,8 +33,14 @@ public abstract class MovableEntity extends Entity {
     			sharable = false;
     		}
     	}
-    	if (sharable && getY() > 0)
+    	if (sharable && getY() > 0) {
+    		this.getDungeon().removeEntity(this);
             y().set(getY() - 1);
+            this.getDungeon().addEntity(this);
+    	}
+    	
+    	
+    	notifyObservers("EntityMove");
     	return sharable;
     }
 
@@ -44,8 +55,13 @@ public abstract class MovableEntity extends Entity {
     			sharable = false;
     		}
     	}
-    	if (sharable && getY() < dungeon.getHeight() - 1)
+    	if (sharable && getY() < dungeon.getHeight() - 1) {
+    		this.getDungeon().removeEntity(this);
     		y().set(getY() + 1);
+    		this.getDungeon().addEntity(this);
+    	}
+    	
+    	notifyObservers("EntityMove");
     	return sharable;
     }
 
@@ -60,8 +76,13 @@ public abstract class MovableEntity extends Entity {
     			sharable = false;
     		}
     	}
-        if (sharable && getX() > 0)
+        if (sharable && getX() > 0) {
+        	this.getDungeon().removeEntity(this);
             x().set(getX() - 1);
+            this.getDungeon().addEntity(this);
+        }
+        
+        notifyObservers("EntityMove");
         return sharable;
     }
 
@@ -76,8 +97,13 @@ public abstract class MovableEntity extends Entity {
     			sharable = false;
     		}
     	}
-        if (sharable && getX() < dungeon.getWidth() - 1)
+        if (sharable && getX() < dungeon.getWidth() - 1) {
+        	this.getDungeon().removeEntity(this);
             x().set(getX() + 1);
+            this.getDungeon().addEntity(this);
+        }
+        
+        notifyObservers("EntityMove");
         return sharable;
     }
     

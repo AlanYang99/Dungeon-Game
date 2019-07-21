@@ -8,15 +8,15 @@ public interface State {
 	 * ========================================================
 	 */
 
-    default public State changeToOpenIndefinitely() {
+    default public void changeToOpenIndefinitely(Entity e) {
     	throw new UnsupportedOperationException();
     }
     
-    default public State changeToOpen() {
+    default public void changeToOpen(Entity e) {
     	throw new UnsupportedOperationException();
     }
     
-	default public State changeToClosed() {
+	default public void changeToClosed(Entity e) {
 		throw new UnsupportedOperationException();
 	}
 

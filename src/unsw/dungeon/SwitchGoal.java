@@ -9,17 +9,17 @@ public class SwitchGoal implements Goal {
 	}
 	
 	@Override
-	public void update(Subject subject) {
+	public void update(Subject subject, String tag) {
 		if (subject instanceof Switch) { // Switch will change to whichever class holds all switch information
 			Switch s = (Switch) subject;
-			if (s.getState() instanceof Open) {
+			if (tag.equals("SwitchOpened")) {
 				switchesLeft--;
-			} else if (s.getState() instanceof Closed) {
+			} else if (tag.equals("SwitchClosed")) {
 				switchesLeft++;
 			}
 		}
 		evaluate();
-		notifyObservers();
+		notifyObservers("ReEvaluate");
 	}
 	
 	@Override

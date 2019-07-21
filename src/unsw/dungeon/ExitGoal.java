@@ -16,12 +16,12 @@ public class ExitGoal implements Goal {
 	}
 	
 	@Override
-	public void update(Subject subject) {
+	public void update(Subject subject, String tag) {
 		if (subject instanceof Exit) {
 			exitReached = true;
 		}
 		evaluate();
-		notifyObservers();
+		notifyObservers("ReEvaluate");
 	}
 
 	@Override

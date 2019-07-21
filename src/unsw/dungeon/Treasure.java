@@ -23,7 +23,7 @@ public class Treasure extends Entity {
 		setY((Integer)null);
 		
 		// Update the treasure goal
-		notifyObservers();
+		notifyObservers("TreasureCollected");
 		
 		return true;
 	}

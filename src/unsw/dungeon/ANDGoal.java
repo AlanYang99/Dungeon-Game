@@ -13,9 +13,10 @@ public class ANDGoal implements Goal {
 	}
 	
 	@Override
-	public void update(Subject subject) {
+	public void update(Subject subject, String tag) {
+		if (!tag.equals("ReEvaluate")) return;
 		evaluate();
-		notifyObservers();
+		notifyObservers("ReEvaluate");
 	}
 	
 	@Override

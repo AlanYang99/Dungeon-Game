@@ -9,9 +9,9 @@ public interface Subject {
 		observers.add(o);
 	}
 	
-	default public void notifyObservers() {
+	default public void notifyObservers(String tag) {
 		for (Observer o : observers) {
-			o.update(this);
+			o.update(this, tag);
 		}
 	}
 }

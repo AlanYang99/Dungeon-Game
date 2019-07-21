@@ -112,8 +112,8 @@ public class Dungeon implements Observer {
     // Is called when:
     // - Enemy moves
 	@Override
-	public void update(Subject subject) {
-		if (subject instanceof Enemy)
+	public void update(Subject subject, String tag) {
+		if (subject instanceof Enemy && tag.equals("EnemyMove"))
 			handlePlayerEnemyClash(player, (Enemy)subject);
 		
 	}

@@ -71,6 +71,9 @@ public class enemyAttacking implements MovementBehaviour {
 	}
 	
 	public void fill(int x, int y, int oldVal, Enemy me, Player player, int[][] map) {
+		int width = player.getDungeon().getWidth();
+		int height = player.getDungeon().getHeight();
+		
 		if (map[x][y] == -1) return;
 		if (x == player.getX() && y == player.getY() && oldVal != 0) return;
 		
@@ -88,10 +91,14 @@ public class enemyAttacking implements MovementBehaviour {
 		if (alreadyPlaced) return;
 		if (x == me.getX() && y == me.getY()) return;
 		
-		fill(x, y+1, val, me, player, map);
-		fill(x, y-1, val, me, player, map);
-		fill(x+1, y, val, me, player, map);
-		fill(x-1, y, val, me, player, map);
+		if (y+1 <= height-1) 
+			fill(x, y+1, val, me, player, map);
+		if (y-1 >= 0)
+			fill(x, y-1, val, me, player, map);
+		if (x+1 <= width-1)
+			fill(x+1, y, val, me, player, map);
+		if (x-1 >= 0)
+			fill(x-1, y, val, me, player, map);
 		
 	}
 

@@ -37,7 +37,7 @@ public class Potion extends Entity implements Subject {
     }
 	
 	public void activate() {
-		notifyObservers();
+		notifyObservers("PotionActivate");
 		
 		Timer timer = new Timer();
         
@@ -51,7 +51,7 @@ public class Potion extends Entity implements Subject {
 	}
 	
 	public void deactivate() {
-		notifyObservers();
+		notifyObservers("PotionDeactivate");
 	}
 	
 

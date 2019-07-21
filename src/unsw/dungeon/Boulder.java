@@ -18,6 +18,6 @@ public class Boulder extends MovableEntity {
     public boolean share(Entity item) {
     	if (item instanceof Switch) return true;
 		return super.share(item);
-    }
+	}
 
 }

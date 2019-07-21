@@ -27,10 +27,10 @@ public class Sword extends Entity {
 		//give to player
 		dungeon.getPlayer().setSword(this);
 		// remove from dungeon map
-		dungeon.getMap()[getX()][getY()].remove(this);
+//		dungeon.getMap()[getX()][getY()].remove(this);
 		// set entity coordinates to null
-		setX(-1);
-		setY(-1);
+//		setX(-1);
+//		setY(-1);
 		return true;
 	}
 	

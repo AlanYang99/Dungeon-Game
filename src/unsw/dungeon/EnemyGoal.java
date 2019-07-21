@@ -4,7 +4,7 @@ public class EnemyGoal implements Goal {
 	
 	private int livingEnemies;
 	
-	EnemyGoal(Dungeon dungeon) {
+	public EnemyGoal(Dungeon dungeon) {
 		this.livingEnemies = dungeon.getEnemies().size();
 		for (Enemy e : dungeon.getEnemies()) {
 			e.attach(this);

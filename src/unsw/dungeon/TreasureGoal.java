@@ -4,7 +4,7 @@ public class TreasureGoal implements Goal {
 	
 	private int treasureLeft;
 	
-	TreasureGoal(Dungeon dungeon) {
+	public TreasureGoal(Dungeon dungeon) {
 		this.treasureLeft = dungeon.getTreasure().size();
 	}
 	

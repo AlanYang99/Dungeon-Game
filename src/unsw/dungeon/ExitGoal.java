@@ -7,9 +7,12 @@ public class ExitGoal implements Goal {
 	public Goal mainGoal;
 	public boolean exitReached;
 	
+	public ExitGoal() {
+		exitReached = false;
+	}
+	
 	public void setMainGoal(Goal goal) {
 		this.mainGoal = goal;
-		exitReached = false;
 	}
 	
 	@Override

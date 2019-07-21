@@ -32,6 +32,7 @@ public class Dungeon implements Observer {
         this.player = null;
         this.map = new ArrayList[width][height];
         this.enemies = new ArrayList<Enemy>();
+        this.treasure = new ArrayList<Treasure>();
         
         int row, col;
         for (row = 0; row < height; row++) {
@@ -112,8 +113,8 @@ public class Dungeon implements Observer {
     // Is called when:
     // - Enemy moves
 	@Override
-	public void update(Subject subject) {
-		if (subject instanceof Enemy)
+	public void update(Subject subject, String tag) {
+		if (subject instanceof Enemy && tag.equals("EnemyMove"))
 			handlePlayerEnemyClash(player, (Enemy)subject);
 		
 	}

@@ -29,11 +29,11 @@ public class Switch extends Entity {
 		for (Entity e : entities) {
 			if (e instanceof Boulder) {
 				this.state.changeToClosed();
-				notifyObservers();
+				notifyObservers("SwitchClosed");
 				break;
 			} else {
 				this.state.changeToOpen();
-				notifyObservers();
+				notifyObservers("SwitchOpened");
 			}
 		}
 	}

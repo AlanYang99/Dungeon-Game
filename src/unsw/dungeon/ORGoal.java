@@ -2,7 +2,7 @@ package unsw.dungeon;
 
 public class ORGoal implements Goal {
 	
-	ORGoal(Goal subgoal1, Goal subgoal2) {
+	public ORGoal(Goal subgoal1, Goal subgoal2) {
 		// Attach itself to each subgoal to be updated when they do.
 		subgoal1.attach(this);
 		subgoal2.attach(this);
@@ -13,9 +13,10 @@ public class ORGoal implements Goal {
 	}
 	
 	@Override
-	public void update(Subject subject) {
+	public void update(Subject subject, String tag) {
+		if (!tag.equals("ReEvaluate")) return;
 		evaluate();
-		notifyObservers();
+		notifyObservers("ReEvaluate");
 	}
 	
 	@Override

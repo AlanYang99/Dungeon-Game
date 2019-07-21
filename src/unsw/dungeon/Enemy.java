@@ -38,12 +38,14 @@ public class Enemy extends MovableEntity {
     public void move() {
     	movement.move(playerTracking, this);
     	
-    	notifyObservers();
+    	notifyObservers("EnemyMove");
     	
     	
     }
     
     public void kill() {
+    	notifyObservers("EnemyDeath");
+    	
     	dungeon.getEnemies().remove(this);
     	dungeon.getMap()[this.getX()][this.getY()].remove(this);
     }

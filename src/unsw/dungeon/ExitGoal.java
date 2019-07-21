@@ -7,18 +7,21 @@ public class ExitGoal implements Goal {
 	public Goal mainGoal;
 	public boolean exitReached;
 	
-	public void setMainGoal(Goal goal) {
-		this.mainGoal = goal;
+	public ExitGoal() {
 		exitReached = false;
 	}
 	
+	public void setMainGoal(Goal goal) {
+		this.mainGoal = goal;
+	}
+	
 	@Override
-	public void update(Subject subject) {
+	public void update(Subject subject, String tag) {
 		if (subject instanceof Exit) {
 			exitReached = true;
 		}
 		evaluate();
-		notifyObservers();
+		notifyObservers("ReEvaluate");
 	}
 
 	@Override

@@ -233,10 +233,13 @@ public class Player extends MovableEntity implements Observer {
     }
 
 	@Override
-	public void update(Subject subject) {
+	public void update(Subject subject, String tag) {
 		// If the potion updates the player, it has either started or run out.
 		if (subject instanceof Potion) {
-			invulnerable = !invulnerable;
+			if (tag.equals("PotionActivate"))
+				invulnerable = true;
+			if (tag.equals("PotionDeactivate"))
+				invulnerable = false;
 		}
 		
 	}

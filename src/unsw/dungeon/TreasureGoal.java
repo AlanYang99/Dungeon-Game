@@ -4,17 +4,17 @@ public class TreasureGoal implements Goal {
 	
 	private int treasureLeft;
 	
-	TreasureGoal(Dungeon dungeon) {
+	public TreasureGoal(Dungeon dungeon) {
 		this.treasureLeft = dungeon.getTreasure().size();
 	}
 	
 	@Override
-	public void update(Subject subject) {
-		if (subject instanceof Treasure) { // Treasure will change to whichever class holds all treasure information
+	public void update(Subject subject, String tag) {
+		if (subject instanceof Treasure && tag.equals("TreasureCollected")) {
 			treasureLeft--;
 		}
 		evaluate();
-		notifyObservers();
+		notifyObservers("ReEvaluate");
 	}
 
 	@Override

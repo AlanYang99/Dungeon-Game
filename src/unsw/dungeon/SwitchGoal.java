@@ -4,22 +4,22 @@ public class SwitchGoal implements Goal {
 	
 	private int switchesLeft;
 	
-	SwitchGoal(int totalSwitchesInDungeon) {
+	public SwitchGoal(int totalSwitchesInDungeon) {
 		this.switchesLeft = totalSwitchesInDungeon;
 	}
 	
 	@Override
-	public void update(Subject subject) {
-		if (subject instanceof Switch) { // Switch will change to whichever class holds all switch information
-			Switch s = (Switch) subject;
-			if (s.getState() instanceof Open) {
+	public void update(Subject subject, String tag) {
+		if (subject instanceof Switch) {
+			//Switch s = (Switch) subject;
+			if (tag.equals("SwitchOpened")) {
 				switchesLeft--;
-			} else if (s.getState() instanceof Closed) {
+			} else if (tag.equals("SwitchClosed")) {
 				switchesLeft++;
 			}
 		}
 		evaluate();
-		notifyObservers();
+		notifyObservers("ReEvaluate");
 	}
 	
 	@Override

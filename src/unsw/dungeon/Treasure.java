@@ -21,13 +21,12 @@ public class Treasure extends Entity {
 		// set entity coordinates to null
 		setX(-1);
 		setY(-1);
-		return true;
-	}
 
-	@Override
-	public boolean drop(Entity item) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		// Update the treasure goal
+		notifyObservers();
+		
+		return true;
 	}
 
 }

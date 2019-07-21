@@ -2,10 +2,13 @@ package unsw.dungeon;
 
 public class EnemyGoal implements Goal {
 	
-	public int livingEnemies;
+	private int livingEnemies;
 	
-	EnemyGoal(int totalEnemiesInDungeon) {
-		this.livingEnemies = totalEnemiesInDungeon;
+	EnemyGoal(Dungeon dungeon) {
+		this.livingEnemies = dungeon.getEnemies().size();
+		for (Enemy e : dungeon.getEnemies()) {
+			e.attach(this);
+		}
 	}
 	
 	@Override

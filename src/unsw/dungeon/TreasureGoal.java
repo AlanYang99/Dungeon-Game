@@ -2,10 +2,10 @@ package unsw.dungeon;
 
 public class TreasureGoal implements Goal {
 	
-	public int treasureLeft;
+	private int treasureLeft;
 	
-	TreasureGoal(int totalTreasureInDungeon) {
-		this.treasureLeft = totalTreasureInDungeon;
+	TreasureGoal(Dungeon dungeon) {
+		this.treasureLeft = dungeon.getTreasure().size();
 	}
 	
 	@Override

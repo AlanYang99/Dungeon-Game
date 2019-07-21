@@ -5,7 +5,7 @@ import java.util.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public abstract class Entity {
+public abstract class Entity implements Subject {
     
 	Dungeon dungeon;
 	SimpleIntegerProperty x,y;
@@ -108,6 +108,10 @@ public abstract class Entity {
      * Note a potion is used when it is collected (hence will return false in this method)
      */
 	public boolean use() {
+		return false;
+	}
+	
+	public boolean use(int dx, int dy) {
 		return false;
 	}
 	

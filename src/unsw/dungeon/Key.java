@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import java.util.List;
+
 public class Key extends Entity {
 	
     private int id;
@@ -57,10 +59,44 @@ public class Key extends Entity {
 	}
 	
 	@Override
-	public boolean use() {
-		// TODO
-		dungeon.getPlayer().setKey(null);
-		return true;
+
+	public boolean use(int dx, int dy) {
+		Player player = dungeon.getPlayer();
+		List<Entity> doorPos = dungeon.getMap()[player.getX()+dx][player.getY()+dy];
+		Door door = null;
+		for (Entity e : doorPos) {
+			if (e instanceof Door)
+				door = (Door) e;
+		}
+		
+		boolean doorOpen = false;
+		
+		// If the door is already open.
+		if (door.getState() instanceof Open) {
+			doorOpen = true;
+		} else {
+			// Check IDs of key and door match
+			if (door.getId() == id) {
+				// Unlock door
+				door.getState().changeToOpenIndefinitely();
+				
+				doorOpen = true;
+				
+				// Move player.
+				if (dx == 1 && dy == 0)
+					player.moveRight();
+				else if(dx == -1 && dy == 0)
+					player.moveLeft();
+				else if(dx == 0 && dy == 1)
+					player.moveDown();
+				else if(dx == 0 && dy == -1)
+					player.moveUp();
+				
+				dungeon.getPlayer().setKey(null);
+			}
+		}
+		
+		return doorOpen;
 	}
 	
 	@Override

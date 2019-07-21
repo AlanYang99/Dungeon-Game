@@ -38,7 +38,7 @@ public class ExitGoal implements Goal {
 			mainGoal.evaluate();
 		} else {
 		// If true, the exit goal must've been completed last so set it to true.
-			result =  true;
+			result = true;
 		}
 		
 		return result;

@@ -1,6 +1,5 @@
 package unsw.dungeon.enemyStates;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import unsw.dungeon.*;
@@ -56,10 +55,10 @@ public class enemyAttacking implements MovementBehaviour {
 		
 		switch (minI) {
 		case 0:
-			me.moveUp();
+			me.moveDown();
 			break;
 		case 1:
-			me.moveDown();
+			me.moveUp();
 			break;
 		case 2:
 			me.moveRight();

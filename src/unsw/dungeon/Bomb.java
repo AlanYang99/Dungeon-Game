@@ -70,6 +70,10 @@ public class Bomb extends Entity {
 		return super.share(item);
     }
 	
+    /**
+     * Bomb timer, controls the state of the bomb after it has been "dropped".
+     * The bomb will go through unlit, lit1, lit2, and exploded states.
+     */
     public void setBombTimer() {
 
         new TimerTask() {
@@ -94,6 +98,10 @@ public class Bomb extends Entity {
 
     }
     
+    /**
+     * Destroy method, used when bomb is exploding.
+     * Will not destroy doors/walls/switches to the immediate top/bottom/left/right of the bomb.
+     */
     protected void destroySurroundings() {
     	Dictionary<String, List<Entity>> surroundings = getSurrounding();
     	List<Entity> entities = surroundings.get("up");
@@ -102,6 +110,8 @@ public class Bomb extends Entity {
     	entities.addAll(surroundings.get("right"));
     	
     	for (Entity e : entities) {
+    		if (e instanceof Door || e instanceof Switch || e instanceof Wall) break;
+    		
     		int x = e.getX();
     		int y = e.getY();
     		

@@ -15,12 +15,14 @@ import java.util.List;
  * @author Robert Clifton-Everest
  *
  */
-public class Dungeon {
+public class Dungeon implements Observer {
 
     private int width, height;
     // private List<Entity> entities;
     private Player player;
     private List<Entity>[][] map;
+    private List<Enemy> enemies;
+    private List<Treasure> treasure;
 
     @SuppressWarnings("unchecked")
 	public Dungeon(int width, int height) {
@@ -29,6 +31,7 @@ public class Dungeon {
         // this.entities = new ArrayList<>();
         this.player = null;
         this.map = new ArrayList[width][height];
+        this.enemies = new ArrayList<Enemy>();
         
         int row, col;
         for (row = 0; row < height; row++) {
@@ -37,7 +40,9 @@ public class Dungeon {
         	}
         }
     }
-
+    
+    
+    
     public int getWidth() {
         return width;
     }
@@ -57,13 +62,27 @@ public class Dungeon {
     public List<Entity>[][] getMap() {
         return map;
     }
+    
+    public List<Enemy> getEnemies() {
+    	return enemies;
+    }
 
     public void addEntity(Entity entity) {
         // entities.add(entity);
     	map[entity.getX()][entity.getY()].add(entity);
+    	
+    	entity.attach(this);
+    	
+    	if (entity instanceof Enemy)
+    		enemies.add((Enemy)entity);
+    	if (entity instanceof Treasure)
+    		treasure.add((Treasure)entity);
+    	
     }
     
-    
+    public List<Treasure> getTreasure() {
+    	return treasure;
+    }
     
     /**
      *  Returns true if the given coordinate exists, otherwise  false.
@@ -89,5 +108,31 @@ public class Dungeon {
     	if (check(x,y) == false || map[x][y] == null) return null;
     	return map[x][y];
     }
+    
+    // Is called when:
+    // - Enemy moves
+	@Override
+	public void update(Subject subject) {
+		if (subject instanceof Enemy)
+			handlePlayerEnemyClash(player, (Enemy)subject);
+		
+	}
+	
+	private void handlePlayerEnemyClash(Player player, Enemy enemy) {
+		// Check if the player and enemy are in the same square.
+		boolean contact = false;
+		if (player.getX() == enemy.getX() && player.getY() == enemy.getY()) {
+			contact = true;
+		}
+		
+		if (contact) {
+			if (player.isInvulnerable()) {
+				enemy.kill();
+			} else {
+				// End game as player dies.
+				// TODO
+			}
+		}
+	}
     
 }

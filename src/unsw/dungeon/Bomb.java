@@ -75,9 +75,7 @@ public class Bomb extends Entity {
      * Bomb timer, controls the state of the bomb after it has been "dropped".
      * The bomb will go through unlit, lit1, lit2, and exploded states.
      */
-    public void setBombTimer() {
-
-        new TimerTask() {
+    public class BombTimer extends TimerTask {
 
         	@Override
 	        public void run() { 
@@ -95,8 +93,6 @@ public class Bomb extends Entity {
 	            }
 	            seconds++;
 	        }
-        };
-
     }
     
     /**
@@ -121,6 +117,12 @@ public class Bomb extends Entity {
     		e.setX(-2);
     		e.setY(-2);
     	}
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 
 

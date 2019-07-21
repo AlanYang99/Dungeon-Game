@@ -115,7 +115,7 @@ public class Bomb extends Entity {
     		int x = e.getX();
     		int y = e.getY();
     		
-    		dungeon.getMap()[x][y].remove(e);
+    		dungeon.removeEntity(e);
     		
     		e.setX(-2);
     		e.setY(-2);

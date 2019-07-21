@@ -75,7 +75,7 @@ public class Key extends Entity {
 			// Check IDs of key and door match
 			if (door.getId() == id) {
 				// Unlock door
-				door.getState().changeToOpenIndefinitely();
+				door.getState().changeToOpenIndefinitely(this);
 				
 				doorOpen = true;
 				

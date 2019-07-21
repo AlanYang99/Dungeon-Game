@@ -23,6 +23,7 @@ public class Dungeon implements Observer {
     private List<Entity>[][] map;
     private List<Enemy> enemies;
     private List<Treasure> treasure;
+    private List<Switch> switches;
 
     @SuppressWarnings("unchecked")
 	public Dungeon(int width, int height) {
@@ -33,6 +34,7 @@ public class Dungeon implements Observer {
         this.map = new ArrayList[width][height];
         this.enemies = new ArrayList<Enemy>();
         this.treasure = new ArrayList<Treasure>();
+        this.switches = new ArrayList<Switch>();
         
         int row, col;
         for (row = 0; row < height; row++) {
@@ -67,6 +69,10 @@ public class Dungeon implements Observer {
     public List<Enemy> getEnemies() {
     	return enemies;
     }
+    
+    public List<Switch> getSwitches() {
+    	return switches;
+    }
 
     public void addEntity(Entity entity) {
         // entities.add(entity);
@@ -78,6 +84,22 @@ public class Dungeon implements Observer {
     		enemies.add((Enemy)entity);
     	if (entity instanceof Treasure)
     		treasure.add((Treasure)entity);
+    	if (entity instanceof Switch)
+    		switches.add((Switch)entity);
+    	
+    }
+    
+    public void removeEntity(Entity entity) {
+    	map[entity.getX()][entity.getY()].remove(entity);
+    	
+    	
+    	
+    	if (entity instanceof Enemy)
+    		enemies.add((Enemy)entity);
+    	if (entity instanceof Treasure)
+    		treasure.add((Treasure)entity);
+    	if (entity instanceof Switch)
+    		switches.add((Switch)entity);
     	
     }
     

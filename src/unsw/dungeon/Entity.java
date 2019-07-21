@@ -9,6 +9,7 @@ public abstract class Entity implements Subject {
     
 	Dungeon dungeon;
 	SimpleIntegerProperty x,y;
+	State state;
 	
     /**
      *  Create an entity positioned in square (x,y)
@@ -20,7 +21,7 @@ public abstract class Entity implements Subject {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.dungeon = dungeon;
-        this.dungeon.getMap()[x][y].add(this);
+        this.dungeon.addEntity(this);
     }
 
     public Dungeon getDungeon() {

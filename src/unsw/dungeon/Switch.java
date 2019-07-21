@@ -2,9 +2,8 @@ package unsw.dungeon;
 
 import java.util.List;
 
-public class Switch extends Entity {
+public class Switch extends Entity implements Observer {
 
-	private State state;
     /**
      * Create an switch positioned in square (x,y)
      * @param x
@@ -13,6 +12,7 @@ public class Switch extends Entity {
     public Switch(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
         this.state = new Closed(); // assumes board cannot be initialized with boulder already on top of a switch
+        
     }
 
 	@Override
@@ -25,21 +25,31 @@ public class Switch extends Entity {
 	
 	public void checkTriggered() {
 		List<Entity> entities = dungeon.getMap()[getX()][getY()];
-		
+		notifyObservers("SwitchUpdate");
 		for (Entity e : entities) {
+			
 			if (e instanceof Boulder) {
-				this.state.changeToClosed();
-				notifyObservers("SwitchClosed");
+				this.state.changeToClosed(this);
 				break;
 			} else {
-				this.state.changeToOpen();
-				notifyObservers("SwitchOpened");
+				this.state.changeToOpen(this);
 			}
 		}
 	}
 	
+	public void setState(State state) {
+		this.state = state;
+	}
+	
 	public State getState() {
 		return state;
+	}
+
+	@Override
+	public void update(Subject subject, String tag) {
+		if (tag.equals("EntityMove")) {
+			checkTriggered();
+		}
 	}
 	
 }

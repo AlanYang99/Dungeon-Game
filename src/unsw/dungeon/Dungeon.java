@@ -32,6 +32,7 @@ public class Dungeon implements Observer {
         this.player = null;
         this.map = new ArrayList[width][height];
         this.enemies = new ArrayList<Enemy>();
+        this.treasure = new ArrayList<Treasure>();
         
         int row, col;
         for (row = 0; row < height; row++) {

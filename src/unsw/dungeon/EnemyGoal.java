@@ -15,9 +15,10 @@ public class EnemyGoal implements Goal {
 	public void update(Subject subject, String tag) {
 		if (subject instanceof Enemy && tag.equals("EnemyDeath")) { // Enemy will change to whichever class holds all enemy information
 			livingEnemies--;
+			evaluate();
+			notifyObservers("ReEvaluate");
 		}
-		evaluate();
-		notifyObservers("ReEvaluate");
+		
 	}
 
 	@Override

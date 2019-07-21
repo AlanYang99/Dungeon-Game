@@ -15,7 +15,7 @@ class TestBomb {
 		Dungeon dungeon = new Dungeon(20,20);
 		Player player1 = new Player(dungeon,10,10);
 		Bomb bomb1 = new Bomb(dungeon,10,11);
-		bomb1.collect();
+		player1.moveDown();
 		assertEquals(player1.getNumBombs(),1);
 		assertEquals(bomb1.getX(),-1);
 		assertEquals(bomb1.getY(),-1);

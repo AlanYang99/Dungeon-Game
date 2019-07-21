@@ -29,10 +29,9 @@ class TestKey {
 		player1.moveRight();
 		key2.collect();
 		assertNotEquals(player1.getKey(),key1);
-		assertEquals(player1.getKey(),key2);
+		assertEquals(player1.getKey(),key2);	
 		assertEquals(key1.getX(),10);
 		assertEquals(key1.getY(),12);
-		
 	}
 	
 	@Test

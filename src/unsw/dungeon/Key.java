@@ -29,17 +29,14 @@ public class Key extends Entity {
 		if(oldKey != null) {
 			oldKey.setX(getX());
 			oldKey.setY(getY());
-			dungeon.getMap()[getX()][getY()].remove(this);
 			dungeon.getPlayer().setKey(this);
-			dungeon.addEntity(oldKey);
+//			dungeon.addEntity(oldKey);
 		} else {
 			dungeon.getPlayer().setKey(this);
 			// remove from dungeon map
 			
-			dungeon.getMap()[getX()][getY()].remove(this);			
 		}
-		setX(-1);
-		setY(-1);
+
 //		// check player isn't already holding a key
 //		if (dungeon.getPlayer().getKey() != null) {
 //			// set map coordinates for old key

@@ -29,10 +29,10 @@ public class Bomb extends Entity {
 		//give to player
 		dungeon.getPlayer().addBomb(this);
 		// remove from dungeon map
-		dungeon.getMap()[getX()][getY()].remove(this);
+//		dungeon.getMap()[getX()][getY()].remove(this);
 		// set entity coordinates to null
-		setX(-1);
-		setY(-1);
+//		setX(-1);
+//		setY(-1);
 		return true;
 	}
 	

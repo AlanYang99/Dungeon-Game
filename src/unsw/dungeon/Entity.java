@@ -64,7 +64,6 @@ public abstract class Entity implements Subject {
     	Dictionary<String, List<Entity>> surroundings = new Hashtable<String, List<Entity>>();
     	int x = getX();
     	int y = getY();
-    	
     	surroundings.put("up", 		dungeon.getEntities(x,y-1));
     	surroundings.put("down", 	dungeon.getEntities(x,y+1));
     	surroundings.put("left", 	dungeon.getEntities(x-1,y));

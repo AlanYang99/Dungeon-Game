@@ -35,6 +35,7 @@ public class Player extends MovableEntity implements Observer {
     @Override
     public boolean moveUp() {
     	List<Entity> entities = getSurrounding().get("up");
+    	
     	for (Entity e : entities) {
     		if (e instanceof Boulder) {
     			// attempt to move boulder first
@@ -42,8 +43,14 @@ public class Player extends MovableEntity implements Observer {
     		}
     	}
     	if (super.moveUp()) {
+    		List<Entity> entitiesToDelete = new ArrayList<Entity>();
     		for (Entity e : entities) {
-    			collectItem(e);
+    			if(collectItem(e)) entitiesToDelete.add(e);
+    		}
+    		for (Entity a : entitiesToDelete) {
+    			getDungeon().getMap()[a.getX()][a.getY()].remove(a);
+    			a.setX(-1);
+    			a.setY(-1);    			
     		}
     		return true;
     	}
@@ -60,36 +67,74 @@ public class Player extends MovableEntity implements Observer {
     	for (Entity e : entities) {
     		if (e instanceof Boulder) {
     			// attempt to move boulder
-    			((Boulder) e).moveUp();
+    			((Boulder) e).moveDown();
     		}
     	}
     	if (super.moveDown()) {
+    		List<Entity> entitiesToDelete = new ArrayList<Entity>();
     		for (Entity e : entities) {
-    			collectItem(e);
+    			if(collectItem(e)) entitiesToDelete.add(e);
+    		}
+    		for (Entity a : entitiesToDelete) {
+    			getDungeon().getMap()[a.getX()][a.getY()].remove(a);
+    			a.setX(-1);
+    			a.setY(-1);    			
     		}
     		return true;
     	}
     	return false;
     }
-    
+    @Override
+    public boolean moveRight() {
+    	List<Entity> entities = super.getSurrounding().get("right");
+    	for (Entity e : entities) {
+    		if (e instanceof Boulder) {
+    			// attempt to move boulder
+    			((Boulder) e).moveRight();
+    		}
+    	}
+    	if (super.moveRight()) {
+    	
+    		List<Entity> entitiesToDelete = new ArrayList<Entity>();
+    		for (Entity e : entities) {
+    			if(collectItem(e)) entitiesToDelete.add(e);
+    		}
+    		for (Entity a : entitiesToDelete) {
+    			getDungeon().getMap()[a.getX()][a.getY()].remove(a);
+    			a.setX(-1);
+    			a.setY(-1);    			
+    		}
+    		return true;
+    		
+    	}
+    	return false;
+    }        
 	/**
 	 * Moves an player to the left if it is legal to do so. If a boulder can be moved in the same direction,
 	 * the boulder will be moved before the player is moved.
 	 */
     @Override
     public boolean moveLeft() {
-    	List<Entity> entities = getSurrounding().get("down");
+    	List<Entity> entities = super.getSurrounding().get("left");
     	for (Entity e : entities) {
     		if (e instanceof Boulder) {
     			// attempt to move boulder
-    			((Boulder) e).moveUp();
+    			((Boulder) e).moveLeft();
     		}
     	}
     	if (super.moveLeft()) {
+    	
+    		List<Entity> entitiesToDelete = new ArrayList<Entity>();
     		for (Entity e : entities) {
-    			collectItem(e);
+    			if(collectItem(e)) entitiesToDelete.add(e);
+    		}
+    		for (Entity a : entitiesToDelete) {
+    			getDungeon().getMap()[a.getX()][a.getY()].remove(a);
+    			a.setX(-1);
+    			a.setY(-1);    			
     		}
     		return true;
+    		
     	}
     	return false;
     }
@@ -98,24 +143,7 @@ public class Player extends MovableEntity implements Observer {
 	 * Moves an player to the right if it is legal to do so. If a boulder can be moved in the same direction,
 	 * the boulder will be moved before the player is moved.
 	 */
-    @Override
-    public boolean moveRight() {
-    	List<Entity> entities = getSurrounding().get("down");
-    	for (Entity e : entities) {
-    		if (e instanceof Boulder) {
-    			// attempt to move boulder
-    			((Boulder) e).moveUp();
-    		}
-    	}
-    	if (super.moveRight()) {
-    		for (Entity e : entities) {
-    			System.out.println(e instanceof Potion);
-    			collectItem(e);
-    		}
-    		return true;
-    	}
-    	return false;
-    }
+
     
 	/** ==============================================
 	 *  Getters and setters
@@ -146,6 +174,7 @@ public class Player extends MovableEntity implements Observer {
 		this.key = key;
 	}
 	
+
 	public boolean isInvulnerable() {
 		return this.invulnerable;
 	}
@@ -222,7 +251,10 @@ public class Player extends MovableEntity implements Observer {
     
 	@Override
     public boolean share(Entity item) {
-    	if (item instanceof Switch || item instanceof Exit || item instanceof Enemy ) return true;
+    	if (item instanceof Switch || item instanceof Exit || item instanceof Enemy || 
+    			item instanceof Key || item instanceof Treasure || item instanceof Bomb ||
+    			item instanceof Potion || item instanceof Sword) return true;
+    	
 		return super.share(item);
     }
 

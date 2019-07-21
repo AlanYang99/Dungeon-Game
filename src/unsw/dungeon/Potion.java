@@ -21,10 +21,10 @@ public class Potion extends Entity implements Subject {
 		//give to player
 		dungeon.getPlayer().setPotion(this);
 		// remove from dungeon map
-		dungeon.getMap()[getX()][getY()].remove(this);
+//		dungeon.getMap()[getX()][getY()].remove(this);
 		// set entity coordinates to null
-		setX(-1);
-		setY(-1);
+//		setX(-1);
+//		setY(-1);
 		
 		// TODO: USE FUNCTIONALITY
 		return true;

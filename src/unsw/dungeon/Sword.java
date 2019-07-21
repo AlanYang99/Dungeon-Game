@@ -45,5 +45,11 @@ public class Sword extends Entity {
 		if (hits == 0) dungeon.getPlayer().setSword(null);
 		return true;
 	}
+	
+	@Override
+    public boolean share(Entity item) {
+    	if (item instanceof Player || item instanceof Switch) return true;
+		return super.share(item);
+    }
 
 }

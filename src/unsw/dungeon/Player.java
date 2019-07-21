@@ -118,6 +118,9 @@ public class Player extends MovableEntity implements Observer {
 	 *  ==============================================
 	 */
 
+	/**
+	 * @return	sword a player is holding, otherwise null
+	 */
     public Sword getSword() {
 		return sword;
 	}
@@ -126,6 +129,9 @@ public class Player extends MovableEntity implements Observer {
 		this.sword = sword;
 	}
 
+	/**
+	 * @return	potion a player is holding, otherwise null
+	 */
 	public Potion getPotion() {
 		return potion;
 	}
@@ -134,6 +140,9 @@ public class Player extends MovableEntity implements Observer {
 		this.potion = potion;
 	}
 
+	/**
+	 * @return	key a player is holding, otherwise null
+	 */
 	public Key getKey() {
 		return key;
 	}
@@ -216,7 +225,10 @@ public class Player extends MovableEntity implements Observer {
     
 	@Override
     public boolean share(Entity item) {
-    	if (item instanceof Switch || item instanceof Exit || item instanceof Enemy ) return true;
+    	if (item instanceof Switch || item instanceof Exit || item instanceof Enemy || 
+    			item instanceof Key || item instanceof Treasure || item instanceof Bomb ||
+    			item instanceof Potion) return true;
+    	
 		return super.share(item);
     }
 

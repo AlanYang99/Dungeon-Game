@@ -2,7 +2,9 @@ package unsw.dungeon;
 
 import java.util.List;
 import java.util.ArrayList;
-public class Player extends MovableEntity {
+
+
+public class Player extends MovableEntity implements Observer {
 
     private Dungeon dungeon;
    /*
@@ -19,6 +21,7 @@ public class Player extends MovableEntity {
     private Key key;
     private List<Treasure> treasures;
     private List<Bomb> bombs;
+    private boolean invulnerable;
 
 	/**
      * Create a player positioned in square (x,y)
@@ -30,6 +33,7 @@ public class Player extends MovableEntity {
         dungeon.setPlayer(this);
         bombs = new ArrayList <Bomb>(); //changed this
         treasures = new ArrayList <Treasure>(); //changed this
+        invulnerable = false;
     }
     
 	/** ==============================================
@@ -69,6 +73,10 @@ public class Player extends MovableEntity {
 		bombs.add(bomb);
 	}
 	
+	public void dropBomb(Bomb bomb) {
+		bombs.remove(bomb);
+	}
+	
 	/** ==============================================
 	 *  Get quantities of items collected
 	 *  ==============================================
@@ -103,5 +111,14 @@ public class Player extends MovableEntity {
     	if (item instanceof Switch || item instanceof Exit || item instanceof Enemy ) return true;
 		return super.share(item);
     }
+
+	@Override
+	public void update(Subject subject) {
+		// If the potion updates the player, it has either started or run out.
+		if (subject instanceof Potion) {
+			invulnerable = !invulnerable;
+		}
+		
+	}
 
 }

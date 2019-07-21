@@ -1,7 +1,11 @@
 package unsw.dungeon;
 
-public class Potion extends Entity {
+import java.util.concurrent.TimeUnit;
 
+public class Potion extends Entity implements Subject {
+	
+	private final int length = 10;
+	
     /**
      * Create a potion positioned in square (x,y)
      * @param x
@@ -30,5 +34,18 @@ public class Potion extends Entity {
     	if (item instanceof Switch || item instanceof Player) return true;
 		return super.share(item);
     }
+	
+	public void activate() {
+		notifyObservers();
+		
+		try {
+			TimeUnit.SECONDS.sleep(length);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		notifyObservers();
+	}
 
 }

@@ -5,6 +5,7 @@ import unsw.dungeon.Bomb;
 import unsw.dungeon.Player;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.Wall;
+import unsw.dungeon.Boulder;
 import org.junit.jupiter.api.Test;
 
 class TestBomb {
@@ -29,25 +30,24 @@ class TestBomb {
 		Player player1 = new Player(dungeon,10,10);
 		Wall wall1 = new Wall(dungeon,11,10);
 		Wall wall2 = new Wall(dungeon,9,10);
-		Wall wall3 = new Wall(dungeon,10,11);
-		Wall wall4 = new Wall(dungeon,10,9);
+		Boulder boulder1 = new Boulder(dungeon,10,11);
+		Boulder boulder2 = new Boulder(dungeon,10,9);
 		assertEquals(dungeon.getMap()[11][10].contains(wall1),true);
 		assertEquals(dungeon.getMap()[9][10].contains(wall2),true);
-		assertEquals(dungeon.getMap()[10][11].contains(wall3),true);
-		assertEquals(dungeon.getMap()[10][9].contains(wall4),true);
-		
+		assertEquals(dungeon.getMap()[10][11].contains(boulder1),true);
+		assertEquals(dungeon.getMap()[10][9].contains(boulder2),true);
 		Bomb bomb1 = new Bomb(dungeon,10,12);
 		bomb1.collect();
 		assertEquals(player1.getNumBombs(),1);
 		assertEquals(bomb1.use(),true);
-		
+		assertEquals(bomb1.getX(),-2);
+		assertEquals(bomb1.getY(),-2);
 		assertEquals(dungeon.getMap()[11][10].contains(wall1),true);
 		assertEquals(dungeon.getMap()[9][10].contains(wall2),true);
-		assertEquals(dungeon.getMap()[10][11].contains(wall3),true);
-		assertEquals(dungeon.getMap()[10][9].contains(wall4),true);		
+		assertEquals(dungeon.getMap()[10][11].contains(boulder1),false);
+		assertEquals(dungeon.getMap()[10][9].contains(boulder2),false);
 		assertEquals(player1.getNumBombs(),0);
 		assertEquals(bomb1.use(),false);
-		
 		
 	}
 }

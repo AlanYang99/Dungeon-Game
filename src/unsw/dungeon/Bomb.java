@@ -55,7 +55,6 @@ public class Bomb extends Entity {
 		
 		// set subsequent states with timer
 		setBombTimer();
-		
 		// remove bomb from map after exploded
 		dungeon.getMap()[x][y].remove(this);
 		setX(-2);
@@ -77,7 +76,6 @@ public class Bomb extends Entity {
     public void setBombTimer() {
 
         new TimerTask() {
-
         	@Override
 	        public void run() { 
 	            if (seconds < UNLIT_SECONDS) {
@@ -109,8 +107,10 @@ public class Bomb extends Entity {
     	entities.addAll(surroundings.get("left"));
     	entities.addAll(surroundings.get("right"));
     	
+    	
     	for (Entity e : entities) {
-    		if (e instanceof Door || e instanceof Switch || e instanceof Wall) break;
+    		if (e instanceof Door || e instanceof Switch || e instanceof Wall) continue;
+    		System.out.println(e);
     		
     		int x = e.getX();
     		int y = e.getY();

@@ -233,5 +233,5 @@ public class Player extends MovableEntity implements Observer {
 		}
 		
 	}
-
+	
 }

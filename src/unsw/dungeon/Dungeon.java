@@ -142,6 +142,9 @@ public class Dungeon implements Observer {
 		if (subject instanceof Enemy && tag.equals("EnemyMove"))
 			handlePlayerEnemyClash(player, (Enemy)subject);
 		
+		
+		// Prints out the entities at the same square as the player.
+		//System.out.println(getEntities(getPlayer().getX(),getPlayer().getY()));
 	}
 	
 	private void handlePlayerEnemyClash(Player player, Enemy enemy) {

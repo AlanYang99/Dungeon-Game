@@ -14,6 +14,10 @@ public class Potion extends Entity implements Subject {
      */
     public Potion(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
+        
+        for (Enemy e : dungeon.getEnemies()) {
+        	this.attach((Observer) e);
+        }
     }
 
 	@Override

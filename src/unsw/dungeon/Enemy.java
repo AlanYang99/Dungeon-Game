@@ -5,7 +5,7 @@ import java.util.TimerTask;
 
 import unsw.dungeon.enemyStates.*;
 
-public class Enemy extends MovableEntity {
+public class Enemy extends MovableEntity implements Observer {
 	
 	MovementBehaviour movement;
 	Player playerTracking;
@@ -55,6 +55,15 @@ public class Enemy extends MovableEntity {
     	if (item instanceof Switch || item instanceof Player) return true;
 		return super.share(item);
     }
+
+	@Override
+	public void update(Subject subject, String tag) {
+		if (tag.equals("PotionActivate")) {
+			this.setState(new enemyDefending());
+		} else if (tag.equals("PotionDeactivate")) {
+			this.setState(new enemyAttacking());
+		}
+	}
 	
 	
 	

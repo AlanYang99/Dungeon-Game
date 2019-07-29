@@ -7,6 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import javafx.scene.image.Image;
+
 /**
  * Loads a dungeon from a .json file.
  *
@@ -60,15 +62,88 @@ public abstract class DungeonLoader {
             onLoad(wall);
             entity = wall;
             break;
+        case "exit":
+            Exit exit = new Exit(dungeon, x, y);
+            onLoad(exit);
+            entity = exit;
+            break;
+        case "door":
+            Door door = new Door(dungeon, x, y, 0); // TODO door id
+            onLoad(door);
+            entity = door;
+            break;
+        case "switch":
+            Switch plate = new Switch(dungeon, x, y);
+            onLoad(plate);
+            entity = plate;
+            break;
+        case "boulder":
+            Boulder boulder = new Boulder(dungeon, x, y);
+            onLoad(boulder);
+            entity = boulder;
+            break;
+        case "enemy":
+            Enemy enemy = new Enemy(dungeon, x, y);
+            onLoad(enemy);
+            entity = enemy;
+            break;
+        case "key":
+            Key key = new Key(dungeon, x, y, 0); // TODO key id
+            onLoad(key);
+            entity = key;
+            break;
+        case "treasure":
+            Treasure treasure = new Treasure(dungeon, x, y);
+            onLoad(treasure);
+            entity = treasure;
+            break;
+        case "bomb":
+            Bomb bomb = new Bomb(dungeon, x, y);
+            onLoad(bomb);
+            entity = bomb;
+            break;
+        case "invincibility":
+            Potion potion = new Potion(dungeon, x, y);
+            onLoad(potion);
+            entity = potion;
+            break;
+        case "sword":
+            Sword sword = new Sword(dungeon, x, y);
+            onLoad(sword);
+            entity = sword;
+            break;
+            
+            
         // TODO Handle other possible entities
         }
         
     }
 
+    
     public abstract void onLoad(Entity player);
 
     public abstract void onLoad(Wall wall);
-
+    
+    public abstract void onLoad(Exit exit);
+    
+    public abstract void onLoad(Door door);
+    
+    public abstract void onLoad(Switch plate);
+    
+    public abstract void onLoad(Boulder boulder);
+    
+    public abstract void onLoad(Enemy enemy);
+    
+    public abstract void onLoad(Key key);
+    
+    public abstract void onLoad(Treasure treasure);
+    
+    public abstract void onLoad(Bomb bomb);
+    
+    public abstract void onLoad(Potion potion);
+    
+    public abstract void onLoad(Sword sword);
+    
     // TODO Create additional abstract methods for the other entities
 
 }

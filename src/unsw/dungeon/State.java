@@ -13,11 +13,11 @@ public interface State {
     }
     
     default public void changeToOpen(Entity e) {
-    	throw new UnsupportedOperationException();
+    	
     }
     
 	default public void changeToClosed(Entity e) {
-		throw new UnsupportedOperationException();
+		
 	}
 
 	

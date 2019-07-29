@@ -38,9 +38,7 @@ class GoalTest {
 	void enemyGoal() {
 		Dungeon dungeon = new Dungeon(20,20);
 		Player player = new Player(dungeon, 19, 19);
-		dungeon.addEntity(player);
 		Enemy enemy = new Enemy(dungeon, 10, 10);
-		dungeon.addEntity(enemy);
 		
 		EnemyGoal mainGoal = new EnemyGoal(dungeon);
 		
@@ -49,6 +47,40 @@ class GoalTest {
 		enemy.kill();
 		
 		assertEquals(true ,mainGoal.evaluate());
+		
+	}
+	
+	@Test
+	void treasureGoal() {
+		Dungeon dungeon = new Dungeon(20,20);
+		Player player = new Player(dungeon, 10, 10);
+		
+		Treasure tr = new Treasure(dungeon, 11, 10);
+		
+		TreasureGoal mainGoal = new TreasureGoal(dungeon);
+		
+		assertEquals(false ,mainGoal.evaluate());
+		
+		player.moveRight();
+		
+		assertEquals(false ,mainGoal.evaluate());
+		
+	}
+	
+	@Test
+	void exitGoal() {
+		Dungeon dungeon = new Dungeon(20,20);
+		Player player = new Player(dungeon, 19, 19);
+		Exit exit = new Exit(dungeon, 19, 20);
+		
+		
+		ExitGoal mainGoal = new ExitGoal();
+		
+		assertEquals(false ,mainGoal.evaluate());
+		
+		player.moveDown();
+		
+		assertEquals(false ,mainGoal.evaluate());
 		
 	}
 	

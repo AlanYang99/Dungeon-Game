@@ -17,7 +17,7 @@ public class ExitGoal implements Goal {
 	
 	@Override
 	public void update(Subject subject, String tag) {
-		if (subject instanceof Exit) {
+		if (tag.equals("PLACEHOLDER")) {
 			exitReached = true;
 		}
 		evaluate();

@@ -32,14 +32,14 @@ public class Dungeon implements Observer {
         // this.entities = new ArrayList<>();
         this.player = null;
         this.map = new ArrayList[width][height];
+        
         this.enemies = new ArrayList<Enemy>();
         this.treasure = new ArrayList<Treasure>();
         this.switches = new ArrayList<Switch>();
         
-        int row, col;
-        for (row = 0; row < height; row++) {
-        	for (col = 0; col < width; col++) {
-        		this.map[row][col] = new ArrayList<Entity>();
+        for (int x = 0; x < width; x++) {
+        	for (int y = 0; y < height; y++) {
+        		this.map[x][y] = new ArrayList<Entity>();
         	}
         }
     }
@@ -75,7 +75,9 @@ public class Dungeon implements Observer {
     }
 
     public void addEntity(Entity entity) {
+    	if (entity == null) return;
         // entities.add(entity);
+    	
     	map[entity.getX()][entity.getY()].add(entity);
     	
     	entity.attach(this);

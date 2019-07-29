@@ -122,11 +122,7 @@ public class Bomb extends Entity {
     	}
 	}
 
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 
 }

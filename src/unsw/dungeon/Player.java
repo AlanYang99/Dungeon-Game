@@ -35,13 +35,15 @@ public class Player extends MovableEntity implements Observer {
     @Override
     public boolean moveUp() {
     	List<Entity> entities = getSurrounding().get("up");
-    	
+    	Boulder b = null;
     	for (Entity e : entities) {
     		if (e instanceof Boulder) {
     			// attempt to move boulder first
-    			((Boulder) e).moveUp();
+    			b = (Boulder) e;
     		}
     	}
+    	if (b != null) b.moveUp();
+    	
     	if (super.moveUp()) {
     		List<Entity> entitiesToDelete = new ArrayList<Entity>();
     		for (Entity e : entities) {
@@ -64,12 +66,15 @@ public class Player extends MovableEntity implements Observer {
     @Override
     public boolean moveDown() {
     	List<Entity> entities = getSurrounding().get("down");
+    	Boulder b = null;
     	for (Entity e : entities) {
     		if (e instanceof Boulder) {
     			// attempt to move boulder
-    			((Boulder) e).moveDown();
+    			b = (Boulder) e;
     		}
     	}
+    	if (b != null) b.moveDown();
+    	
     	if (super.moveDown()) {
     		List<Entity> entitiesToDelete = new ArrayList<Entity>();
     		for (Entity e : entities) {
@@ -87,12 +92,15 @@ public class Player extends MovableEntity implements Observer {
     @Override
     public boolean moveRight() {
     	List<Entity> entities = super.getSurrounding().get("right");
+    	Boulder b = null;
     	for (Entity e : entities) {
     		if (e instanceof Boulder) {
     			// attempt to move boulder
-    			((Boulder) e).moveRight();
+    			b = (Boulder) e;
     		}
     	}
+    	if (b != null) b.moveRight();
+    	
     	if (super.moveRight()) {
     	
     		List<Entity> entitiesToDelete = new ArrayList<Entity>();
@@ -116,12 +124,15 @@ public class Player extends MovableEntity implements Observer {
     @Override
     public boolean moveLeft() {
     	List<Entity> entities = super.getSurrounding().get("left");
+    	Boulder b = null;
     	for (Entity e : entities) {
     		if (e instanceof Boulder) {
     			// attempt to move boulder
-    			((Boulder) e).moveLeft();
+    			b = (Boulder) e;
     		}
     	}
+    	if (b != null) b.moveLeft();
+    	
     	if (super.moveLeft()) {
     	
     		List<Entity> entitiesToDelete = new ArrayList<Entity>();

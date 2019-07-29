@@ -37,11 +37,50 @@ public abstract class DungeonLoader {
         Dungeon dungeon = new Dungeon(width, height);
 
         JSONArray jsonEntities = json.getJSONArray("entities");
-
+        
         for (int i = 0; i < jsonEntities.length(); i++) {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
+        
+        JSONObject jsonGoals = json.getJSONObject("goal-condition");
+        loadGoals(dungeon, jsonGoals);
+        
+        
         return dungeon;
+    }
+    
+    private void loadGoals(Dungeon dungeon, JSONObject json) {
+    	System.out.println(json);
+    	
+    	// First get the subgoals.
+    	JSONArray subgoals = json.getJSONArray("subgoals");
+    	
+    	Goal sub1 = getSubgoal(dungeon, subgoals, 0);
+    	Goal sub2 = getSubgoal(dungeon, subgoals, 1);
+    	
+    	
+    	
+    	String type = json.getString("goal");
+    	
+    	
+    	
+    	Goal mainGoal = null;
+    	switch (type) {
+    	case "AND":
+    		
+    		break;
+    	case "OR":
+    		
+    		break;
+    	}
+    	
+    }
+    
+    private Goal getSubgoal(Dungeon dungeon, JSONArray subgoals, int subgoalIndex) {
+    	
+    	
+    	
+    	return null;
     }
 
     private void loadEntity(Dungeon dungeon, JSONObject json) {

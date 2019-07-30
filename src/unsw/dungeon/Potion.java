@@ -3,7 +3,7 @@ package unsw.dungeon;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Potion extends Entity implements Subject {
+public class Potion extends Collectibles implements Subject {
 	
 	private final int length = 10;
 	
@@ -34,11 +34,11 @@ public class Potion extends Entity implements Subject {
 		return true;
 	}
 	
-	@Override
-    public boolean share(Entity item) {
-    	if (item instanceof Switch || item instanceof Player) return true;
-		return super.share(item);
-    }
+//	@Override
+//    public boolean share(Entity item) {
+//    	if (item instanceof Switch || item instanceof Player) return true;
+//		return super.share(item);
+//    }
 	
 	public void activate() {
 		notifyObservers("PotionActivate");

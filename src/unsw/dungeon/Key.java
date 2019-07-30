@@ -2,7 +2,7 @@ package unsw.dungeon;
 
 import java.util.List;
 
-public class Key extends Entity {
+public class Key extends Collectibles {
 	
     private int id;
 
@@ -96,10 +96,10 @@ public class Key extends Entity {
 		return doorOpen;
 	}
 	
-	@Override
-    public boolean share(Entity item) {
-    	if (item instanceof Switch || item instanceof Player) return true;
-		return super.share(item);
-    }
+//	@Override
+//    public boolean share(Entity item) {
+//    	if (item instanceof Switch || item instanceof Player) return true;
+//		return super.share(item);
+//    }
 
 }

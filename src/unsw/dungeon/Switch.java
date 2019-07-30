@@ -17,7 +17,7 @@ public class Switch extends Entity implements Observer {
 
 	@Override
     public boolean share(Entity item) {
-		if (item instanceof Door || item instanceof Exit || item instanceof Wall || item instanceof Switch) return false;
+		if (item.isImmovable()) return false;
 		return true;
     }
 	

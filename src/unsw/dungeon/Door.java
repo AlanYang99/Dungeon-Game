@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public class Door extends Entity implements State {
+public class Door extends ImmovableEntity implements State {
 
     private int id;
     private State state;
@@ -17,11 +17,6 @@ public class Door extends Entity implements State {
         this.state = new Closed();
     }
     
-	@Override
-    public boolean share(Entity item) {
-    	if (item instanceof Player) return true;
-		return super.share(item);
-    }
 	
 	public int getId() {
 		return id;

@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public class Exit extends Entity {
+public class Exit extends ImmovableEntity {
 
 
     /**
@@ -12,10 +12,10 @@ public class Exit extends Entity {
         super(dungeon, x, y);
     }
     
-	@Override
-    public boolean share(Entity item) {
-    	if (item instanceof Player) return true;
-		return super.share(item);
-    }
+//	@Override
+//    public boolean share(Entity item) {
+//    	if (item instanceof Player) return true;
+//		return super.share(item);
+//    }
 
 }

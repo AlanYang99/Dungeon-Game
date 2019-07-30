@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public class Treasure extends Entity {
+public class Treasure extends Collectibles {
 	
     /**
      * Create a treasure positioned in square (x,y)
@@ -29,10 +29,10 @@ public class Treasure extends Entity {
 		return true;
 	}
 	
-	@Override
-    public boolean share(Entity item) {
-    	if (item instanceof Player || item instanceof Switch) return true;
-		return super.share(item);
-    }
+//	@Override
+//    public boolean share(Entity item) {
+//    	if (item instanceof Player || item instanceof Switch) return true;
+//		return super.share(item);
+//    }
 
 }

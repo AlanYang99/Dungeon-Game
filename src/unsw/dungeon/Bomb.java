@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Bomb extends Entity { 
+public class Bomb extends Collectibles { 
 	private final int UNLIT_SECONDS = 3;
 	private final int LIT1_SECONDS = 3;
 	private final int LIT2_SECONDS = 3;
@@ -89,11 +89,11 @@ public class Bomb extends Entity {
 		return true;
 	}
 
-	@Override
-    public boolean share(Entity item) {
-    	if (item instanceof Switch || item instanceof Player) return true;
-		return super.share(item);
-    }
+//	@Override
+//    public boolean share(Entity item) {
+//    	if (item instanceof Switch || item instanceof Player) return true;
+//		return super.share(item);
+//    }
 	
 
     
@@ -110,7 +110,7 @@ public class Bomb extends Entity {
     	
     	
     	for (Entity e : entities) {
-    		if (e instanceof Door || e instanceof Switch || e instanceof Wall) continue;
+    		if (e.isImmovable()) continue;
     		
     		int x = e.getX();
     		int y = e.getY();

@@ -12,7 +12,7 @@ class TestBoulder {
 		Player player1 = new Player(dungeon,10,10);	
 		Boulder boulder1 = new Boulder(dungeon,11,10);
 		player1.moveRight();
-		assertEquals(player1.getX(),10);
+		assertEquals(player1.getX(),11);
 		assertEquals(player1.getY(),10);
 		assertEquals(boulder1.getX(),12);
 		assertEquals(boulder1.getY(),10);
@@ -40,7 +40,11 @@ class TestBoulder {
 		Boulder boulder1 = new Boulder(dungeon,11,10);
 		Wall wall1 = new Wall(dungeon,12,10);
 		player1.moveRight();
-		assertEquals(player1.getX(),10);
+		assertEquals(player1.getX(),10);//	@Override
+//    public boolean share(Entity item) {
+//    	if (item instanceof Player) return true;
+//		return super.share(item);
+//    }
 		assertEquals(player1.getY(),10);
 		assertEquals(boulder1.getX(),11);
 		assertEquals(boulder1.getY(),10);	

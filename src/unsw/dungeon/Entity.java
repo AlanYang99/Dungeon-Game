@@ -138,6 +138,25 @@ public abstract class Entity implements Subject {
     	if (entity == null) return true;
     	return false;
     }
+    
+    public boolean isPlayer() {
+    	return false;
+    }
+    
+    public boolean isSwitch() {
+    	return false;
+    }
+    
+    public boolean isDoor() {
+    	return false;
+    }
 	
+    public boolean isWall() {
+    	return false;
+    }
+    
+    public boolean isImmovable() {
+    	return false;
+    }
     
 }

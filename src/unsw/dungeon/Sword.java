@@ -46,10 +46,10 @@ public class Sword extends Entity {
 		return true;
 	}
 	
-	@Override
-    public boolean share(Entity item) {
-    	if (item instanceof Player || item instanceof Switch) return true;
-		return super.share(item);
-    }
+//	@Override
+//    public boolean share(Entity item) {
+//    	if (item instanceof Player || item instanceof Switch) return true;
+//		return super.share(item);
+//    }
 
 }

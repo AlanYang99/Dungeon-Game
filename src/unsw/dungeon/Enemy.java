@@ -52,7 +52,7 @@ public class Enemy extends MovableEntity implements Observer {
     
 	@Override
     public boolean share(Entity item) {
-    	if (item.isPlayer()||item.isPlayer()) return true;
+    	if (item.isPlayer()||item.isSwitch()) return true;
 		return super.share(item);
     }
 

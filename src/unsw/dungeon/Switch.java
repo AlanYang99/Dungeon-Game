@@ -52,4 +52,9 @@ public class Switch extends Entity implements Observer {
 		}
 	}
 	
+	@Override
+	public boolean isSwitch() {
+		return true;
+	}
+	
 }

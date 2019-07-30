@@ -10,4 +10,6 @@ public class Wall extends ImmovableEntity {
     public boolean share(Entity Item) {
     	return false;
     }
+    
+    
 }

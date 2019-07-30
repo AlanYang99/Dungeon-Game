@@ -281,4 +281,9 @@ public class Player extends MovableEntity implements Observer {
 		
 	}
 	
+	@Override
+	public boolean isPlayer() {
+		return true;
+	}
+	
 }

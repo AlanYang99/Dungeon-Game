@@ -56,7 +56,6 @@ public class Key extends Collectibles {
 	}
 	
 	@Override
-
 	public boolean use(int dx, int dy) {
 		Player player = dungeon.getPlayer();
 		List<Entity> doorPos = dungeon.getMap()[player.getX()+dx][player.getY()+dy];

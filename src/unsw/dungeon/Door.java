@@ -26,4 +26,9 @@ public class Door extends ImmovableEntity implements State {
 		return state;
 	}
 	
+	@Override
+	public boolean isDoor() {
+		return true;
+	}
+	
 }

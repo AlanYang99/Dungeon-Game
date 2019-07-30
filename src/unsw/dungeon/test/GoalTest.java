@@ -47,7 +47,7 @@ class GoalTest {
 		enemy.kill();
 		
 		assertEquals(true ,mainGoal.evaluate());
-		
+		//Issues with this (Most of the time it passes, but occasionally get concurrent modification error)
 	}
 	
 	@Test

@@ -28,7 +28,7 @@ public class Switch extends Entity implements Observer {
 		notifyObservers("SwitchUpdate");
 		for (Entity e : entities) {
 			
-			if (e instanceof Boulder) {
+			if (e.isBoulder()) {
 				this.state.changeToClosed(this);
 				break;
 			} else {

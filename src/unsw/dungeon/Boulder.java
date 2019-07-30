@@ -19,5 +19,10 @@ public class Boulder extends MovableEntity {
     	if (item.isSwitch()) return true;
 		return super.share(item);
 	}
+	
+	@Override
+	public boolean isBoulder() {
+		return true;
+	}
 
 }

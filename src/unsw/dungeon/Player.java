@@ -37,7 +37,7 @@ public class Player extends MovableEntity implements Observer {
     	List<Entity> entities = getSurrounding().get("up");
     	Boulder b = null;
     	for (Entity e : entities) {
-    		if (e instanceof Boulder) {
+    		if (e.isBoulder()) {
     			// attempt to move boulder first
     			b = (Boulder) e;
     		}
@@ -68,7 +68,7 @@ public class Player extends MovableEntity implements Observer {
     	List<Entity> entities = getSurrounding().get("down");
     	Boulder b = null;
     	for (Entity e : entities) {
-    		if (e instanceof Boulder) {
+    		if (e.isBoulder()) {
     			// attempt to move boulder
     			b = (Boulder) e;
     		}
@@ -94,7 +94,7 @@ public class Player extends MovableEntity implements Observer {
     	List<Entity> entities = super.getSurrounding().get("right");
     	Boulder b = null;
     	for (Entity e : entities) {
-    		if (e instanceof Boulder) {
+    		if (e.isBoulder()) {
     			// attempt to move boulder
     			b = (Boulder) e;
     		}
@@ -126,7 +126,7 @@ public class Player extends MovableEntity implements Observer {
     	List<Entity> entities = super.getSurrounding().get("left");
     	Boulder b = null;
     	for (Entity e : entities) {
-    		if (e instanceof Boulder) {
+    		if (e.isBoulder()) {
     			// attempt to move boulder
     			b = (Boulder) e;
     		}

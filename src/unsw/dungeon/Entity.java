@@ -151,7 +151,7 @@ public abstract class Entity implements Subject {
     	return false;
     }
 	
-    public boolean isWall() {
+    public boolean isBoulder() {
     	return false;
     }
     

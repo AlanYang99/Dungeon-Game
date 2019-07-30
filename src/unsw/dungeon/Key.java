@@ -61,7 +61,7 @@ public class Key extends Collectibles {
 		List<Entity> doorPos = dungeon.getMap()[player.getX()+dx][player.getY()+dy];
 		Door door = null;
 		for (Entity e : doorPos) {
-			if (e instanceof Door)
+			if (e.isDoor())
 				door = (Door) e;
 		}
 		if(door == null) return false;

@@ -53,10 +53,10 @@ public abstract class DungeonLoader {
     	System.out.println(json);
     	
     	// First get the subgoals.
-    	JSONArray subgoals = json.getJSONArray("subgoals");
-    	
-    	Goal sub1 = getSubgoal(dungeon, subgoals, 0);
-    	Goal sub2 = getSubgoal(dungeon, subgoals, 1);
+//    	JSONArray subgoals = json.getJSONArray("subgoals");
+//    	
+//    	Goal sub1 = getSubgoal(dungeon, subgoals, 0);
+//    	Goal sub2 = getSubgoal(dungeon, subgoals, 1);
     	
     	
     	

@@ -106,11 +106,19 @@ public class Player extends MovableEntity implements Observer {
     		List<Entity> entitiesToDelete = new ArrayList<Entity>();
     		for (Entity e : entities) {
     			if(collectItem(e)) entitiesToDelete.add(e);
+//    			System.out.println(e.getClass());
     		}
     		for (Entity a : entitiesToDelete) {
+//    			System.out.println("hi");
+//    			System.out.println(a);
+//    			System.out.println(a.getX());
+//    			System.out.println(a.getY());
+
     			getDungeon().getMap()[a.getX()][a.getY()].remove(a);
     			a.setX(-1);
-    			a.setY(-1);    			
+    			a.setY(-1);  
+//    			System.out.println(a.getX());
+//    			System.out.println(a.getY());
     		}
     		return true;
     		

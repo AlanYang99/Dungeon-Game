@@ -128,6 +128,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
+        if(entity instanceof Sword) trackExist((Sword)entity,view); //Testing purposes
         entities.add(view);
     }
 
@@ -141,6 +142,27 @@ public class DungeonControllerLoader extends DungeonLoader {
      * @param entity
      * @param node
      */
+    
+    private void trackExist(Sword sword, Node node) {
+    	sword.getExist().addListener(new ChangeListener<Boolean>() {
+    		@Override
+            public void changed(ObservableValue<? extends Boolean> observable,
+                    Boolean oldValue, Boolean newValue) {
+//            	System.out.println("test2");
+    			System.out.println("hi");
+    			System.out.println(oldValue);
+    			System.out.println(newValue);
+//    			node.prop
+    			GridPane.clearConstraints(node);
+//    			GridPane.setColumnIndex(node, -1);
+//    			GridPane.setRowIndex(node, -1);
+
+//                GridPane.setColumnIndex(node, newValue.booleanValue());
+//                System.out.println(node);
+//                GridPane.se
+            }    		
+    	});
+    }
     private void trackPosition(Entity entity, Node node) {
         GridPane.setColumnIndex(node, entity.getX());
         GridPane.setRowIndex(node, entity.getY());
@@ -148,7 +170,10 @@ public class DungeonControllerLoader extends DungeonLoader {
             @Override
             public void changed(ObservableValue<? extends Number> observable,
                     Number oldValue, Number newValue) {
+//            	System.out.println("test2");
                 GridPane.setColumnIndex(node, newValue.intValue());
+//                System.out.println(node);
+//                GridPane.se
             }
         });
         entity.y().addListener(new ChangeListener<Number>() {

@@ -22,7 +22,8 @@ public class Treasure extends Collectibles {
 //		setX(-1);
 //		setY(-1);
 
-		
+		setExist(false);
+
 		// Update the treasure goal
 		notifyObservers("TreasureCollected");
 		

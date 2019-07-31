@@ -128,7 +128,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
-        if(entity instanceof Sword) trackExist((Sword)entity,view); //Testing purposes
+        if(entity instanceof Collectibles) trackExist((Collectibles)entity,view); //Testing purposes
         entities.add(view);
     }
 
@@ -143,7 +143,7 @@ public class DungeonControllerLoader extends DungeonLoader {
      * @param node
      */
     
-    private void trackExist(Sword sword, Node node) {
+    private void trackExist(Collectibles sword, Node node) {
     	sword.getExist().addListener(new ChangeListener<Boolean>() {
     		@Override
             public void changed(ObservableValue<? extends Boolean> observable,
@@ -158,7 +158,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     			    			
 				ImageView im = (ImageView) node;
 				im.setImage(null);
-    			GridPane.clearConstraints(node);
+//    			GridPane.clearConstraints(node);
     			//Suggestions
     			//The trackposition method, adds all initial entities into
     			//the gridPane
@@ -186,10 +186,8 @@ public class DungeonControllerLoader extends DungeonLoader {
             @Override
             public void changed(ObservableValue<? extends Number> observable,
                     Number oldValue, Number newValue) {
-//            	System.out.println("test2");
+            	System.out.println("test2");
                 GridPane.setColumnIndex(node, newValue.intValue());
-//                System.out.println(node);
-//                GridPane.se
             }
         });
         entity.y().addListener(new ChangeListener<Number>() {

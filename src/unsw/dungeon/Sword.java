@@ -1,13 +1,10 @@
 package unsw.dungeon;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 
-public class Sword extends Entity {
+
+public class Sword extends Collectibles {
 	private static final int HITS = 5;
 	private int hits; // hits remaining
 	
-	private BooleanProperty Exist;
-
 	/**
      * Create an sword positioned in square (x,y)
      * @param x
@@ -16,13 +13,7 @@ public class Sword extends Entity {
     public Sword(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
         hits = HITS;
-        Exist = new SimpleBooleanProperty(true);
     }
-    
-    public BooleanProperty getExist() {
-    	return Exist;
-    }
-    
 	
     public int getHits() {
 		return hits;
@@ -37,9 +28,7 @@ public class Sword extends Entity {
 		
 		//give to player
 		dungeon.getPlayer().setSword(this);
-		System.out.println(Exist);
-		Exist.set(false);
-		System.out.println(Exist);
+		setExist(false);
 //		System.out.println(dungeon.getPlayer().getSword());
 		// remove from dungeon map
 //		dungeon.getMap()[getX()][getY()].remove(this);
@@ -60,6 +49,7 @@ public class Sword extends Entity {
 		if (hits == 0) dungeon.getPlayer().setSword(null);
 		return true;
 	}
+	
 	
 //	@Override
 //    public boolean share(Entity item) {

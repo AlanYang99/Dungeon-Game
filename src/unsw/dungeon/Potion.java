@@ -29,7 +29,8 @@ public class Potion extends Collectibles implements Subject {
 		// set entity coordinates to null
 //		setX(-1);
 //		setY(-1);
-		
+		setExist(false);
+
 		// TODO: USE FUNCTIONALITY
 		return true;
 	}

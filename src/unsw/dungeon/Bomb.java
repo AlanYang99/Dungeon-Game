@@ -28,6 +28,8 @@ public class Bomb extends Collectibles {
 	public boolean collect() {
 		//give to player
 		dungeon.getPlayer().addBomb(this);
+		setExist(false);
+
 		// remove from dungeon map
 //		dungeon.getMap()[getX()][getY()].remove(this);
 		// set entity coordinates to null

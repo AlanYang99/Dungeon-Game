@@ -48,6 +48,5 @@ class TestBomb {
 		assertEquals(dungeon.getMap()[10][9].contains(boulder2),false);
 		assertEquals(player1.getNumBombs(),0);
 		assertEquals(bomb1.use(),false);
-		
 	}
 }

@@ -601,6 +601,11 @@
       "x": 17,
       "y": 15,
       "type": "wall"
+    },
+    {
+    "x": 10,
+    "y": 12,
+   	"type" : "enemy"
     }
   ],
   "goal-condition": {

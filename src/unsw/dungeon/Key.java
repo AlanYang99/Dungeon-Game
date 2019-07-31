@@ -36,6 +36,7 @@ public class Key extends Collectibles {
 			// remove from dungeon map
 			
 		}
+		setExist(false);
 
 //		// check player isn't already holding a key
 //		if (dungeon.getPlayer().getKey() != null) {

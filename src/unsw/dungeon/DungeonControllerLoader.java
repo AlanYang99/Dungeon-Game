@@ -46,7 +46,7 @@ public class DungeonControllerLoader extends DungeonLoader {
         switchImage = new Image("/pressure_plate.png");
         boulderImage = new Image("/boulder.png");
         enemyImage = new Image("/deep_elf_master_archer.png");
-        keyImage = new Image("/key.png");
+        keyImage = new Image ("/key.png");
         treasureImage = new Image("/gold_pile.png");
         bombImage = new Image("/bomb_unlit.png");
         potionImage = new Image("/brilliant_blue_new.png");
@@ -152,8 +152,23 @@ public class DungeonControllerLoader extends DungeonLoader {
     			System.out.println("hi");
     			System.out.println(oldValue);
     			System.out.println(newValue);
-//    			node.prop
+////    			node.prop
+//    			GridPane.setColumnIndex(node, 0);
+//    			GridPane.
+    			    			
+				ImageView im = (ImageView) node;
+				im.setImage(null);
     			GridPane.clearConstraints(node);
+    			//Suggestions
+    			//The trackposition method, adds all initial entities into
+    			//the gridPane
+    			//Hence if we colllect an item, we can reinitialise the entities list
+    			//by making it empty and then adding the current existing 
+    			//items into the list
+    			//Have a list that contains all Entities, when collect
+    			//remove that item from the entities list (above) line 22
+    			//and then reinitalise the 
+    			
 //    			GridPane.setColumnIndex(node, -1);
 //    			GridPane.setRowIndex(node, -1);
 
@@ -166,6 +181,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     private void trackPosition(Entity entity, Node node) {
         GridPane.setColumnIndex(node, entity.getX());
         GridPane.setRowIndex(node, entity.getY());
+        
         entity.x().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable,

@@ -30,15 +30,6 @@ public class SwitchGoal implements Goal {
 			
 			switchesLeft = count;
 			
-			/*
-			//Switch s = (Switch) subject;
-			if (tag.equals("SwitchOpened")) {
-				switchesLeft--;
-			} else if (tag.equals("SwitchClosed")) {
-				switchesLeft++;
-			}
-			*/
-			
 			evaluate();
 			notifyObservers("ReEvaluate");
 		}

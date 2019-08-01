@@ -24,7 +24,10 @@ public class Dungeon implements Observer {
     private List<Enemy> enemies;
     private List<Treasure> treasure;
     private List<Switch> switches;
-
+    private List<Boulder> boulders;
+    private List<Potion> potions;
+    private Goal mainGoal;
+    
     @SuppressWarnings("unchecked")
 	public Dungeon(int width, int height) {
         this.width = width;
@@ -36,6 +39,8 @@ public class Dungeon implements Observer {
         this.enemies = new ArrayList<Enemy>();
         this.treasure = new ArrayList<Treasure>();
         this.switches = new ArrayList<Switch>();
+        this.boulders = new ArrayList<Boulder>();
+        this.potions = new ArrayList<Potion>();
         
         for (int x = 0; x < width; x++) {
         	for (int y = 0; y < height; y++) {
@@ -86,8 +91,12 @@ public class Dungeon implements Observer {
     		enemies.add((Enemy)entity);
     	if (entity instanceof Treasure)
     		treasure.add((Treasure)entity);
-    	if (entity instanceof Switch)
+    	if (entity.isSwitch())
     		switches.add((Switch)entity);
+    	if (entity.isBoulder())
+    		boulders.add((Boulder)entity);
+    	if (entity instanceof Potion)
+    		potions.add((Potion)entity);
     	
     }
     
@@ -95,18 +104,57 @@ public class Dungeon implements Observer {
     	map[entity.getX()][entity.getY()].remove(entity);
     	
     	
-    	
     	if (entity instanceof Enemy)
-    		enemies.add((Enemy)entity);
+    		enemies.remove((Enemy)entity);
     	if (entity instanceof Treasure)
-    		treasure.add((Treasure)entity);
-    	if (entity instanceof Switch)
-    		switches.add((Switch)entity);
+    		treasure.remove((Treasure)entity);
+    	if (entity.isSwitch())
+    		switches.remove((Switch)entity);
+    	if (entity.isBoulder())
+    		boulders.remove((Boulder)entity);
     	
     }
     
     public List<Treasure> getTreasure() {
     	return treasure;
+    }
+    
+    public void setGoal(Goal goal) {
+    	this.mainGoal = goal;
+    }
+    
+    public boolean evaluateGoal() {
+    	return this.mainGoal.evaluate();
+    }
+    
+    public void attachEntities() {
+    	
+    	for (Potion p : this.potions) {
+    		// Attach each enemy to each potion.
+    		for (Enemy e : this.enemies) {
+            	p.attach((Observer) e);
+            }
+    		// Attach the player to each potion.
+    		p.attach((Observer)this.player);
+    	}
+    	
+    	
+    	for (Boulder b : this.boulders) {
+    		// Attach each switch to each boulder.
+	    	for (Switch s : this.switches) {
+				b.attach(s);
+			}
+    	}
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
     }
     
     /**

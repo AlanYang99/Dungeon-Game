@@ -42,45 +42,57 @@ public abstract class DungeonLoader {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
         
+        // Load the goal condition.
         JSONObject jsonGoals = json.getJSONObject("goal-condition");
-        loadGoals(dungeon, jsonGoals);
-        
+        Goal mainGoal = loadGoals(dungeon, jsonGoals);
+        dungeon.setGoal(mainGoal);
         
         return dungeon;
     }
     
-    private void loadGoals(Dungeon dungeon, JSONObject json) {
+    private Goal loadGoals(Dungeon dungeon, JSONObject json) {
     	System.out.println(json);
-    	
-    	// First get the subgoals.
-//    	JSONArray subgoals = json.getJSONArray("subgoals");
-//    	
-//    	Goal sub1 = getSubgoal(dungeon, subgoals, 0);
-//    	Goal sub2 = getSubgoal(dungeon, subgoals, 1);
-    	
-    	
-    	
-    	String type = json.getString("goal");
-    	
     	
     	
     	Goal mainGoal = null;
-    	switch (type) {
-    	case "AND":
+    	// If there are no subgoals.
+    	if (!json.has("subgoals")) {
+        	String type = json.getString("goal");
+        	switch (type) {
+        	case "enemies":
+        		mainGoal = new EnemyGoal(dungeon);
+        		break;
+        	case "treasure":
+        		mainGoal = new TreasureGoal(dungeon);
+        		break;
+	    	case "switches":
+	    		mainGoal = new SwitchGoal(dungeon);
+	    		break;
+			case "exit":
+				mainGoal = new ExitGoal();
+				break;
+			}
+        	
+        // If there are subgoals.
+    	} else {
+    		// Initialise each subgoal.
+    		JSONArray subgoalArray = json.getJSONArray("subgoals");
+    		Goal subgoal1 = loadGoals(dungeon, (JSONObject)subgoalArray.get(0));
+    		Goal subgoal2 = loadGoals(dungeon, (JSONObject)subgoalArray.get(1));
     		
-    		break;
-    	case "OR":
-    		
-    		break;
+    		String type = json.getString("goal");
+        	switch (type) {
+        	case "AND":
+        		mainGoal = new ANDGoal(subgoal1, subgoal2);
+        		break;
+        	case "OR":
+        		mainGoal = new ORGoal(subgoal1, subgoal2);
+        		break;
+        	}
     	}
     	
-    }
-    
-    private Goal getSubgoal(Dungeon dungeon, JSONArray subgoals, int subgoalIndex) {
+    	return mainGoal;
     	
-    	
-    	
-    	return null;
     }
 
     private void loadEntity(Dungeon dungeon, JSONObject json) {

@@ -24,7 +24,8 @@ public class Dungeon implements Observer {
     private List<Enemy> enemies;
     private List<Treasure> treasure;
     private List<Switch> switches;
-
+    private Goal mainGoal;
+    
     @SuppressWarnings("unchecked")
 	public Dungeon(int width, int height) {
         this.width = width;
@@ -107,6 +108,14 @@ public class Dungeon implements Observer {
     
     public List<Treasure> getTreasure() {
     	return treasure;
+    }
+    
+    public void setGoal(Goal goal) {
+    	this.mainGoal = goal;
+    }
+    
+    public boolean evaluateGoal() {
+    	return this.mainGoal.evaluate();
     }
     
     /**

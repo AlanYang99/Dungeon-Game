@@ -47,7 +47,7 @@ public class Switch extends Entity implements Observer {
 
 	@Override
 	public void update(Subject subject, String tag) {
-		if (tag.equals("EntityMove")) {
+		if (tag.equals("BoulderMove")) {
 			checkTriggered();
 		}
 	}

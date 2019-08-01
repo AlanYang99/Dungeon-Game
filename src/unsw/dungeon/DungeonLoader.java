@@ -42,6 +42,9 @@ public abstract class DungeonLoader {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
         
+        // Attach all entities that need to be attached.
+        dungeon.attachEntities();
+        
         // Load the goal condition.
         JSONObject jsonGoals = json.getJSONObject("goal-condition");
         Goal mainGoal = loadGoals(dungeon, jsonGoals);

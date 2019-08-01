@@ -39,15 +39,12 @@ public class Enemy extends MovableEntity implements Observer {
     	movement.move(playerTracking, this);
     	
     	notifyObservers("EnemyMove");
-    	
-    	
     }
     
     public void kill() {
     	notifyObservers("EnemyDeath");
     	
-    	dungeon.getEnemies().remove(this);
-    	dungeon.getMap()[this.getX()][this.getY()].remove(this);
+    	dungeon.removeEntity(this);
     }
     
 	@Override

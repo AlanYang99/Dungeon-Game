@@ -7,12 +7,6 @@ public abstract class MovableEntity extends Entity {
 	
 	public MovableEntity(Dungeon dungeon, int x, int y) {
 		super(dungeon, x, y);
-		
-		// Attach all switches to observe all moving entities for movement.
-		for (Switch s : dungeon.getSwitches()) {
-			this.attach(s);
-		}
-		
 	}
 	
 
@@ -40,8 +34,9 @@ public abstract class MovableEntity extends Entity {
             this.getDungeon().addEntity(this);
     	}
     	
+    	if (this.isBoulder())
+    		notifyObservers("BoulderMove");
     	
-    	notifyObservers("EntityMove");
     	return sharable;
     }
 
@@ -62,7 +57,9 @@ public abstract class MovableEntity extends Entity {
     		this.getDungeon().addEntity(this);
     	}
     	
-    	notifyObservers("EntityMove");
+    	if (this.isBoulder())
+    		notifyObservers("BoulderMove");
+    	
     	return sharable;
     }
 
@@ -83,7 +80,9 @@ public abstract class MovableEntity extends Entity {
             this.getDungeon().addEntity(this);
         }
         
-        notifyObservers("EntityMove");
+        if (this.isBoulder())
+    		notifyObservers("BoulderMove");
+        
         return sharable;
     }
 
@@ -106,7 +105,9 @@ public abstract class MovableEntity extends Entity {
             this.getDungeon().addEntity(this);
         }
         
-        notifyObservers("EntityMove");
+        if (this.isBoulder())
+    		notifyObservers("BoulderMove");
+        
         return sharable;
     }
     

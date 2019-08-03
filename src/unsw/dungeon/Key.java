@@ -29,6 +29,8 @@ public class Key extends Collectibles {
 		if(oldKey != null) {
 			oldKey.setX(getX());
 			oldKey.setY(getY());
+//			dungeon.addEntity(oldKey);
+
 			dungeon.getPlayer().setKey(this);
 //			dungeon.addEntity(oldKey);
 		} else {
@@ -94,6 +96,14 @@ public class Key extends Collectibles {
 		}
 		
 		return doorOpen;
+	}
+	
+	@Override
+	public boolean isKey() {
+		return true;
+	}
+	public int getId() {
+		return id;
 	}
 	
 //	@Override

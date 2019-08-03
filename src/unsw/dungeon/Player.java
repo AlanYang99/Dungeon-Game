@@ -46,9 +46,18 @@ public class Player extends MovableEntity implements Observer {
     	
     	if (super.moveUp()) {
     		List<Entity> entitiesToDelete = new ArrayList<Entity>();
+    		Key tempkey = null;
+    		boolean haveKey = key != null;
+    		Key prevKey = key;
     		for (Entity e : entities) {
-    			if(collectItem(e)) entitiesToDelete.add(e);
+    			if(collectItem(e)) {
+    				if (e.isKey() && haveKey) {
+    					tempkey = (Key)prevKey;
+    				}
+					entitiesToDelete.add(e);
+    			}
     		}
+    		if(tempkey != null) getDungeon().addEntity(tempkey);
     		for (Entity a : entitiesToDelete) {
     			getDungeon().getMap()[a.getX()][a.getY()].remove(a);
     			a.setX(-1);
@@ -77,9 +86,18 @@ public class Player extends MovableEntity implements Observer {
     	
     	if (super.moveDown()) {
     		List<Entity> entitiesToDelete = new ArrayList<Entity>();
+    		Key tempkey = null;
+    		boolean haveKey = key != null;
+    		Key prevKey = key;
     		for (Entity e : entities) {
-    			if(collectItem(e)) entitiesToDelete.add(e);
+    			if(collectItem(e)) {
+    				if (e.isKey() && haveKey) {
+    					tempkey = (Key)prevKey;
+    				}
+					entitiesToDelete.add(e);
+    			}
     		}
+    		if(tempkey != null) getDungeon().addEntity(tempkey);
     		for (Entity a : entitiesToDelete) {
     			getDungeon().getMap()[a.getX()][a.getY()].remove(a);
     			a.setX(-1);
@@ -104,10 +122,18 @@ public class Player extends MovableEntity implements Observer {
     	if (super.moveRight()) {
     	
     		List<Entity> entitiesToDelete = new ArrayList<Entity>();
+    		Key tempkey = null;
+    		boolean haveKey = key != null;
+    		Key prevKey = key;
     		for (Entity e : entities) {
-    			if(collectItem(e)) entitiesToDelete.add(e);
-//    			System.out.println(e.getClass());
+    			if(collectItem(e)) {
+    				if (e.isKey() && haveKey) {
+    					tempkey = (Key)prevKey;
+    				}
+					entitiesToDelete.add(e);
+    			}
     		}
+    		if(tempkey != null) getDungeon().addEntity(tempkey);
     		for (Entity a : entitiesToDelete) {
 //    			System.out.println("hi");
 //    			System.out.println(a);
@@ -144,10 +170,20 @@ public class Player extends MovableEntity implements Observer {
     	if (super.moveLeft()) {
     	
     		List<Entity> entitiesToDelete = new ArrayList<Entity>();
+    		Key tempkey = null;
+    		boolean haveKey = key != null;
+    		Key prevKey = key;
     		for (Entity e : entities) {
-    			if(collectItem(e)) entitiesToDelete.add(e);
+    			if(collectItem(e)) {
+    				if (e.isKey() && haveKey) {
+    					tempkey = (Key)prevKey;
+    				}
+					entitiesToDelete.add(e);
+    			}
     		}
+    		if(tempkey != null) getDungeon().addEntity(tempkey);
     		for (Entity a : entitiesToDelete) {
+    		
     			getDungeon().getMap()[a.getX()][a.getY()].remove(a);
     			a.setX(-1);
     			a.setY(-1);    			

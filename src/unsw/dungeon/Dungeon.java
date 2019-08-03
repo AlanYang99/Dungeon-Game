@@ -77,7 +77,12 @@ public class Dungeon implements Observer {
     public void addEntity(Entity entity) {
     	if (entity == null) return;
         // entities.add(entity);
-    	
+    	if(entity.isKey()) {
+		Key temp = (Key)entity;
+		System.out.println(temp.getId());
+    	System.out.println(entity.getX());
+    	System.out.println(entity.getY());
+    	}
     	map[entity.getX()][entity.getY()].add(entity);
     	
     	entity.attach(this);

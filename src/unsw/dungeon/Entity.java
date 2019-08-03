@@ -155,6 +155,10 @@ public abstract class Entity implements Subject {
     	return false;
     }
     
+    public boolean isKey() {
+    	return false;
+    }
+    
     public boolean isImmovable() {
     	return false;
     }

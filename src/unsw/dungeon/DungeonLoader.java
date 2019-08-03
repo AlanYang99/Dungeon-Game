@@ -107,7 +107,8 @@ public abstract class DungeonLoader {
             entity = exit;
             break;
         case "door":
-            Door door = new Door(dungeon, x, y, 0); // TODO door id
+            int id = json.getInt("id");
+            Door door = new Door(dungeon, x, y, id); // TODO door id
             onLoad(door);
             entity = door;
             break;
@@ -127,7 +128,8 @@ public abstract class DungeonLoader {
             entity = enemy;
             break;
         case "key":
-            Key key = new Key(dungeon, x, y, 0); // TODO key id
+            id = json.getInt("id");
+            Key key = new Key(dungeon, x, y, id); // TODO key id
             onLoad(key);
             entity = key;
             break;

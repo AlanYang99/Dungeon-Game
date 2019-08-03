@@ -64,6 +64,10 @@ public class DungeonController {
             break;
         case Z:
         	player.attack();
+        	break;
+        case Q:
+        	System.out.println(player.getKey().getId());
+        	break;
         default:
             break;
         }

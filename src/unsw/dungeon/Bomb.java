@@ -48,6 +48,7 @@ public class Bomb extends Collectibles {
 
         TimerTask task;
         state = new Unlit();
+        setExist(true);
 
         task = new TimerTask() {
         	
@@ -69,6 +70,7 @@ public class Bomb extends Collectibles {
                 } else if (seconds == EXPLODE_SECONDS) {
                 	state = state.changeToExploded();
                 	System.out.println("Explode");
+                	setExist(false);
                 } else {
                 	cancel();
                 }
@@ -92,7 +94,7 @@ public class Bomb extends Collectibles {
 		
 		// put bomb in player coordinates 
 		int x = dungeon.getPlayer().getX();
-		int y = dungeon.getPlayer().getX();
+		int y = dungeon.getPlayer().getY();
 		
 		this.setX(x);
 		this.setY(y);
@@ -102,7 +104,7 @@ public class Bomb extends Collectibles {
          * Bomb timer, controls the state of the bomb after it has been "dropped".
          * The bomb will go through unlit, lit1, lit2, and exploded states.
          */
-       // MyTimer();
+        MyTimer();
        // System.out.println(state);
 		// remove bomb from map after exploded
         destroySurroundings();
@@ -141,11 +143,17 @@ public class Bomb extends Collectibles {
 			entitiesToDelete.add(e);
     	}
     	for (Entity a : entitiesToDelete) {
+    		a.setExist(false);
 			getDungeon().getMap()[a.getX()][a.getY()].remove(a);
 			a.setX(-2);
 			a.setY(-2);    			
 		}
 	}
+    
+    @Override
+    public boolean isBomb() {
+    	return true;
+    }
 
 	
 

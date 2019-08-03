@@ -2,7 +2,9 @@ package unsw.dungeon;
 
 import java.util.*;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class Entity implements Subject {
@@ -10,7 +12,9 @@ public abstract class Entity implements Subject {
 	Dungeon dungeon;
 	SimpleIntegerProperty x,y;
 	State state;
-	
+	private BooleanProperty Exist;
+
+
     /**
      *  Create an entity positioned in square (x,y)
      *  Use this method in all implementing class constructors
@@ -22,6 +26,7 @@ public abstract class Entity implements Subject {
         this.y = new SimpleIntegerProperty(y);
         this.dungeon = dungeon;
         this.dungeon.addEntity(this);
+		Exist = new SimpleBooleanProperty(true);
     }
 
     public Dungeon getDungeon() {
@@ -65,14 +70,21 @@ public abstract class Entity implements Subject {
     	Dictionary<String, List<Entity>> surroundings = new Hashtable<String, List<Entity>>();
     	int x = getX();
     	int y = getY();
-//    	System.out.println(x);
-//    	System.out.println(y);
+
     	surroundings.put("up", 		dungeon.getEntities(x,y-1));
     	surroundings.put("down", 	dungeon.getEntities(x,y+1));
     	surroundings.put("left", 	dungeon.getEntities(x-1,y));
     	surroundings.put("right", 	dungeon.getEntities(x+1,y));
 
     	return surroundings;
+    }
+    
+    public BooleanProperty getExist() {
+    	return Exist;
+    }
+    
+    public void setExist(Boolean state) {
+    	Exist.set(state);
     }
     
     /**
@@ -162,6 +174,10 @@ public abstract class Entity implements Subject {
     }
     
     public boolean isImmovable() {
+    	return false;
+    }
+    
+    public boolean isBomb() {
     	return false;
     }
     

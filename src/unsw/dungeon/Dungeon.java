@@ -132,9 +132,6 @@ public class Dungeon implements Observer {
     public List<Entity> getEntities (int x, int y) {
     	
     	if (check(x,y) == false || map[x][y] == null) return null;
-//    	System.out.println(x);
-//    	System.out.println(y);
-//    	System.out.println(map[x][y]);
     	return map[x][y];
     }
     

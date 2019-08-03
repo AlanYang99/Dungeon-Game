@@ -28,6 +28,7 @@ public class Player extends MovableEntity implements Observer {
         invulnerable = false;
     }
     
+    
 	/**
 	 * Moves an player upwards if it is legal to do so. If a boulder can be moved in the same direction,
 	 * the boulder will be moved before the player is moved.
@@ -197,6 +198,12 @@ public class Player extends MovableEntity implements Observer {
     public void attack() {
     	if(sword != null)
     		sword.use();
+    }
+    
+    public void plantBomb() {
+    	if(!(bombs.isEmpty())) 
+    		bombs.get(0).use();
+    	
     }
     
 	/**

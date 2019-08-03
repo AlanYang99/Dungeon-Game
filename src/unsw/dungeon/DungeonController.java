@@ -74,7 +74,11 @@ public class DungeonController {
         	break;
         case X:
         	System.out.println(player.isInvulnerable());
-        	break;	
+        	break;
+        case SPACE:
+        	player.plantBomb();
+        	System.out.println("hello");
+        	break;
         default:
             break;
         }

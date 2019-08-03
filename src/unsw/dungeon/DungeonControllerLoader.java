@@ -157,6 +157,11 @@ public class DungeonControllerLoader extends DungeonLoader {
     		        GridPane.setRowIndex(node, sword.getY());    				
 					ImageView im = (ImageView) node;
 					im.setImage(keyImage);    					
+    			} else if (sword.isBomb() && oldValue == false){
+    		        GridPane.setColumnIndex(node, sword.getX());
+    		        GridPane.setRowIndex(node, sword.getY());
+					ImageView im = (ImageView) node;
+					im.setImage(bombImage);      		        
     			} else {
 					ImageView im = (ImageView) node;
 					im.setImage(null);

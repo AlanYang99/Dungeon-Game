@@ -30,6 +30,10 @@ public class DungeonController {
         this.player = dungeon.getPlayer();
         this.initialEntities = new ArrayList<>(initialEntities);
     }
+    
+    public void removeEntity(Object object) {
+    	squares.getChildren().remove(object);
+    }
 
     @FXML
     public void initialize() {

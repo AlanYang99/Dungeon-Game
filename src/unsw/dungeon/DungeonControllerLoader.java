@@ -153,6 +153,8 @@ public class DungeonControllerLoader extends DungeonLoader {
 //    			GridPane.setColumnIndex(node, 0);
 //    			GridPane.
     			if(sword.isKey() && oldValue == false) {
+    		        GridPane.setColumnIndex(node, sword.getX());
+    		        GridPane.setRowIndex(node, sword.getY());    				
 					ImageView im = (ImageView) node;
 					im.setImage(keyImage);    					
     			} else {

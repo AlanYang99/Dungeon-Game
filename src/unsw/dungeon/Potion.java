@@ -24,6 +24,7 @@ public class Potion extends Collectibles implements Subject {
 	public boolean collect() {
 		//give to player
 		dungeon.getPlayer().setPotion(this);
+		
 		// remove from dungeon map
 //		dungeon.getMap()[getX()][getY()].remove(this);
 		// set entity coordinates to null

@@ -7,14 +7,15 @@ import java.util.TimerTask;
 
 public class Bomb extends Collectibles { 
 	private final int UNLIT_SECONDS = 3;
-	private final int LIT1_SECONDS = 3;
-	private final int LIT2_SECONDS = 3;
-	private final int EXPLODE_SECONDS = 3;
+	private final int LIT1_SECONDS = 6;
+	private final int LIT2_SECONDS = 9;
+	private final int EXPLODE_SECONDS = 12;
 	
 	private static int seconds = 0;
 	private static Timer timer = new Timer();
 	
 	private State state;
+	
     /**
      * Create an bomb positioned in square (x,y)
      * @param x
@@ -59,28 +60,61 @@ public class Bomb extends Collectibles {
          * Bomb timer, controls the state of the bomb after it has been "dropped".
          * The bomb will go through unlit, lit1, lit2, and exploded states.
          */
-        
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-
-        	@Override
-	        public void run() { 
-	            if (seconds < UNLIT_SECONDS) {
-	                state.changeToUnlit();
-	            } else if (seconds < LIT1_SECONDS) {
-	            	state.changeToLit1();
-	            } else if (seconds < LIT2_SECONDS) {
-	            	state.changeToLit2();
-	            } else if (seconds < EXPLODE_SECONDS) {
-	            	state.changeToExploded();
-	            	destroySurroundings();
-	            } else {
-	                cancel();	
-	            }
-	            seconds++;
-	        }
+        state = new Unlit();
+        TimerTask task = new TimerTask() {
         	
-        }, 0, 9999999);
+        	@Override
+        	public void run() {
+        		if(seconds < UNLIT_SECONDS) {
+        			System.out.println(seconds);
+        			seconds++;
+        		} else if(seconds < LIT1_SECONDS) {
+        			System.out.println(seconds);
+        			state.changeToLit1();
+        			seconds++;
+        		} else if (seconds < LIT2_SECONDS) {
+        			System.out.println(seconds);
+        			state.changeToLit2();
+        			seconds++;
+        		} else {
+        			cancel();
+        		}
+        	}
+        };
+        timer.schedule(task,0, 1000);
+        	
+        	
+        	
+        	
+        	
+        	
+        	
+        
+        	
+//        	@Override
+//	        public void run() { 
+//        		
+//        		System.out.println(seconds);
+////	            if (seconds < UNLIT_SECONDS) {
+////	                state.changeToUnlit();
+////	            } else 
+//        		if (seconds < LIT1_SECONDS) {
+//	            	state.changeToLit1();
+//	            } else if (seconds < LIT2_SECONDS) {
+//	            	System.out.println(seconds);
+//	            	state.changeToLit2();
+//	            } else if (seconds < EXPLODE_SECONDS) {
+//	            	state.changeToExploded();
+//	            	destroySurroundings();
+//	            } else {
+//	                cancel();	
+//	            }
+//	            seconds++;
+//	        }
+//        	
+//        }, 0, 9999999);
+//        }
+        
         
         
 		// remove bomb from map after exploded

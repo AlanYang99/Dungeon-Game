@@ -72,6 +72,9 @@ public class DungeonController {
         case Q:
         	System.out.println(player.getKey().getId());
         	break;
+        case X:
+        	System.out.println(player.isInvulnerable());
+        	break;	
         default:
             break;
         }

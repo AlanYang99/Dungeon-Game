@@ -30,7 +30,7 @@ public class Key extends Collectibles {
 			oldKey.setX(getX());
 			oldKey.setY(getY());
 //			dungeon.addEntity(oldKey);
-
+			oldKey.setExist(true);
 			dungeon.getPlayer().setKey(this);
 //			dungeon.addEntity(oldKey);
 		} else {

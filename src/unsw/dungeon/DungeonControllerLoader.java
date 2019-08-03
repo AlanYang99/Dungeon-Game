@@ -152,9 +152,14 @@ public class DungeonControllerLoader extends DungeonLoader {
 ////    			node.prop
 //    			GridPane.setColumnIndex(node, 0);
 //    			GridPane.
-    			    			
-				ImageView im = (ImageView) node;
-				im.setImage(null);
+    			if(sword.isKey() && oldValue == false) {
+					ImageView im = (ImageView) node;
+					im.setImage(keyImage);    					
+    			} else {
+					ImageView im = (ImageView) node;
+					im.setImage(null);
+    			}
+				
 //    			GridPane.clearConstraints(node);
     			//Suggestions
     			//The trackposition method, adds all initial entities into

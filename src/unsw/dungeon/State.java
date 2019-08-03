@@ -1,5 +1,6 @@
 package unsw.dungeon;
 
+
 public interface State {
 	
 	/**
@@ -29,6 +30,7 @@ public interface State {
 //    default public State changeToUnlit() {
 //    	throw new UnsupportedOperationException();
 //    }
+
     
 	default public State changeToLit1() {
 		throw new UnsupportedOperationException();

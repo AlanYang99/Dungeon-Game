@@ -149,9 +149,6 @@ public class DungeonControllerLoader extends DungeonLoader {
             public void changed(ObservableValue<? extends Boolean> observable,
                     Boolean oldValue, Boolean newValue) {
 //            	System.out.println("test2");
-    			System.out.println("hi");
-    			System.out.println(oldValue);
-    			System.out.println(newValue);
 ////    			node.prop
 //    			GridPane.setColumnIndex(node, 0);
 //    			GridPane.
@@ -186,7 +183,6 @@ public class DungeonControllerLoader extends DungeonLoader {
             @Override
             public void changed(ObservableValue<? extends Number> observable,
                     Number oldValue, Number newValue) {
-            	System.out.println("test2");
                 GridPane.setColumnIndex(node, newValue.intValue());
             }
         });

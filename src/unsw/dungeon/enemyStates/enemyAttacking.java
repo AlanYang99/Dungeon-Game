@@ -1,5 +1,6 @@
 package unsw.dungeon.enemyStates;
 
+import java.util.Arrays;
 import java.util.List;
 
 import unsw.dungeon.*;
@@ -24,7 +25,7 @@ public class enemyAttacking implements MovementBehaviour {
 				}
 				
 				if (walkable)
-					distMap[x][y] = 0;
+					distMap[x][y] = 10000000;
 				else
 					distMap[x][y] = -1;
 			}
@@ -32,8 +33,10 @@ public class enemyAttacking implements MovementBehaviour {
 		
 		int pX = player.getX();
 		int pY = player.getY();
+				
+		fill(pX, pY, 0, player, distMap);
 		
-		fill(pX, pY, 0, me, player, distMap);
+		printMap(distMap);
 		
 		int eX = me.getX();
 		int eY = me.getY();
@@ -44,15 +47,16 @@ public class enemyAttacking implements MovementBehaviour {
 		neighbours[2] = distMap[eX+1][eY];
 		neighbours[3] = distMap[eX-1][eY];
 		
-		int min = neighbours[0];
-		int minI = 0;
-		for (int i=1;i<4;i++) {
-			if (neighbours[i] < min) {
+		int min = 1000000;
+		int minI = -1;
+		for (int i=0;i<4;i++) {
+			if (neighbours[i] != -1 && neighbours[i] < min) {
 				min = neighbours[i];
 				minI = i;
 			}
 		}
 		
+		// If minI is -1, there is no single move to get closer to the player, and so don't do anything.
 		switch (minI) {
 		case 0:
 			me.moveDown();
@@ -70,35 +74,23 @@ public class enemyAttacking implements MovementBehaviour {
 		
 	}
 	
-	public void fill(int x, int y, int oldVal, Enemy me, Player player, int[][] map) {
+	public void fill(int x, int y, int oldVal, Player player, int[][] map) {
 		int width = player.getDungeon().getWidth();
 		int height = player.getDungeon().getHeight();
 		
 		if (map[x][y] == -1) return;
-		if (x == player.getX() && y == player.getY() && oldVal != 0) return;
+		if (oldVal+1 >= map[x][y]) return;
 		
-		boolean alreadyPlaced = false;
-		if (map[x][y] > 0) alreadyPlaced = true;
-		
-		//if (map[x][y] != 0 && map[x][y] < oldVal + 1)
-		
-		if (map[x][y] == 0 || map[x][y] >= oldVal + 1) {
-			map[x][y] = oldVal + 1;
-		}
-		
-		int val = map[x][y];
-		
-		if (alreadyPlaced) return;
-		if (x == me.getX() && y == me.getY()) return;
+		map[x][y] = oldVal+1;
 		
 		if (y+1 <= height-1) 
-			fill(x, y+1, val, me, player, map);
+			fill(x, y+1, oldVal+1, player, map);
 		if (y-1 >= 0)
-			fill(x, y-1, val, me, player, map);
+			fill(x, y-1, oldVal+1, player, map);
 		if (x+1 <= width-1)
-			fill(x+1, y, val, me, player, map);
+			fill(x+1, y, oldVal+1, player, map);
 		if (x-1 >= 0)
-			fill(x-1, y, val, me, player, map);
+			fill(x-1, y, oldVal+1, player, map);
 		
 	}
 
@@ -106,5 +98,15 @@ public class enemyAttacking implements MovementBehaviour {
 	public void toggleState(Enemy enemy) {
 		enemy.setState(new enemyDefending());
 	}
+	
+	public void printMap(int[][] map) {
+		for (int y=0;y<map[0].length;y++) {
+			for (int x=0;x<map.length;x++) {
+				System.out.print(map[x][y] + " ");
+			}
+			System.out.println();
+		}
+	}
+	
 	
 }

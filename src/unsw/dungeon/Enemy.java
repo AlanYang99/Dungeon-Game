@@ -8,7 +8,8 @@ import unsw.dungeon.enemyStates.*;
 public class Enemy extends MovableEntity implements Observer {
 	
 	MovementBehaviour movement;
-	Player playerTracking;
+	private Player playerTracking;
+	private int speed;
 	
     /**
      * Create an enemy positioned in square (x,y)
@@ -19,6 +20,7 @@ public class Enemy extends MovableEntity implements Observer {
         super(dungeon, x, y);
         playerTracking = dungeon.getPlayer();
         movement = new enemyAttacking();
+        speed = 1000;
         
         Timer timer = new Timer();
         
@@ -27,7 +29,7 @@ public class Enemy extends MovableEntity implements Observer {
         	public void run() {
         	  move();
         	}
-        }, 0, 2*1000);
+        }, 0, speed);
         
     }
     
@@ -49,7 +51,11 @@ public class Enemy extends MovableEntity implements Observer {
     
 	@Override
     public boolean share(Entity item) {
-    	if (item.isPlayer()||item.isSwitch()) return true;
+		if (item instanceof Switch || item instanceof Enemy || item instanceof Player ||
+    			item instanceof Key || item instanceof Treasure || item instanceof Bomb ||
+    			item instanceof Potion || item instanceof Sword) return true;
+    	
+    	
 		return super.share(item);
     }
 

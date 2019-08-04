@@ -29,32 +29,13 @@ public class Key extends Collectibles {
 		if(oldKey != null) {
 			oldKey.setX(getX());
 			oldKey.setY(getY());
-//			dungeon.addEntity(oldKey);
 			oldKey.setExist(true);
 			dungeon.getPlayer().setKey(this);
-//			dungeon.addEntity(oldKey);
 		} else {
-			dungeon.getPlayer().setKey(this);
-			// remove from dungeon map
-			
+			dungeon.getPlayer().setKey(this);			
 		}
 		setExist(false);
 
-//		// check player isn't already holding a key
-//		if (dungeon.getPlayer().getKey() != null) {
-//			// set map coordinates for old key
-//			dungeon.getPlayer().getKey().setX(getX());
-//			dungeon.getPlayer().getKey().setX(getY());
-//		}
-//		
-//		//give to player
-//		dungeon.getPlayer().setKey(this);
-//		// remove from dungeon map
-//		
-//		dungeon.getMap()[getX()][getY()].remove(this);
-//		// set entity coordinates to null
-//		setX(-1);
-//		setY(-1);
 		return true;
 	}
 	
@@ -106,10 +87,5 @@ public class Key extends Collectibles {
 		return id;
 	}
 	
-//	@Override
-//    public boolean share(Entity item) {
-//    	if (item instanceof Switch || item instanceof Player) return true;
-//		return super.share(item);
-//    }
 
 }

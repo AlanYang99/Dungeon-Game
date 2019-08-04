@@ -16,11 +16,6 @@ public class Treasure extends Collectibles {
 	public boolean collect() {
 		//give to player
 		dungeon.getPlayer().addTreasures(this);
-		// remove from dungeon map
-//		dungeon.getMap()[getX()][getY()].remove(this);
-		// set entity coordinates to null
-//		setX(-1);
-//		setY(-1);
 
 		setExist(false);
 
@@ -30,10 +25,6 @@ public class Treasure extends Collectibles {
 		return true;
 	}
 	
-//	@Override
-//    public boolean share(Entity item) {
-//    	if (item instanceof Player || item instanceof Switch) return true;
-//		return super.share(item);
-//    }
+
 
 }

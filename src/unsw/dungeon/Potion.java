@@ -24,23 +24,10 @@ public class Potion extends Collectibles implements Subject {
 	public boolean collect() {
 		//give to player
 		dungeon.getPlayer().setPotion(this);
-		
-		// remove from dungeon map
-//		dungeon.getMap()[getX()][getY()].remove(this);
-		// set entity coordinates to null
-//		setX(-1);
-//		setY(-1);
 		setExist(false);
-
-		// TODO: USE FUNCTIONALITY
 		return true;
 	}
 	
-//	@Override
-//    public boolean share(Entity item) {
-//    	if (item instanceof Switch || item instanceof Player) return true;
-//		return super.share(item);
-//    }
 	
 	public void activate() {
 		notifyObservers("PotionActivate");

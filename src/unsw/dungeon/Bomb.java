@@ -22,13 +22,13 @@ public class Bomb extends Collectibles {
         super(dungeon, x, y);
     }
     
-    public static void main(String[] args) {
-		Dungeon dungeon = new Dungeon(20,20);
-		Player player1 = new Player(dungeon,10,10);
-		Bomb bomb1 = new Bomb(dungeon,10,12);
-		bomb1.collect();
-        bomb1.use();
-    }
+//    public static void main(String[] args) {
+//		Dungeon dungeon = new Dungeon(20,20);
+//		Player player1 = new Player(dungeon,10,10);
+//		Bomb bomb1 = new Bomb(dungeon,10,12);
+//		bomb1.collect();
+//        bomb1.use();
+//    }
 
 	@Override
 	public boolean collect() {
@@ -36,11 +36,6 @@ public class Bomb extends Collectibles {
 		dungeon.getPlayer().addBomb(this);
 		setExist(false);
 
-		// remove from dungeon map
-//		dungeon.getMap()[getX()][getY()].remove(this);
-		// set entity coordinates to null
-//		setX(-1);
-//		setY(-1);
 		return true;
 	}
 	
@@ -69,17 +64,13 @@ public class Bomb extends Collectibles {
             	if (seconds == 0) {
                 	setExist(true);
             	} else if (seconds < LIT1_SECONDS){
-                    System.out.println("Seconds = " + seconds);
+                   
                 } else if (seconds < LIT2_SECONDS) {
                 	state = state.changeToLit1();
-                	System.out.println(state);
-                    System.out.println("Seconds = " + seconds);
                 } else if (seconds < EXPLODE_SECONDS) {
                 	state = state.changeToLit2();
-                    System.out.println("Seconds = " + seconds);
                 } else if (seconds == EXPLODE_SECONDS) {
                 	state = state.changeToExploded();
-                	System.out.println("Explode");
                     destroySurroundings();
                 	setExist(false);
                 } else {
@@ -99,38 +90,18 @@ public class Bomb extends Collectibles {
 	@Override
 	public boolean use() {
 		if (dungeon.getPlayer().getNumBombs() == 0) return false;
-		// TODO
-		// remove bomb from player
 		dungeon.getPlayer().dropBomb(this);
-//		
-//		// put bomb in player coordinates 
-//		int x = dungeon.getPlayer().getX();
-//		int y = dungeon.getPlayer().getY();
-//		
-//		this.setX(x);
-//		this.setY(y);
-//		dungeon.getMap()[x][y].add(this);
-		
+
         /**
          * Bomb timer, controls the state of the bomb after it has been "dropped".
          * The bomb will go through unlit, lit1, lit2, and exploded states.
          */
         MyTimer();
-       // System.out.println(state);
-		// remove bomb from map after exploded
-//        destroySurroundings();
-//		dungeon.getMap()[x][y].remove(this);
-//		setX(-2);
-//		setY(-2);
-		
+
 		return true;
 	}
 
-//	@Override
-//    public boolean share(Entity item) {
-//    	if (item instanceof Switch || item instanceof Player) return true;
-//		return super.share(item);
-//    }
+
 	
 
     
@@ -150,10 +121,8 @@ public class Bomb extends Collectibles {
     	entities.addAll(surroundings.get("right"));
 		List<Entity> entitiesToDelete = new ArrayList<Entity>();
 		
-//		System.out.println(entities);
 
     	for (Entity e : entities) {
-//    		System.out.println(e);
     		if (e.isImmovable()) continue;
 			entitiesToDelete.add(e);
     	}

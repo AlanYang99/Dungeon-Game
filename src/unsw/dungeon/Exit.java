@@ -12,10 +12,5 @@ public class Exit extends ImmovableEntity {
         super(dungeon, x, y);
     }
     
-//	@Override
-//    public boolean share(Entity item) {
-//    	if (item instanceof Player) return true;
-//		return super.share(item);
-//    }
 
 }

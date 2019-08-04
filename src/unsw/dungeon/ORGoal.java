@@ -22,7 +22,7 @@ public class ORGoal implements Goal {
 	public void update(Subject subject, String tag) {
 		if (!tag.equals("ReEvaluate")) return;
 		evaluate();
-		notifyObservers("ReEvaluate");
+		if (observers.size() > 0) notifyObservers("ReEvaluate");
 	}
 	
 	@Override

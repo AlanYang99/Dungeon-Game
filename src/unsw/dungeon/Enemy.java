@@ -55,7 +55,9 @@ public class Enemy extends MovableEntity implements Observer {
     public void kill() {
     	notifyObservers("EnemyDeath");
     	
-    	//timer.cancel();
+    	timer.cancel();
+    	this.setExist(false);
+    	
     	dungeon.removeEntity(this);
     }
     

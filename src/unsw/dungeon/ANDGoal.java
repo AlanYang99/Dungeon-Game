@@ -22,8 +22,7 @@ public class ANDGoal implements Goal {
 	public void update(Subject subject, String tag) {
 		if (!tag.equals("ReEvaluate")) return;
 		evaluate();
-		System.out.println(observers.size());
-		//if (observers.size() > 0) notifyObservers("ReEvaluate");
+		if (observers.size() > 0) notifyObservers("ReEvaluate");
 	}
 	
 	@Override

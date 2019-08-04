@@ -10,12 +10,16 @@ public class TreasureGoal implements Goal {
 	
 	public TreasureGoal(Dungeon dungeon) {
 		this.treasureLeft = dungeon.getTreasure().size();
+		for (Treasure t : dungeon.getTreasure()) {
+			t.attach(this);
+		}
+		
 		observers = new ArrayList<Observer>();
 	}
 	
 	@Override
 	public void update(Subject subject, String tag) {
-		if (subject instanceof Treasure && tag.equals("TreasureCollected")) {
+		if (tag.equals("TreasureCollected")) {
 			treasureLeft--;
 		}
 		evaluate();

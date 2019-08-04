@@ -146,8 +146,11 @@ public class Dungeon implements Observer {
 			}
     	}
     	
+    	// Attach the player and enemy to the dungeon.
     	this.player.attach(this);
-    	
+    	for (Enemy e : this.enemies) {
+    		e.attach(this);
+    	}
     	
     	
     	
@@ -195,6 +198,7 @@ public class Dungeon implements Observer {
 			
 			if (enemyClashed != null) handlePlayerEnemyClash(this.player, enemyClashed);
 			
+			System.out.println("big goal: " + this.evaluateGoal());
 		}
 		
 		// Prints out the entities at the same square as the player.

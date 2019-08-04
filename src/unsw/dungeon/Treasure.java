@@ -1,6 +1,11 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Treasure extends Collectibles {
+	
+	private List<Observer> observers;
 	
     /**
      * Create a treasure positioned in square (x,y)
@@ -9,6 +14,7 @@ public class Treasure extends Collectibles {
      */
     public Treasure(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
+        observers = new ArrayList<Observer>();
     }
 
 	@SuppressWarnings("null")
@@ -25,6 +31,22 @@ public class Treasure extends Collectibles {
 		return true;
 	}
 	
-
+	@Override
+	public void attach(Observer o) {
+		observers.add(o);
+	}
+	
+	@Override
+	public void notifyObservers(String tag) {
+		if (observers == null) return;
+		for (Observer o : observers) {
+			o.update(this, tag);
+		}
+	}
+	
+	@Override
+	public void detach(Observer o) {
+		observers.remove(o);
+	}
 
 }

@@ -1,8 +1,14 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ORGoal implements Goal {
 	
+	private List<Observer> observers;
+	
 	public ORGoal(Goal subgoal1, Goal subgoal2) {
+		observers = new ArrayList<Observer>();
 		// Attach itself to each subgoal to be updated when they do.
 		subgoal1.attach(this);
 		subgoal2.attach(this);
@@ -27,6 +33,24 @@ public class ORGoal implements Goal {
 		}
 		
 		return result;
+	}
+	
+	@Override
+	public void attach(Observer o) {
+		observers.add(o);
+	}
+	
+	@Override
+	public void notifyObservers(String tag) {
+		if (observers == null) return;
+		for (Observer o : observers) {
+			o.update(this, tag);
+		}
+	}
+	
+	@Override
+	public void detach(Observer o) {
+		observers.remove(o);
 	}
 	
 }

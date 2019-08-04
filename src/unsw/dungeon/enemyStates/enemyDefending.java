@@ -36,8 +36,6 @@ public class enemyDefending implements MovementBehaviour {
 		
 		fill(pX, pY, 0, player, distMap);
 		
-		printMap(distMap);
-		
 		int eX = me.getX();
 		int eY = me.getY();
 		

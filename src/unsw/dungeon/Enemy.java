@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -9,7 +11,10 @@ public class Enemy extends MovableEntity implements Observer {
 	
 	MovementBehaviour movement;
 	private Player playerTracking;
+	Timer timer;
 	private int speed;
+	
+	private List<Observer> observers;
 	
     /**
      * Create an enemy positioned in square (x,y)
@@ -18,11 +23,13 @@ public class Enemy extends MovableEntity implements Observer {
      */
     public Enemy(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
+        
+        observers = new ArrayList<Observer>();
         playerTracking = dungeon.getPlayer();
         movement = new enemyAttacking();
         speed = 1000;
         
-        Timer timer = new Timer();
+        timer = new Timer();
         
         timer.scheduleAtFixedRate(new TimerTask() {
         	@Override
@@ -30,6 +37,8 @@ public class Enemy extends MovableEntity implements Observer {
         	  move();
         	}
         }, 0, speed);
+        
+        
         
     }
     
@@ -46,6 +55,7 @@ public class Enemy extends MovableEntity implements Observer {
     public void kill() {
     	notifyObservers("EnemyDeath");
     	
+    	//timer.cancel();
     	dungeon.removeEntity(this);
     }
     
@@ -68,7 +78,23 @@ public class Enemy extends MovableEntity implements Observer {
 		}
 	}
 	
+	@Override
+	public void attach(Observer o) {
+		observers.add(o);
+	}
 	
+	@Override
+	public void notifyObservers(String tag) {
+		if (observers == null) return;
+		for (Observer o : observers) {
+			o.update(this, tag);
+		}
+	}
+	
+	@Override
+	public void detach(Observer o) {
+		observers.remove(o);
+	}
 	
 	
 	

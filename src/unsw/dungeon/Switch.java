@@ -1,9 +1,12 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Switch extends Entity implements Observer {
-
+	
+	private List<Observer> observers;
+	
     /**
      * Create an switch positioned in square (x,y)
      * @param x
@@ -11,6 +14,7 @@ public class Switch extends Entity implements Observer {
      */
     public Switch(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
+        observers = new ArrayList<Observer>();
         this.state = new Closed(); // assumes board cannot be initialized with boulder already on top of a switch
         
     }
@@ -55,6 +59,24 @@ public class Switch extends Entity implements Observer {
 	@Override
 	public boolean isSwitch() {
 		return true;
+	}
+	
+	@Override
+	public void attach(Observer o) {
+		observers.add(o);
+	}
+	
+	@Override
+	public void notifyObservers(String tag) {
+		if (observers == null) return;
+		for (Observer o : observers) {
+			o.update(this, tag);
+		}
+	}
+	
+	@Override
+	public void detach(Observer o) {
+		observers.remove(o);
 	}
 	
 }

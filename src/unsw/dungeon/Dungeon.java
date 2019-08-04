@@ -85,7 +85,7 @@ public class Dungeon implements Observer {
 
     	map[entity.getX()][entity.getY()].add(entity);
     	
-    	entity.attach(this);
+    	//entity.attach(this);
     	
     	if (entity instanceof Enemy)
     		enemies.add((Enemy)entity);
@@ -146,7 +146,7 @@ public class Dungeon implements Observer {
 			}
     	}
     	
-    	
+    	this.player.attach(this);
     	
     	
     	
@@ -187,12 +187,28 @@ public class Dungeon implements Observer {
     // - Enemy moves
 	@Override
 	public void update(Subject subject, String tag) {
-		if (subject instanceof Enemy && tag.equals("EnemyMove"))
-			handlePlayerEnemyClash(player, (Enemy)subject);
-		
+		if (tag.equals("PlayerMove") || tag.equals("EnemyMove")) {
+			Enemy enemyClashed = null;
+			for (Enemy e : this.enemies) {
+				if (checkPlayerEnemyClash(this.player, e)) enemyClashed = e;
+			}
+			
+			if (enemyClashed != null) handlePlayerEnemyClash(this.player, enemyClashed);
+			
+		}
 		
 		// Prints out the entities at the same square as the player.
 		//System.out.println(getEntities(getPlayer().getX(),getPlayer().getY()));
+	}
+	
+	private boolean checkPlayerEnemyClash(Player player, Enemy enemy) {
+		// Check if the player and enemy are in the same square.
+		boolean contact = false;
+		if (player.getX() == enemy.getX() && player.getY() == enemy.getY()) {
+			contact = true;
+		}
+		
+		return contact;
 	}
 	
 	private void handlePlayerEnemyClash(Player player, Enemy enemy) {
@@ -205,6 +221,7 @@ public class Dungeon implements Observer {
 		if (contact) {
 			if (player.isInvulnerable()) {
 				enemy.kill();
+				System.out.println("u dead");
 			} else {
 				// End game as player dies.
 				// TODO

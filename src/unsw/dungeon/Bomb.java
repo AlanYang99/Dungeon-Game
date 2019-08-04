@@ -10,7 +10,7 @@ public class Bomb extends Collectibles {
 	
 	private static int seconds = 0;
 	private static Timer timer = new Timer();
-
+	private List<Observer> observers;
 	private State state;
 	
     /**
@@ -20,6 +20,7 @@ public class Bomb extends Collectibles {
      */
     public Bomb(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
+        observers = new ArrayList<Observer>();
     }
     
 //    public static void main(String[] args) {
@@ -156,8 +157,24 @@ public class Bomb extends Collectibles {
     public boolean isBomb() {
     	return true;
     }
-
+    
+    @Override
+	public void attach(Observer o) {
+		observers.add(o);
+	}
 	
+	@Override
+	public void notifyObservers(String tag) {
+		if (observers == null) return;
+		for (Observer o : observers) {
+			o.update(this, tag);
+		}
+	}
+	
+	@Override
+	public void detach(Observer o) {
+		observers.remove(o);
+	}
 
 
 }

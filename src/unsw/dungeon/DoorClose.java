@@ -6,4 +6,9 @@ public class DoorClose implements State {
 	public State setDoorClose() {
 		 return new DoorClose();
 	}
+	
+	@Override
+	public State setDoorOpen() {
+		 return new DoorOpen();
+	}
 }

@@ -91,11 +91,11 @@ public class Bomb extends Collectibles {
 		return true;
 	}
 
-//	@Override
-//    public boolean share(Entity item) {
-//    	if (item instanceof Switch || item instanceof Player) return true;
-//		return super.share(item);
-//    }
+	@Override
+    public boolean share(Entity item) {
+    	if (item.isSwitch() || item.isPlayer()) return true;
+		return super.share(item);
+    }
 	
 
     

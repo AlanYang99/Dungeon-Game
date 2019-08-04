@@ -60,6 +60,7 @@ public class Player extends MovableEntity implements Observer {
     		}
     		if(tempkey != null) getDungeon().addEntity(tempkey);
     		for (Entity a : entitiesToDelete) {
+
     			getDungeon().getMap()[a.getX()][a.getY()].remove(a);
     			a.setX(-1);
     			a.setY(-1);    			
@@ -136,6 +137,10 @@ public class Player extends MovableEntity implements Observer {
     		}
     		if(tempkey != null) getDungeon().addEntity(tempkey);
     		for (Entity a : entitiesToDelete) {
+    			if(a.isBomb()) {
+    				Bomb tempBomb = (Bomb)a;
+    				if(!(tempBomb.isDestroyable())) continue;
+    			}
     			getDungeon().getMap()[a.getX()][a.getY()].remove(a);
     			a.setX(-1);
     			a.setY(-1);  
@@ -178,7 +183,10 @@ public class Player extends MovableEntity implements Observer {
     		}
     		if(tempkey != null) getDungeon().addEntity(tempkey);
     		for (Entity a : entitiesToDelete) {
-    		
+    			if(a.isBomb()) {
+    				Bomb tempBomb = (Bomb)a;
+    				if(!(tempBomb.isDestroyable())) continue;
+    			}
     			getDungeon().getMap()[a.getX()][a.getY()].remove(a);
     			a.setX(-1);
     			a.setY(-1);    			

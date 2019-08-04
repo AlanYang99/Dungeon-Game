@@ -33,10 +33,13 @@ public class Bomb extends Collectibles {
 	@Override
 	public boolean collect() {
 		//give to player
-		dungeon.getPlayer().addBomb(this);
-		setExist(false);
+		if(isDestroyable()) {
+			dungeon.getPlayer().addBomb(this);
+			setExist(false);
+			return true;
+		}
 
-		return true;
+		return false;
 	}
 	
     public void MyTimer() {
@@ -45,7 +48,8 @@ public class Bomb extends Collectibles {
         TimerTask task;
         state = new Unlit();
 
-        
+		dungeon.getPlayer().dropBomb(this);
+
     	int x = dungeon.getPlayer().getX();
 		int y = dungeon.getPlayer().getY();
 		
@@ -90,7 +94,6 @@ public class Bomb extends Collectibles {
 	@Override
 	public boolean use() {
 		if (dungeon.getPlayer().getNumBombs() == 0) return false;
-		dungeon.getPlayer().dropBomb(this);
 
         /**
          * Bomb timer, controls the state of the bomb after it has been "dropped".
@@ -101,6 +104,11 @@ public class Bomb extends Collectibles {
 		return true;
 	}
 
+	public boolean isDestroyable() {
+		if(state == null)
+			return true;
+		return false;
+	}
 
 	
 

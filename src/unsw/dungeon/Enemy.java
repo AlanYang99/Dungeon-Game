@@ -31,6 +31,10 @@ public class Enemy extends MovableEntity implements Observer {
         
     }
     
+    public boolean isEnemy() {
+    	return true;
+    }
+    
     public void setState(MovementBehaviour state) {
     	this.movement = state;
     }

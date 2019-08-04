@@ -16,10 +16,14 @@ public class Key extends Collectibles {
         super(dungeon, x, y);
         this.id = id;
     }
+    
+   public int getId () {
+	   return this.id;
+   }
     /**	If player is already holding a key, drop that key onto the current grid 
      * 	Player holds new key
      * 
-     * @pre		
+     * @pre		Player is either holding one key or no keys
      * @post	Player holds new key. If player held an older key, that key is in the new key's original spot
      * @inv		Player holds maximum 1 key
      */	
@@ -38,21 +42,21 @@ public class Key extends Collectibles {
 		}
 		setExist(false);
 
-//		// check player isn't already holding a key
-//		if (dungeon.getPlayer().getKey() != null) {
-//			// set map coordinates for old key
-//			dungeon.getPlayer().getKey().setX(getX());
-//			dungeon.getPlayer().getKey().setX(getY());
-//		}
-//		
-//		//give to player
-//		dungeon.getPlayer().setKey(this);
-//		// remove from dungeon map
-//		
-//		dungeon.getMap()[getX()][getY()].remove(this);
-//		// set entity coordinates to null
-//		setX(-1);
-//		setY(-1);
+		// check player isn't already holding a key
+		if (dungeon.getPlayer().getKey() != null) {
+			// set map coordinates for old key
+			dungeon.getPlayer().getKey().setX(getX());
+			dungeon.getPlayer().getKey().setX(getY());
+		}
+		
+		//give to player
+		dungeon.getPlayer().setKey(this);
+		// remove from dungeon map
+		
+		dungeon.getMap()[getX()][getY()].remove(this);
+		// set entity coordinates to null
+		setX(-1);
+		setY(-1);
 		return true;
 	}
 	
@@ -75,7 +79,7 @@ public class Key extends Collectibles {
 			// Check IDs of key and door match
 			if (door.getId() == id) {
 				// Unlock door
-				door.getState().changeToOpenIndefinitely(this);
+				door.openDoor(this);
 				
 				doorOpen = true;
 				
@@ -96,10 +100,10 @@ public class Key extends Collectibles {
 		return doorOpen;
 	}
 	
-//	@Override
-//    public boolean share(Entity item) {
-//    	if (item instanceof Switch || item instanceof Player) return true;
-//		return super.share(item);
-//    }
+	@Override
+    public boolean share(Entity item) {
+    	if (item.isSwitch() || item.isPlayer()) return true;
+		return super.share(item);
+    }
 
 }

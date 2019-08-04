@@ -14,9 +14,8 @@ public class Door extends ImmovableEntity implements State {
     public Door (Dungeon dungeon, int x, int y, int id) {
         super(dungeon, x, y);
         this.id = id;
-        this.state = new Closed();
+        this.state = new DoorClose();
     }
-    
 	
 	public int getId() {
 		return id;
@@ -29,6 +28,14 @@ public class Door extends ImmovableEntity implements State {
 	@Override
 	public boolean isDoor() {
 		return true;
+	}
+	
+	public boolean openDoor (Key key) {
+		if (key.getId() == this.getId()) {
+			this.state = this.state.setDoorOpen();
+			return true;
+		}
+		return false;
 	}
 	
 }

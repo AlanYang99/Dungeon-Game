@@ -7,8 +7,10 @@ public class ExitGoal implements Goal {
 	public Goal mainGoal;
 	public boolean exitReached;
 	
-	public ExitGoal() {
+	public ExitGoal(Dungeon dungeon) {
 		exitReached = false;
+		
+		dungeon.getExit().attach(this);
 	}
 	
 	public void setMainGoal(Goal goal) {
@@ -17,7 +19,7 @@ public class ExitGoal implements Goal {
 	
 	@Override
 	public void update(Subject subject, String tag) {
-		if (tag.equals("PLACEHOLDER")) {
+		if (tag.equals("ExitReached")) {
 			exitReached = true;
 		}
 		evaluate();

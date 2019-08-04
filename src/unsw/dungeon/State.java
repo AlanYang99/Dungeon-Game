@@ -4,21 +4,31 @@ public interface State {
 	
 	/**
 	 * ========================================================
-	 * Open Indefinitely (door) / Open / Close states
+	 * Door states Open / Close states
 	 * ========================================================
 	 */
 
-    default public void changeToOpenIndefinitely(Entity e) {
+    default public State setDoorOpen() {
     	throw new UnsupportedOperationException();
     }
     
-    default public void changeToOpen(Entity e) {
-    	
+    default public State setDoorClose() {
+    	throw new UnsupportedOperationException();	
     }
     
-	default public void changeToClosed(Entity e) {
-		
-	}
+	/**
+	 * ========================================================
+	 * Exit states Open / Close states
+	 * ========================================================
+	 */
+    
+    default public State setExitOpen() {
+    	throw new UnsupportedOperationException();
+    }
+    
+    default public State setExitClose() {
+    	throw new UnsupportedOperationException();	
+    }
 
 	
 	/**

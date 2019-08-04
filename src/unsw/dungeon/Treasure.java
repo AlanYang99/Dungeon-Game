@@ -35,5 +35,11 @@ public class Treasure extends Collectibles {
 //    	if (item instanceof Player || item instanceof Switch) return true;
 //		return super.share(item);
 //    }
+	
+    
+    public boolean isTreasure() {
+    	return true;
+    }
+    
 
 }

@@ -10,12 +10,30 @@ public class Exit extends ImmovableEntity {
      */
     public Exit(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
+        this.state = new Closed();
     }
     
-//	@Override
-//    public boolean share(Entity item) {
-//    	if (item instanceof Player) return true;
-//		return super.share(item);
-//    }
-
+	@Override
+    public boolean share(Entity item) {
+    	if (item.isPlayer()) return true;
+		return super.share(item);
+	}
+	
+	public State getState() {
+		return state;
+	}
+	
+	public boolean openExit() {
+		notifyObservers("ExitReached");
+		if (dungeon.evaluateGoal()) {
+				this.state = this.state.setExitOpen();
+				return true;
+		}
+		return false;
+	}
+	
+	public boolean isExit() {
+		return true;
+	}
+	
 }

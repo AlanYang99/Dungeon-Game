@@ -52,4 +52,14 @@ public class TreasureGoal implements Goal {
 		observers.remove(o);
 	}
 	
+	@Override
+	public boolean baseGoal() {
+		return true;
+	}
+	
+	@Override
+	public List<Goal> getSubgoals() {
+		return null;
+	}
+	
 }

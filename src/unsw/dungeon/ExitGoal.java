@@ -10,9 +10,10 @@ public class ExitGoal implements Goal {
 	public boolean exitReached;
 	private List<Observer> observers;
 	
-	public ExitGoal() {
+	public ExitGoal(Dungeon dungeon) {
 		exitReached = false;
 		observers = new ArrayList<Observer>();
+		dungeon.getExit().attach(this);
 	}
 	
 	public void setMainGoal(Goal goal) {
@@ -21,7 +22,7 @@ public class ExitGoal implements Goal {
 	
 	@Override
 	public void update(Subject subject, String tag) {
-		if (tag.equals("PLACEHOLDER")) {
+		if (tag.equals("ExitReached")) {
 			exitReached = true;
 		}
 		evaluate();
@@ -67,6 +68,16 @@ public class ExitGoal implements Goal {
 	@Override
 	public void detach(Observer o) {
 		observers.remove(o);
+	}
+	
+	@Override
+	public boolean baseGoal() {
+		return true;
+	}
+	
+	@Override
+	public List<Goal> getSubgoals() {
+		return null;
 	}
 	
 }

@@ -74,7 +74,7 @@ class GoalTest {
 		Exit exit = new Exit(dungeon, 19, 20);
 		
 		
-		ExitGoal mainGoal = new ExitGoal();
+		ExitGoal mainGoal = new ExitGoal(dungeon);
 		
 		assertEquals(false ,mainGoal.evaluate());
 		

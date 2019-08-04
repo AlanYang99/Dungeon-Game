@@ -79,6 +79,10 @@ public class Dungeon implements Observer {
     public List<Switch> getSwitches() {
     	return switches;
     }
+    
+    public Exit getExit() {
+    	return exit;
+    }
 
     public void addEntity(Entity entity) {
     	if (entity == null) return;

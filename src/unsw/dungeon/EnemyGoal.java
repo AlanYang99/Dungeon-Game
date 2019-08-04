@@ -51,5 +51,15 @@ public class EnemyGoal implements Goal {
 	public void detach(Observer o) {
 		observers.remove(o);
 	}
+	
+	@Override
+	public boolean baseGoal() {
+		return true;
+	}
+	
+	@Override
+	public List<Goal> getSubgoals() {
+		return null;
+	}
 
 }

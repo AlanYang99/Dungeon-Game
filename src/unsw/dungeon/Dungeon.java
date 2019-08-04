@@ -79,6 +79,10 @@ public class Dungeon implements Observer {
     public List<Switch> getSwitches() {
     	return switches;
     }
+    
+    public Exit getExit() {
+    	return exit;
+    }
 
     public void addEntity(Entity entity) {
     	if (entity == null) return;
@@ -232,7 +236,11 @@ public class Dungeon implements Observer {
 		}
 		
 		if (contact) {
+			// If the player is invulnerable or has a sword, kill the enemy.
 			if (player.isInvulnerable()) {
+				enemy.kill();
+			} else if (player.getSword() != null) {
+				player.getSword().use();
 				enemy.kill();
 			} else {
 				player.gameOver();

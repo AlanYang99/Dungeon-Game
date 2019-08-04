@@ -27,6 +27,9 @@ public abstract class MovableEntity extends Entity {
     		if ((!share(e))) {
     			sharable = false;
     		}
+    		if (e.isExit()) {
+    			((Exit)e).checkGoal();
+    		}
     	}
     	if (sharable && getY() > 0) {
     		this.getDungeon().removeEntity(this);
@@ -49,6 +52,9 @@ public abstract class MovableEntity extends Entity {
     	for (Entity e : entities) {
     		if ((!share(e))) {
     			sharable = false;
+    		}
+    		if (e.isExit()) {
+    			((Exit)e).checkGoal();
     		}
     	}
     	if (sharable && getY() < dungeon.getHeight() - 1) {
@@ -73,6 +79,9 @@ public abstract class MovableEntity extends Entity {
     		if ((!share(e))) {
     			sharable = false;
     		}
+    		if (e.isExit()) {
+    			((Exit)e).checkGoal();
+    		}
     	}
         if (sharable && getX() > 0) {
         	this.getDungeon().removeEntity(this);
@@ -95,6 +104,9 @@ public abstract class MovableEntity extends Entity {
     	for (Entity e : entities) {
     		if ((!share(e))) {
     			sharable = false;
+    		}
+    		if (e.isExit()) {
+    			((Exit)e).checkGoal();
     		}
     	}
         if (sharable && getX() < dungeon.getWidth() - 1) {

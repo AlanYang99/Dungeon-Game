@@ -6,9 +6,11 @@ import java.util.List;
 public class ORGoal implements Goal {
 	
 	private List<Observer> observers;
+	public List<Goal> subgoals;
 	
 	public ORGoal(Goal subgoal1, Goal subgoal2) {
 		observers = new ArrayList<Observer>();
+		subgoals = new ArrayList<Goal>();
 		// Attach itself to each subgoal to be updated when they do.
 		subgoal1.attach(this);
 		subgoal2.attach(this);
@@ -16,6 +18,10 @@ public class ORGoal implements Goal {
 		// Add the subgoals to a stored array.
 		addSubgoal(subgoal1);
 		addSubgoal(subgoal2);
+	}
+	
+	public void addSubgoal(Goal goal) {
+		subgoals.add(goal);
 	}
 	
 	@Override
@@ -51,6 +57,16 @@ public class ORGoal implements Goal {
 	@Override
 	public void detach(Observer o) {
 		observers.remove(o);
+	}
+	
+	@Override
+	public boolean baseGoal() {
+		return false;
+	}
+	
+	@Override
+	public List<Goal> getSubgoals() {
+		return subgoals;
 	}
 	
 }

@@ -35,6 +35,7 @@ public class Player extends MovableEntity implements Observer {
     	System.out.println("GAME OVER");
 		// End game as player dies.
 		// TODO
+    	setExist(false);
     }
     
 	/**

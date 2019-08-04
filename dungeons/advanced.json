@@ -595,7 +595,7 @@
     {
       "x": 16,
       "y": 15,
-      "type": "wall"
+      "type": "exit"
     },
     {
       "x": 17,
@@ -624,7 +624,7 @@
     "goal": "AND",
     "subgoals": [
       {
-        "goal": "enemies"
+        "goal": "exit"
       },
       {
         "goal": "treasure"

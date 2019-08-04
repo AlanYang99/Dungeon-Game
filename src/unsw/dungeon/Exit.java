@@ -7,6 +7,7 @@ public class Exit extends ImmovableEntity {
 	
 	State state;
 	private List<Observer> observers;
+	Dungeon dungeon;
 
     /**
      * Create an exit positioned in square (x,y)
@@ -15,6 +16,7 @@ public class Exit extends ImmovableEntity {
      */
     public Exit(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
+        this.dungeon = dungeon;
         this.state = new Closed();
         observers = new ArrayList<Observer>();
     }
@@ -26,6 +28,12 @@ public class Exit extends ImmovableEntity {
     
     public void openExit() {
     	this.state.changeToOpenIndefinitely(this);
+    }
+    
+    public boolean checkGoal() {
+    	notifyObservers("ExitReached");
+    	
+    	return (dungeon.evaluateGoal());
     }
     
     @Override

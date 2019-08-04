@@ -46,6 +46,7 @@ public abstract class DungeonLoader {
         JSONObject jsonGoals = json.getJSONObject("goal-condition");
         Goal mainGoal = loadGoals(dungeon, jsonGoals);
         dungeon.setGoal(mainGoal);
+        setMainExit(mainGoal, mainGoal);
         
         // Attach all entities that need to be attached.
         dungeon.attachEntities();
@@ -69,7 +70,7 @@ public abstract class DungeonLoader {
 	    		mainGoal = new SwitchGoal(dungeon);
 	    		break;
 			case "exit":
-				mainGoal = new ExitGoal();
+				mainGoal = new ExitGoal(dungeon);
 				break;
 			}
         	
@@ -94,7 +95,18 @@ public abstract class DungeonLoader {
     	return mainGoal;
     	
     }
-
+    
+    private void setMainExit(Goal mainGoal, Goal goal) {
+    	if (goal.baseGoal()) {
+    		if (goal instanceof ExitGoal) {
+    			((ExitGoal) goal).setMainGoal(mainGoal);
+    		}
+    	} else {
+    		setMainExit(mainGoal, goal.getSubgoals().get(0));
+    		setMainExit(mainGoal, goal.getSubgoals().get(1));
+    	}
+    }
+    
     private void loadEntity(Dungeon dungeon, JSONObject json) {
         String type = json.getString("type");
         int x = json.getInt("x");

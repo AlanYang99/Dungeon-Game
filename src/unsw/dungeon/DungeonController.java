@@ -70,7 +70,8 @@ public class DungeonController {
         	player.attack();
         	break;
         case Q:
-        	System.out.println(player.getKey().getId());
+        	System.out.println(player.getPotion());
+        	System.out.println(player.isInvulnerable());
         	break;
         case SPACE:
         	player.plantBomb();

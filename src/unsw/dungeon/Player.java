@@ -224,7 +224,13 @@ public class Player extends MovableEntity implements Observer {
 	}
 
 	public void setPotion(Potion potion) {
+		invulnerable = true;
 		this.potion = potion;
+	}
+	
+	public void losePotion() {
+		invulnerable = false;
+		this.potion = null;
 	}
 
 	public Key getKey() {

@@ -25,11 +25,13 @@ public class Potion extends Collectibles implements Subject {
 		//give to player
 		dungeon.getPlayer().setPotion(this);
 		setExist(false);
+		activate();
 		return true;
 	}
 	
 	
 	public void activate() {
+		System.out.println("Yo");
 		notifyObservers("PotionActivate");
 		
 		Timer timer = new Timer();
@@ -44,6 +46,7 @@ public class Potion extends Collectibles implements Subject {
 	}
 	
 	public void deactivate() {
+		dungeon.getPlayer().losePotion();
 		notifyObservers("PotionDeactivate");
 	}
 	

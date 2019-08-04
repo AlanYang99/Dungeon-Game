@@ -198,7 +198,12 @@ public class Dungeon implements Observer {
 			
 			if (enemyClashed != null) handlePlayerEnemyClash(this.player, enemyClashed);
 			
-			System.out.println("big goal: " + this.evaluateGoal());
+			if (this.evaluateGoal()) {
+				System.out.println("YOU WIN");
+				// Finish game as player completed the goals.
+				// TODO
+			}
+			
 		}
 		
 		// Prints out the entities at the same square as the player.
@@ -225,10 +230,8 @@ public class Dungeon implements Observer {
 		if (contact) {
 			if (player.isInvulnerable()) {
 				enemy.kill();
-				System.out.println("u dead");
 			} else {
-				// End game as player dies.
-				// TODO
+				player.gameOver();
 			}
 		}
 	}

@@ -54,9 +54,6 @@ public abstract class DungeonLoader {
     }
     
     private Goal loadGoals(Dungeon dungeon, JSONObject json) {
-    	System.out.println(json);
-    	
-    	
     	Goal mainGoal = null;
     	// If there are no subgoals.
     	if (!json.has("subgoals")) {

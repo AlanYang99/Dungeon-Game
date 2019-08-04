@@ -31,7 +31,6 @@ public class Potion extends Collectibles implements Subject {
 	
 	
 	public void activate() {
-		System.out.println("Yo");
 		notifyObservers("PotionActivate");
 		
 		Timer timer = new Timer();

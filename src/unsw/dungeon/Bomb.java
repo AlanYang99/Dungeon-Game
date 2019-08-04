@@ -143,10 +143,16 @@ public class Bomb extends Collectibles {
 			entitiesToDelete.add(e);
     	}
     	for (Entity a : entitiesToDelete) {
-    		a.setExist(false);
-			getDungeon().getMap()[a.getX()][a.getY()].remove(a);
-			a.setX(-2);
-			a.setY(-2);    			
+    		if (a instanceof Enemy) {
+    			((Enemy) a).kill();
+    		} else if (a instanceof Player) {
+    			((Player) a).gameOver();
+    		} else {
+	    		a.setExist(false);
+				dungeon.removeEntity(a);
+				a.setX(-2);
+				a.setY(-2);
+    		}
 		}
 		dungeon.getMap()[this.getX()][this.getY()].remove(this);
 		setX(-2);

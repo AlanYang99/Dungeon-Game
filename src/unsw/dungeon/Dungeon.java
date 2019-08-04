@@ -86,7 +86,7 @@ public class Dungeon implements Observer {
 
     	map[entity.getX()][entity.getY()].add(entity);
     	
-    	entity.attach(this);
+    	//entity.attach(this);
     	
     	if (entity.isEnemy())
     		enemies.add((Enemy)entity);
@@ -149,8 +149,11 @@ public class Dungeon implements Observer {
 			}
     	}
     	
-    	
-    	
+    	// Attach the player and enemy to the dungeon.
+    	this.player.attach(this);
+    	for (Enemy e : this.enemies) {
+    		e.attach(this);
+    	}
     	
     	
     	
@@ -190,12 +193,35 @@ public class Dungeon implements Observer {
     // - Enemy moves
 	@Override
 	public void update(Subject subject, String tag) {
-		if (((Entity)subject).isEnemy() && tag.equals("EnemyMove"))
-			handlePlayerEnemyClash(player, (Enemy)subject);
 		
+		if (tag.equals("PlayerMove") || tag.equals("EnemyMove")) {
+			Enemy enemyClashed = null;
+			for (Enemy e : this.enemies) {
+				if (checkPlayerEnemyClash(this.player, e)) enemyClashed = e;
+			}
+			
+			if (enemyClashed != null) handlePlayerEnemyClash(this.player, enemyClashed);
+			
+			if (this.evaluateGoal()) {
+				System.out.println("YOU WIN");
+				// Finish game as player completed the goals.
+				// TODO
+			}
+			
+		}
 		
 		// Prints out the entities at the same square as the player.
 		//System.out.println(getEntities(getPlayer().getX(),getPlayer().getY()));
+	}
+	
+	private boolean checkPlayerEnemyClash(Player player, Enemy enemy) {
+		// Check if the player and enemy are in the same square.
+		boolean contact = false;
+		if (player.getX() == enemy.getX() && player.getY() == enemy.getY()) {
+			contact = true;
+		}
+		
+		return contact;
 	}
 	
 	private void handlePlayerEnemyClash(Player player, Enemy enemy) {
@@ -209,8 +235,7 @@ public class Dungeon implements Observer {
 			if (player.isInvulnerable()) {
 				enemy.kill();
 			} else {
-				// End game as player dies.
-				// TODO
+				player.gameOver();
 			}
 		}
 	}

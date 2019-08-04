@@ -1,11 +1,14 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Potion extends Collectibles implements Subject {
 	
 	private final int length = 10;
+	private List<Observer> observers;
 	
     /**
      * Create a potion positioned in square (x,y)
@@ -14,6 +17,7 @@ public class Potion extends Collectibles implements Subject {
      */
     public Potion(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
+        observers = new ArrayList<Observer>();
     }
     
 	@Override
@@ -27,7 +31,6 @@ public class Potion extends Collectibles implements Subject {
 	
 	
 	public void activate() {
-		System.out.println("Yo");
 		notifyObservers("PotionActivate");
 		
 		Timer timer = new Timer();
@@ -50,5 +53,23 @@ public class Potion extends Collectibles implements Subject {
 	public boolean isPotion() {
 		return true;
 	}
+	
+	public void attach(Observer o) {
+		observers.add(o);
+	}
+	
+	@Override
+	public void notifyObservers(String tag) {
+		if (observers == null) return;
+		for (Observer o : observers) {
+			o.update(this, tag);
+		}
+	}
+	
+	@Override
+	public void detach(Observer o) {
+		observers.remove(o);
+	}
+	
 
 }

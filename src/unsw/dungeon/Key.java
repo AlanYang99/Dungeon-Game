@@ -1,10 +1,12 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Key extends Collectibles {
 	
     private int id;
+    private List<Observer> observers;
 
     /**
      * Create an key positioned in square (x,y)
@@ -15,6 +17,7 @@ public class Key extends Collectibles {
     public Key (Dungeon dungeon, int x, int y, int id) {
         super(dungeon, x, y);
         this.id = id;
+        observers = new ArrayList<Observer>();
     }
     /**	If player is already holding a key, drop that key onto the current grid 
      * 	Player holds new key
@@ -92,6 +95,22 @@ public class Key extends Collectibles {
 		if(item.isSwitch()||item.isPlayer()) return true;
 		return super.share(item);
     }
+	public void attach(Observer o) {
+		observers.add(o);
+	}
+	
+	@Override
+	public void notifyObservers(String tag) {
+		if (observers == null) return;
+		for (Observer o : observers) {
+			o.update(this, tag);
+		}
+	}
+	
+	@Override
+	public void detach(Observer o) {
+		observers.remove(o);
+	}
 	
 
 }

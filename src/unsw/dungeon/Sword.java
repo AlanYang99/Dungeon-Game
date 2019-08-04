@@ -1,9 +1,12 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class Sword extends Collectibles {
 	private static final int HITS = 5;
 	private int hits; // hits remaining
+	private List<Observer> observers;
 	
 	/**
      * Create an sword positioned in square (x,y)
@@ -12,6 +15,7 @@ public class Sword extends Collectibles {
      */
     public Sword(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
+        observers = new ArrayList<Observer>();
         hits = HITS;
     }
 	
@@ -53,5 +57,21 @@ public class Sword extends Collectibles {
 		return super.share(item);
     }
 	
+	public void attach(Observer o) {
+		observers.add(o);
+	}
+	
+	@Override
+	public void notifyObservers(String tag) {
+		if (observers == null) return;
+		for (Observer o : observers) {
+			o.update(this, tag);
+		}
+	}
+	
+	@Override
+	public void detach(Observer o) {
+		observers.remove(o);
+	}
 
 }

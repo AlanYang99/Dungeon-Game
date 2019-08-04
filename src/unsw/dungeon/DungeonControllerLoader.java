@@ -128,7 +128,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
-        if(entity instanceof Collectibles) trackExist((Collectibles)entity,view); //Testing purposes
+        trackExist(entity,view); //Testing purposes
         entities.add(view);
     }
 
@@ -143,7 +143,7 @@ public class DungeonControllerLoader extends DungeonLoader {
      * @param node
      */
     
-    private void trackExist(Collectibles sword, Node node) {
+    private void trackExist(Entity sword, Node node) {
     	sword.getExist().addListener(new ChangeListener<Boolean>() {
     		@Override
             public void changed(ObservableValue<? extends Boolean> observable,

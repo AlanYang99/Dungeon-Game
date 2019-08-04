@@ -8,6 +8,8 @@ public class Player extends MovableEntity implements Observer {
 
     private Dungeon dungeon;
     
+    private List<Observer> observers;
+    
     private Sword sword;
     private Potion potion;
     private Key key;
@@ -22,12 +24,18 @@ public class Player extends MovableEntity implements Observer {
      */
     public Player(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
+        observers = new ArrayList<Observer>();
         dungeon.setPlayer(this);
         bombs = new ArrayList <Bomb>(); //changed this
         treasures = new ArrayList <Treasure>(); //changed this
         invulnerable = false;
     }
     
+    public void gameOver() {
+    	System.out.println("GAME OVER");
+		// End game as player dies.
+		// TODO
+    }
     
 	/**
 	 * Moves an player upwards if it is legal to do so. If a boulder can be moved in the same direction,
@@ -50,6 +58,7 @@ public class Player extends MovableEntity implements Observer {
     	if (b != null) b.moveUp();
     	
     	if (super.moveUp()) {
+    		notifyObservers("PlayerMove");
     		List<Entity> entitiesToDelete = new ArrayList<Entity>();
     		Key tempkey = null;
     		boolean haveKey = key != null;
@@ -95,6 +104,7 @@ public class Player extends MovableEntity implements Observer {
     	if (b != null) b.moveDown();
     	
     	if (super.moveDown()) {
+    		notifyObservers("PlayerMove");
     		List<Entity> entitiesToDelete = new ArrayList<Entity>();
     		Key tempkey = null;
     		boolean haveKey = key != null;
@@ -140,7 +150,7 @@ public class Player extends MovableEntity implements Observer {
     	if (b != null) b.moveRight();
     	
     	if (super.moveRight()) {
-    	
+    		notifyObservers("PlayerMove");
     		List<Entity> entitiesToDelete = new ArrayList<Entity>();
     		Key tempkey = null;
     		boolean haveKey = key != null;
@@ -191,7 +201,7 @@ public class Player extends MovableEntity implements Observer {
     	if (b != null) b.moveLeft();
     	
     	if (super.moveLeft()) {
-    	
+    		notifyObservers("PlayerMove");
     		List<Entity> entitiesToDelete = new ArrayList<Entity>();
     		Key tempkey = null;
     		boolean haveKey = key != null;
@@ -383,6 +393,24 @@ public class Player extends MovableEntity implements Observer {
 	@Override
 	public boolean isPlayer() {
 		return true;
+	}
+	
+	@Override
+	public void attach(Observer o) {
+		observers.add(o);
+	}
+	
+	@Override
+	public void notifyObservers(String tag) {
+		if (observers == null) return;
+		for (Observer o : observers) {
+			o.update(this, tag);
+		}
+	}
+	
+	@Override
+	public void detach(Observer o) {
+		observers.remove(o);
 	}
 	
 }

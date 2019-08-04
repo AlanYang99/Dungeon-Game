@@ -2,13 +2,17 @@ package unsw.dungeon;
 
 import java.util.*;
 
+import unsw.dungeon.Observer;
+
 public class ExitGoal implements Goal {
 	
 	public Goal mainGoal;
 	public boolean exitReached;
+	private List<Observer> observers;
 	
 	public ExitGoal() {
 		exitReached = false;
+		observers = new ArrayList<Observer>();
 	}
 	
 	public void setMainGoal(Goal goal) {
@@ -45,6 +49,24 @@ public class ExitGoal implements Goal {
 		}
 		
 		return result;
+	}
+	
+	@Override
+	public void attach(Observer o) {
+		observers.add(o);
+	}
+	
+	@Override
+	public void notifyObservers(String tag) {
+		if (observers == null) return;
+		for (Observer o : observers) {
+			o.update(this, tag);
+		}
+	}
+	
+	@Override
+	public void detach(Observer o) {
+		observers.remove(o);
 	}
 	
 }

@@ -1,9 +1,13 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Door extends ImmovableEntity implements State {
 
     private int id;
     private State state;
+    private List<Observer> observers;
 
     /**
      * Create an door positioned in square (x,y)
@@ -15,6 +19,7 @@ public class Door extends ImmovableEntity implements State {
         super(dungeon, x, y);
         this.id = id;
         this.state = new Closed();
+        observers = new ArrayList<Observer>();
     }
     
 	
@@ -29,6 +34,24 @@ public class Door extends ImmovableEntity implements State {
 	@Override
 	public boolean isDoor() {
 		return true;
+	}
+	
+	@Override
+	public void attach(Observer o) {
+		observers.add(o);
+	}
+	
+	@Override
+	public void notifyObservers(String tag) {
+		if (observers == null) return;
+		for (Observer o : observers) {
+			o.update(this, tag);
+		}
+	}
+	
+	@Override
+	public void detach(Observer o) {
+		observers.remove(o);
 	}
 	
 }

@@ -1,6 +1,12 @@
 package unsw.dungeon;
 
-public class Treasure extends ImmovableEntity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Treasure extends Collectibles {
+
+	
+	private List<Observer> observers;
 	
     /**
      * Create a treasure positioned in square (x,y)
@@ -9,6 +15,7 @@ public class Treasure extends ImmovableEntity {
      */
     public Treasure(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
+        observers = new ArrayList<Observer>();
     }
 
 	@SuppressWarnings("null")
@@ -26,6 +33,7 @@ public class Treasure extends ImmovableEntity {
 	}
 	
 	@Override
+
     public boolean share(Entity item) {
 		if(item.isSwitch()||item.isPlayer()) return true;
 		return super.share(item);
@@ -34,6 +42,24 @@ public class Treasure extends ImmovableEntity {
 	@Override
 	public boolean isTreasure() {
 		return true;
+	}
+
+
+	public void attach(Observer o) {
+		observers.add(o);
+	}
+	
+	@Override
+	public void notifyObservers(String tag) {
+		if (observers == null) return;
+		for (Observer o : observers) {
+			o.update(this, tag);
+		}
+	}
+	
+	@Override
+	public void detach(Observer o) {
+		observers.remove(o);
 	}
 
 

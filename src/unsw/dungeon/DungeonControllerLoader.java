@@ -24,6 +24,10 @@ public class DungeonControllerLoader extends DungeonLoader {
     //Images
     private Image playerImage;
     private Image wallImage;
+    private Image LitBomb1;
+    private Image LitBomb2;
+    private Image LitBomb3;
+
     private Image exitImage;
     private Image doorImage; // closed version
     private Image switchImage;
@@ -51,7 +55,10 @@ public class DungeonControllerLoader extends DungeonLoader {
         bombImage = new Image("/bomb_unlit.png");
         potionImage = new Image("/brilliant_blue_new.png");
         swordImage = new Image("/greatsword_1_new.png");
-        
+        LitBomb1 = new Image("/bomb_lit_2.png");
+        LitBomb2 = new Image("/bomb_lit_3.png");
+        LitBomb3 = new Image("/bomb_lit_4.png");
+
     }
 
     @Override
@@ -129,6 +136,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
         trackExist(entity,view); //Testing purposes
+        if(entity.isBomb()) trackBombState((Bomb)entity,view);
         entities.add(view);
     }
 
@@ -142,6 +150,25 @@ public class DungeonControllerLoader extends DungeonLoader {
      * @param entity
      * @param node
      */
+    
+
+    private void trackBombState(Bomb bomb,Node node) {
+    	bomb.getState().addListener(new ChangeListener<Number>() {
+                @Override
+                public void changed(ObservableValue<? extends Number> observable,
+                        Number oldValue, Number newValue) {
+                	
+                	ImageView temp = (ImageView)node;
+            		if(newValue.equals(2)) {
+            			temp.setImage(LitBomb1);
+            		} else if (newValue.equals(3)) {
+                    	temp.setImage(LitBomb2);
+            		} else if (newValue.equals(4)) {
+                    	temp.setImage(LitBomb3);
+            		}
+                }
+            });
+    }
     
     private void trackExist(Entity sword, Node node) {
     	sword.getExist().addListener(new ChangeListener<Boolean>() {

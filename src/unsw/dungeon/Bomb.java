@@ -6,11 +6,15 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javafx.beans.property.SimpleIntegerProperty;
+
+
 public class Bomb extends Collectibles { 
 	
 	private static int seconds = 0;
 	private static Timer timer = new Timer();
 	private List<Observer> observers;
+	private SimpleIntegerProperty form;
 	private State state;
 	
     /**
@@ -21,6 +25,7 @@ public class Bomb extends Collectibles {
     public Bomb(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
         observers = new ArrayList<Observer>();
+        form = new SimpleIntegerProperty(0);
     }
     
 //    public static void main(String[] args) {
@@ -69,10 +74,13 @@ public class Bomb extends Collectibles {
             	if (seconds == 0) {
                 	setExist(true);
             	} else if (seconds < LIT1_SECONDS){
-                   
+                    form.set(2);
                 } else if (seconds < LIT2_SECONDS) {
+                    form.set(3);
                 	state = state.changeToLit1();
                 } else if (seconds < EXPLODE_SECONDS) {
+                    form.set(4);
+
                 	state = state.changeToLit2();
                 } else if (seconds == EXPLODE_SECONDS) {
                 	state = state.changeToExploded();
@@ -87,6 +95,10 @@ public class Bomb extends Collectibles {
         };
         timer.schedule(task, 0, 1000);
 
+    }
+    
+    public SimpleIntegerProperty getState() {
+    	return form;
     }
 	
 	/**

@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text; 
 
 /**
  * A JavaFX controller for the dungeon.
@@ -39,6 +40,8 @@ public class DungeonController {
     public void initialize() {
         Image ground = new Image("/dirt_0_new.png");
 
+        // set background 
+
         // Add the ground first so it is below all other entities
         for (int x = 0; x < dungeon.getWidth(); x++) {
             for (int y = 0; y < dungeon.getHeight(); y++) {
@@ -50,6 +53,8 @@ public class DungeonController {
             squares.getChildren().add(entity);
 
     }
+    
+
 
     @FXML
     public void handleKeyPress(KeyEvent event) {
@@ -70,8 +75,6 @@ public class DungeonController {
         	player.attack();
         	break;
         case Q:
-        	System.out.println(player.getPotion());
-        	System.out.println(player.isInvulnerable());
         	break;
         case SPACE:
         	player.plantBomb();
@@ -82,4 +85,3 @@ public class DungeonController {
     }
 
 }
-

@@ -40,6 +40,7 @@ public class Bomb extends Collectibles {
 	}
 	
     public void MyTimer() {
+    	System.out.println(state);
 
         TimerTask task;
         state = new Unlit();
@@ -58,7 +59,6 @@ public class Bomb extends Collectibles {
         	private final int LIT1_SECONDS = 2;
         	private final int LIT2_SECONDS = 3;
         	private final int EXPLODE_SECONDS = 4;
-        	
             @Override
             public void run() { 
             	if (seconds == 0) {
@@ -111,19 +111,26 @@ public class Bomb extends Collectibles {
      */
     protected void destroySurroundings() {
 
-		System.out.println(this.getX());
-		System.out.println(this.getY());
+
 
     	Dictionary<String, List<Entity>> surroundings = getSurrounding();
     	List<Entity> entities = surroundings.get("down");
     	entities.addAll(surroundings.get("up"));
     	entities.addAll(surroundings.get("left"));
     	entities.addAll(surroundings.get("right"));
+    	entities.addAll(surroundings.get("at")); //Minor error for at, because the "at" location also involves the bomb so
+    											//the bomb's
+    	
 		List<Entity> entitiesToDelete = new ArrayList<Entity>();
 		
 
     	for (Entity e : entities) {
     		if (e.isImmovable()) continue;
+    		if (e.isPlayer()) {
+    			Player tempPlayer = (Player)e;
+    			if (tempPlayer.isInvulnerable())continue;
+    		}
+    		if(e.isBomb())continue;
 			entitiesToDelete.add(e);
     	}
     	for (Entity a : entitiesToDelete) {

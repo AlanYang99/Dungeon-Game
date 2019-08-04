@@ -68,6 +68,11 @@ public class Enemy extends MovableEntity implements Observer {
 		}
 	}
 	
+	@Override
+	public boolean isEnemy() {
+		return true;
+	}
+	
 	
 	
 	

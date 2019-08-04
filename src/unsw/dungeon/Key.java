@@ -87,5 +87,11 @@ public class Key extends Collectibles {
 		return id;
 	}
 	
+	@Override
+    public boolean share(Entity item) {
+		if(item.isSwitch()||item.isPlayer()) return true;
+		return super.share(item);
+    }
+	
 
 }

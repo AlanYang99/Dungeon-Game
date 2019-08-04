@@ -42,6 +42,7 @@ class TestBomb {
 		assertEquals(bomb1.use(),true);
 		assertEquals(bomb1.getX(),-2);
 		assertEquals(bomb1.getY(),-2);
+		assertEquals(player1.getNumBombs(),0);
 		assertEquals(dungeon.getMap()[11][10].contains(wall1),true);
 		assertEquals(dungeon.getMap()[9][10].contains(wall2),true);
 		assertEquals(dungeon.getMap()[10][11].contains(boulder1),false);

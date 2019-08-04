@@ -82,7 +82,7 @@ public class Dungeon implements Observer {
     public void addEntity(Entity entity) {
     	if (entity == null) return;
         // entities.add(entity);
-    	
+
     	map[entity.getX()][entity.getY()].add(entity);
     	
     	entity.attach(this);

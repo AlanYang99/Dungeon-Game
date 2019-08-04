@@ -606,6 +606,18 @@
     "x": 10,
     "y": 12,
    	"type" : "enemy"
+    },
+    {
+    "x" : 12,
+    "y" : 5,
+    "id" : 1,
+    "type" : "key"
+    },
+    {
+    "x" : 15,
+    "y" : 5,
+    "id" : 2,
+    "type" : "key"
     }
   ],
   "goal-condition": {

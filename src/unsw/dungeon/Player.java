@@ -28,6 +28,7 @@ public class Player extends MovableEntity implements Observer {
         invulnerable = false;
     }
     
+    
 	/**
 	 * Moves an player upwards if it is legal to do so. If a boulder can be moved in the same direction,
 	 * the boulder will be moved before the player is moved.
@@ -46,9 +47,18 @@ public class Player extends MovableEntity implements Observer {
     	
     	if (super.moveUp()) {
     		List<Entity> entitiesToDelete = new ArrayList<Entity>();
+    		Key tempkey = null;
+    		boolean haveKey = key != null;
+    		Key prevKey = key;
     		for (Entity e : entities) {
-    			if(collectItem(e)) entitiesToDelete.add(e);
+    			if(collectItem(e)) {
+    				if (e.isKey() && haveKey) {
+    					tempkey = (Key)prevKey;
+    				}
+					entitiesToDelete.add(e);
+    			}
     		}
+    		if(tempkey != null) getDungeon().addEntity(tempkey);
     		for (Entity a : entitiesToDelete) {
     			getDungeon().getMap()[a.getX()][a.getY()].remove(a);
     			a.setX(-1);
@@ -77,9 +87,18 @@ public class Player extends MovableEntity implements Observer {
     	
     	if (super.moveDown()) {
     		List<Entity> entitiesToDelete = new ArrayList<Entity>();
+    		Key tempkey = null;
+    		boolean haveKey = key != null;
+    		Key prevKey = key;
     		for (Entity e : entities) {
-    			if(collectItem(e)) entitiesToDelete.add(e);
+    			if(collectItem(e)) {
+    				if (e.isKey() && haveKey) {
+    					tempkey = (Key)prevKey;
+    				}
+					entitiesToDelete.add(e);
+    			}
     		}
+    		if(tempkey != null) getDungeon().addEntity(tempkey);
     		for (Entity a : entitiesToDelete) {
     			getDungeon().getMap()[a.getX()][a.getY()].remove(a);
     			a.setX(-1);
@@ -104,21 +123,23 @@ public class Player extends MovableEntity implements Observer {
     	if (super.moveRight()) {
     	
     		List<Entity> entitiesToDelete = new ArrayList<Entity>();
+    		Key tempkey = null;
+    		boolean haveKey = key != null;
+    		Key prevKey = key;
     		for (Entity e : entities) {
-    			if(collectItem(e)) entitiesToDelete.add(e);
-//    			System.out.println(e.getClass());
+    			if(collectItem(e)) {
+    				if (e.isKey() && haveKey) {
+    					tempkey = (Key)prevKey;
+    				}
+					entitiesToDelete.add(e);
+    			}
     		}
+    		if(tempkey != null) getDungeon().addEntity(tempkey);
     		for (Entity a : entitiesToDelete) {
-//    			System.out.println("hi");
-//    			System.out.println(a);
-//    			System.out.println(a.getX());
-//    			System.out.println(a.getY());
-
     			getDungeon().getMap()[a.getX()][a.getY()].remove(a);
     			a.setX(-1);
     			a.setY(-1);  
-//    			System.out.println(a.getX());
-//    			System.out.println(a.getY());
+
     		}
     		return true;
     		
@@ -144,10 +165,20 @@ public class Player extends MovableEntity implements Observer {
     	if (super.moveLeft()) {
     	
     		List<Entity> entitiesToDelete = new ArrayList<Entity>();
+    		Key tempkey = null;
+    		boolean haveKey = key != null;
+    		Key prevKey = key;
     		for (Entity e : entities) {
-    			if(collectItem(e)) entitiesToDelete.add(e);
+    			if(collectItem(e)) {
+    				if (e.isKey() && haveKey) {
+    					tempkey = (Key)prevKey;
+    				}
+					entitiesToDelete.add(e);
+    			}
     		}
+    		if(tempkey != null) getDungeon().addEntity(tempkey);
     		for (Entity a : entitiesToDelete) {
+    		
     			getDungeon().getMap()[a.getX()][a.getY()].remove(a);
     			a.setX(-1);
     			a.setY(-1);    			
@@ -156,6 +187,17 @@ public class Player extends MovableEntity implements Observer {
     		
     	}
     	return false;
+    }
+    
+    public void attack() {
+    	if(sword != null)
+    		sword.use();
+    }
+    
+    public void plantBomb() {
+    	if(!(bombs.isEmpty())) 
+    		bombs.get(0).use();
+    	
     }
     
 	/**
@@ -182,7 +224,13 @@ public class Player extends MovableEntity implements Observer {
 	}
 
 	public void setPotion(Potion potion) {
+		invulnerable = true;
 		this.potion = potion;
+	}
+	
+	public void losePotion() {
+		invulnerable = false;
+		this.potion = null;
 	}
 
 	public Key getKey() {

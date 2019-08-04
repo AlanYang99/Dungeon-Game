@@ -149,15 +149,24 @@ public class DungeonControllerLoader extends DungeonLoader {
             public void changed(ObservableValue<? extends Boolean> observable,
                     Boolean oldValue, Boolean newValue) {
 //            	System.out.println("test2");
-    			System.out.println("hi");
-    			System.out.println(oldValue);
-    			System.out.println(newValue);
 ////    			node.prop
 //    			GridPane.setColumnIndex(node, 0);
 //    			GridPane.
-    			    			
-				ImageView im = (ImageView) node;
-				im.setImage(null);
+    			if(sword.isKey() && oldValue == false) {
+    		        GridPane.setColumnIndex(node, sword.getX());
+    		        GridPane.setRowIndex(node, sword.getY());    				
+					ImageView im = (ImageView) node;
+					im.setImage(keyImage);    					
+    			} else if (sword.isBomb() && oldValue == false){
+    		        GridPane.setColumnIndex(node, sword.getX());
+    		        GridPane.setRowIndex(node, sword.getY());
+					ImageView im = (ImageView) node;
+					im.setImage(bombImage);      		        
+    			} else {
+					ImageView im = (ImageView) node;
+					im.setImage(null);
+    			}
+				
 //    			GridPane.clearConstraints(node);
     			//Suggestions
     			//The trackposition method, adds all initial entities into
@@ -186,7 +195,6 @@ public class DungeonControllerLoader extends DungeonLoader {
             @Override
             public void changed(ObservableValue<? extends Number> observable,
                     Number oldValue, Number newValue) {
-            	System.out.println("test2");
                 GridPane.setColumnIndex(node, newValue.intValue());
             }
         });

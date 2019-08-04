@@ -21,20 +21,12 @@ public class Sword extends Collectibles {
 
 	@Override
 	public boolean collect() {
-//		System.out.println("hi");
 		// check player isn't already holding a sword
 		if (dungeon.getPlayer().getSword() != null) return false;
-//		System.out.println(dungeon.getPlayer().getSword());
-		
 		//give to player
 		dungeon.getPlayer().setSword(this);
 		setExist(false);
-//		System.out.println(dungeon.getPlayer().getSword());
-		// remove from dungeon map
-//		dungeon.getMap()[getX()][getY()].remove(this);
-		// set entity coordinates to null
-//		setX(-1);
-//		setY(-1);
+
 		return true;
 	}
 	
@@ -50,11 +42,5 @@ public class Sword extends Collectibles {
 		return true;
 	}
 	
-	
-//	@Override
-//    public boolean share(Entity item) {
-//    	if (item instanceof Player || item instanceof Switch) return true;
-//		return super.share(item);
-//    }
 
 }

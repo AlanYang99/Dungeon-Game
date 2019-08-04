@@ -99,9 +99,7 @@ public abstract class MovableEntity extends Entity {
     	}
         if (sharable && getX() < dungeon.getWidth() - 1) {
         	this.getDungeon().removeEntity(this);
-//        	System.out.println("test1");
             x().set(getX() + 1);
-//            System.out.println("test3");
             this.getDungeon().addEntity(this);
         }
         

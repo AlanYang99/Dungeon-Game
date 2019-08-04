@@ -30,6 +30,10 @@ public class DungeonController {
         this.player = dungeon.getPlayer();
         this.initialEntities = new ArrayList<>(initialEntities);
     }
+    
+    public void removeEntity(Object object) {
+    	squares.getChildren().remove(object);
+    }
 
     @FXML
     public void initialize() {
@@ -62,6 +66,16 @@ public class DungeonController {
         case RIGHT:
             player.moveRight();
             break;
+        case Z:
+        	player.attack();
+        	break;
+        case Q:
+        	System.out.println(player.getPotion());
+        	System.out.println(player.isInvulnerable());
+        	break;
+        case SPACE:
+        	player.plantBomb();
+        	break;
         default:
             break;
         }

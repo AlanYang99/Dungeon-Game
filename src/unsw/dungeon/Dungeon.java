@@ -26,6 +26,7 @@ public class Dungeon implements Observer {
     private List<Switch> switches;
     private List<Boulder> boulders;
     private List<Potion> potions;
+    private Exit exit;
     private Goal mainGoal;
     
     @SuppressWarnings("unchecked")
@@ -87,16 +88,18 @@ public class Dungeon implements Observer {
     	
     	entity.attach(this);
     	
-    	if (entity instanceof Enemy)
+    	if (entity.isEnemy())
     		enemies.add((Enemy)entity);
-    	if (entity instanceof Treasure)
+    	if (entity.isTreasure())
     		treasure.add((Treasure)entity);
     	if (entity.isSwitch())
     		switches.add((Switch)entity);
     	if (entity.isBoulder())
     		boulders.add((Boulder)entity);
-    	if (entity instanceof Potion)
+    	if (entity.isPotion())
     		potions.add((Potion)entity);
+    	if (entity.isExit())
+    		exit = (Exit)entity;
     	
     }
     
@@ -104,9 +107,9 @@ public class Dungeon implements Observer {
     	map[entity.getX()][entity.getY()].remove(entity);
     	
     	
-    	if (entity instanceof Enemy)
+    	if (entity.isEnemy())
     		enemies.remove((Enemy)entity);
-    	if (entity instanceof Treasure)
+    	if (entity.isTreasure())
     		treasure.remove((Treasure)entity);
     	if (entity.isSwitch())
     		switches.remove((Switch)entity);
@@ -187,7 +190,7 @@ public class Dungeon implements Observer {
     // - Enemy moves
 	@Override
 	public void update(Subject subject, String tag) {
-		if (subject instanceof Enemy && tag.equals("EnemyMove"))
+		if (((Entity)subject).isEnemy() && tag.equals("EnemyMove"))
 			handlePlayerEnemyClash(player, (Enemy)subject);
 		
 		

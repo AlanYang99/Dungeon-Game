@@ -11,5 +11,10 @@ public class Closed implements State {
 	public void changeToOpenIndefinitely(Entity e) {
 		e.state = new OpenIndefinitely();
 	}
+	
+	@Override
+    public boolean isClosed(Entity e) {
+    	return true;
+    }
 
 }

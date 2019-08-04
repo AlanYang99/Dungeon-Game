@@ -6,5 +6,10 @@ public class Open implements State {
 	public void changeToClosed(Entity e) {
 		 e.state = new Closed();
 	}
+	
+	@Override
+    public boolean isOpen(Entity e) {
+    	return true;
+    }
 
 }

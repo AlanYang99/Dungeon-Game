@@ -22,5 +22,9 @@ public class Exit extends ImmovableEntity {
     public void openExit() {
     	this.state.changeToOpenIndefinitely(this);
     }
+    
+    public State getState() {
+    	return this.state;
+    }
 
 }

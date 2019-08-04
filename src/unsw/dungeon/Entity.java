@@ -158,6 +158,22 @@ public abstract class Entity implements Subject {
     	return false;
     }
     
+    public boolean isEnemy() {
+    	return false;
+    }
+    
+    public boolean isTreasure() {
+    	return false;
+    }
+    
+    public boolean isExit() {
+    	return false;
+    }
+    
+    public boolean isPotion() {
+    	return false;
+    }
+    
     public boolean isSwitch() {
     	return false;
     }
@@ -171,6 +187,10 @@ public abstract class Entity implements Subject {
     }
     
     public boolean isKey() {
+    	return false;
+    }
+    
+    public boolean isSword() {
     	return false;
     }
     

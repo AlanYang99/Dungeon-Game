@@ -12,5 +12,9 @@ public class Exit extends ImmovableEntity {
         super(dungeon, x, y);
     }
     
+    @Override
+    public boolean isExit() {
+    	return true;
+    }
 
 }

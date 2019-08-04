@@ -46,5 +46,9 @@ public class Potion extends Collectibles implements Subject {
 		notifyObservers("PotionDeactivate");
 	}
 	
+	@Override
+	public boolean isPotion() {
+		return true;
+	}
 
 }

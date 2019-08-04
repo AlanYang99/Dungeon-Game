@@ -32,6 +32,10 @@ public class Player extends MovableEntity implements Observer {
 	/**
 	 * Moves an player upwards if it is legal to do so. If a boulder can be moved in the same direction,
 	 * the boulder will be moved before the player is moved.
+	 * 
+	 * @pre		Player is on the board
+	 * @post	Player is either in the same original position or moves 1 space to the adjacent upper cell
+	 * @inv		Player remains on the board (unless killed by bomb or enemy)
 	 */
     @Override
     public boolean moveUp() {
@@ -73,6 +77,10 @@ public class Player extends MovableEntity implements Observer {
 	/**
 	 * Moves an player downwards if it is legal to do so. If a boulder can be moved in the same direction,
 	 * the boulder will be moved before the player is moved.
+	 * 
+	 * @pre		Player is on the board
+	 * @post	Player is either in the same original position or moves 1 space to the adjacent bottom cell
+	 * @inv		Player remains on the board (unless killed by bomb or enemy)
 	 */
     @Override
     public boolean moveDown() {
@@ -109,6 +117,16 @@ public class Player extends MovableEntity implements Observer {
     	}
     	return false;
     }
+    
+	/**
+	 * Moves an player right if it is legal to do so. If a boulder can be moved in the same direction,
+	 * the boulder will be moved before the player is moved.
+	 * 
+	 * @pre		Player is on the board
+	 * @post	Player is either in the same original position or moves 1 space to the adjacent right cell
+	 * @inv		Player remains on the board (unless killed by bomb or enemy)
+	 */
+    
     @Override
     public boolean moveRight() {
     	List<Entity> entities = super.getSurrounding().get("right");
@@ -150,10 +168,15 @@ public class Player extends MovableEntity implements Observer {
     		
     	}
     	return false;
-    }        
+    }    
+    
 	/**
-	 * Moves an player to the left if it is legal to do so. If a boulder can be moved in the same direction,
+	 * Moves an player left if it is legal to do so. If a boulder can be moved in the same direction,
 	 * the boulder will be moved before the player is moved.
+	 * 
+	 * @pre		Player is on the board
+	 * @post	Player is either in the same original position or moves 1 space to the adjacent left cell
+	 * @inv		Player remains on the board (unless killed by bomb or enemy)
 	 */
     @Override
     public boolean moveLeft() {
@@ -208,12 +231,6 @@ public class Player extends MovableEntity implements Observer {
     	
     }
     
-	/**
-	 * Moves an player to the right if it is legal to do so. If a boulder can be moved in the same direction,
-	 * the boulder will be moved before the player is moved.
-	 */
-
-    
 	/** ==============================================
 	 *  Getters and setters
 	 *  ==============================================
@@ -256,6 +273,10 @@ public class Player extends MovableEntity implements Observer {
 	
 	/**
 	 * Adds treasure to the player's treasure collection
+	 * 
+	 * @pre		Player has 0 or more treasure collected
+	 * @post	Player has an additional treasure collected, the dungeon has one less treasure
+	 * @inv		The sum of treasure collected and remaining on the board remains the same
 	 */
 
 	public void addTreasures(Treasure treasure) {
@@ -264,13 +285,21 @@ public class Player extends MovableEntity implements Observer {
 	
 	/**
 	 * Adds bomb to the player's bomb collection
+	 * 
+	 * @pre		Player has 0 or more bombs collected
+	 * @post	Player has 1 or more bombs collected (in total)
+	 * @inv		
 	 */
 	public void addBomb(Bomb bomb) {
 		bombs.add(bomb);
 	}
 	
 	/**
-	 * Removes bomb from the player's bomb collection
+	 * Removes bomb to the player's bomb collection
+	 * 
+	 * @pre		Player has 1 or more bombs collected
+	 * @post	Player has 0 or more bombs collected
+	 * @inv
 	 */
 	public void dropBomb(Bomb bomb) {
 		bombs.remove(bomb);
@@ -324,11 +353,17 @@ public class Player extends MovableEntity implements Observer {
 	 *  ==============================================
 	 */
     
+	/**
+	 * Checks the entities that the player can share a cell with a given entity
+	 * 
+	 * @return 	Boolean value of whether cell can be shared
+	 */
+    
 	@Override
     public boolean share(Entity item) {
-    	if (item instanceof Switch || item instanceof Exit || item instanceof Enemy || 
-    			item instanceof Key || item instanceof Treasure || item instanceof Bomb ||
-    			item instanceof Potion || item instanceof Sword) return true;
+    	if (item.isSwitch() || item.isExit() || item.isEnemy() || 
+    			item.isKey() || item.isTreasure() || item.isBomb() ||
+    			item.isPotion() || item.isSword()) return true;
     	
 		return super.share(item);
     }
@@ -336,7 +371,7 @@ public class Player extends MovableEntity implements Observer {
 	@Override
 	public void update(Subject subject, String tag) {
 		// If the potion updates the player, it has either started or run out.
-		if (subject instanceof Potion) {
+		if (((Entity)subject).isPotion()) {
 			if (tag.equals("PotionActivate"))
 				invulnerable = true;
 			if (tag.equals("PotionDeactivate"))

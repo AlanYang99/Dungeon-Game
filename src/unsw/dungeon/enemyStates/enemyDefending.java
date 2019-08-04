@@ -13,6 +13,7 @@ public class enemyDefending implements MovementBehaviour {
 		
 		int[][] distMap = new int[width][height];
 		
+		int bigNum = 1000000;
 		// Convert entities you can walk through to 0 and entities you cannot to -1.
 		for (int x=0;x<width;x++) {
 			for (int y=0;y<height;y++) {
@@ -24,7 +25,7 @@ public class enemyDefending implements MovementBehaviour {
 				}
 				
 				if (walkable)
-					distMap[x][y] = 0;
+					distMap[x][y] = bigNum;
 				else
 					distMap[x][y] = -1;
 			}
@@ -33,7 +34,9 @@ public class enemyDefending implements MovementBehaviour {
 		int pX = player.getX();
 		int pY = player.getY();
 		
-		fill(pX, pY, 0, me, player, distMap);
+		fill(pX, pY, 0, player, distMap);
+		
+		printMap(distMap);
 		
 		int eX = me.getX();
 		int eY = me.getY();
@@ -44,10 +47,10 @@ public class enemyDefending implements MovementBehaviour {
 		neighbours[2] = distMap[eX+1][eY];
 		neighbours[3] = distMap[eX-1][eY];
 		
-		int max = neighbours[0];
-		int maxI = 0;
-		for (int i=1;i<4;i++) {
-			if (neighbours[i] < max) {
+		int max = -1;
+		int maxI = -1;
+		for (int i=0;i<4;i++) {
+			if (neighbours[i] != -1 &&  neighbours[i] > max && neighbours[i] != bigNum ) {
 				max = neighbours[i];
 				maxI = i;
 			}
@@ -70,28 +73,23 @@ public class enemyDefending implements MovementBehaviour {
 		
 	}
 	
-	public void fill(int x, int y, int oldVal, Enemy me, Player player, int[][] map) {
+	public void fill(int x, int y, int oldVal, Player player, int[][] map) {
+		int width = player.getDungeon().getWidth();
+		int height = player.getDungeon().getHeight();
+		
 		if (map[x][y] == -1) return;
-		if (x == player.getX() && y == player.getY() && oldVal != 0) return;
+		if (oldVal+1 >= map[x][y]) return;
 		
-		boolean alreadyPlaced = false;
-		if (map[x][y] > 0) alreadyPlaced = true;
+		map[x][y] = oldVal+1;
 		
-		//if (map[x][y] != 0 && map[x][y] < oldVal + 1)
-		
-		if (map[x][y] == 0 || map[x][y] >= oldVal + 1) {
-			map[x][y] = oldVal + 1;
-		}
-		
-		int val = map[x][y];
-		
-		if (alreadyPlaced) return;
-		if (x == me.getX() && y == me.getY()) return;
-		
-		fill(x, y+1, val, me, player, map);
-		fill(x, y-1, val, me, player, map);
-		fill(x+1, y, val, me, player, map);
-		fill(x-1, y, val, me, player, map);
+		if (y+1 <= height-1) 
+			fill(x, y+1, oldVal+1, player, map);
+		if (y-1 >= 0)
+			fill(x, y-1, oldVal+1, player, map);
+		if (x+1 <= width-1)
+			fill(x+1, y, oldVal+1, player, map);
+		if (x-1 >= 0)
+			fill(x-1, y, oldVal+1, player, map);
 		
 	}
 
@@ -99,4 +97,14 @@ public class enemyDefending implements MovementBehaviour {
 	public void toggleState(Enemy enemy) {
 		enemy.setState(new enemyAttacking());
 	}
+	
+	public void printMap(int[][] map) {
+		for (int y=0;y<map[0].length;y++) {
+			for (int x=0;x<map.length;x++) {
+				System.out.print(map[x][y] + " ");
+			}
+			System.out.println();
+		}
+	}
+	
 }

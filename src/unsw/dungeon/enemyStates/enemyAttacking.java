@@ -12,11 +12,6 @@ public class enemyAttacking implements MovementBehaviour {
 		int width = dungeon.getWidth();
 		int height = dungeon.getHeight();
 		
-		//System.out.println(width + ", " + height);
-		//System.out.println(dungeon.getMap().length + ", " + dungeon.getMap()[0].length);
-		
-		//System.out.println(dungeon.getEntities(3, 2));
-		
 		int[][] distMap = new int[width][height];
 		
 		// Convert entities you can walk through to 0 and entities you cannot to -1.
@@ -38,14 +33,10 @@ public class enemyAttacking implements MovementBehaviour {
 		
 		int pX = player.getX();
 		int pY = player.getY();
-		
-		//System.out.println(Arrays.deepToString(distMap).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));		
-		
+				
 		fill(pX, pY, 0, player, distMap);
 		
-		//System.out.println(Arrays.deepToString(distMap).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
-		//printMap(distMap);
-		//System.out.println("");
+		printMap(distMap);
 		
 		int eX = me.getX();
 		int eY = me.getY();
@@ -65,6 +56,7 @@ public class enemyAttacking implements MovementBehaviour {
 			}
 		}
 		
+		// If minI is -1, there is no single move to get closer to the player, and so don't do anything.
 		switch (minI) {
 		case 0:
 			me.moveDown();
@@ -100,38 +92,6 @@ public class enemyAttacking implements MovementBehaviour {
 		if (x-1 >= 0)
 			fill(x-1, y, oldVal+1, player, map);
 		
-		
-		
-		
-		
-		
-		/*
-		
-		if (map[x][y] == -1) return;
-		if (x == player.getX() && y == player.getY() && oldVal != 0) return;
-		
-		boolean alreadyPlaced = false;
-		if (map[x][y] > 0) alreadyPlaced = true;
-		
-		
-		
-		if (map[x][y] == 0 || map[x][y] >= oldVal + 1) {
-			map[x][y] = oldVal + 1;
-		}
-		
-		int val = map[x][y];
-		
-		if (alreadyPlaced) return;
-		
-		if (y+1 <= height-1) 
-			fill(x, y+1, val, player, map);
-		if (y-1 >= 0)
-			fill(x, y-1, val, player, map);
-		if (x+1 <= width-1)
-			fill(x+1, y, val, player, map);
-		if (x-1 >= 0)
-			fill(x-1, y, val, player, map);
-		*/
 	}
 
 	@Override
@@ -146,15 +106,6 @@ public class enemyAttacking implements MovementBehaviour {
 			}
 			System.out.println();
 		}
-		
-		/*
-		for (int[] x : map) {
-		   for (int y : x) {
-		        System.out.print(y + " ");
-		   }
-		   System.out.println();
-		}
-		*/
 	}
 	
 	

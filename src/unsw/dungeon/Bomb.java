@@ -48,8 +48,16 @@ public class Bomb extends Collectibles {
 
         TimerTask task;
         state = new Unlit();
-        setExist(true);
 
+        
+    	int x = dungeon.getPlayer().getX();
+		int y = dungeon.getPlayer().getY();
+		
+		this.setX(x);
+		this.setY(y);
+
+
+		dungeon.getMap()[x][y].add(this);
         task = new TimerTask() {
         	
         	private final int LIT1_SECONDS = 2;
@@ -58,7 +66,9 @@ public class Bomb extends Collectibles {
         	
             @Override
             public void run() { 
-            	if (seconds < LIT1_SECONDS){
+            	if (seconds == 0) {
+                	setExist(true);
+            	} else if (seconds < LIT1_SECONDS){
                     System.out.println("Seconds = " + seconds);
                 } else if (seconds < LIT2_SECONDS) {
                 	state = state.changeToLit1();
@@ -70,6 +80,7 @@ public class Bomb extends Collectibles {
                 } else if (seconds == EXPLODE_SECONDS) {
                 	state = state.changeToExploded();
                 	System.out.println("Explode");
+                    destroySurroundings();
                 	setExist(false);
                 } else {
                 	cancel();
@@ -91,14 +102,14 @@ public class Bomb extends Collectibles {
 		// TODO
 		// remove bomb from player
 		dungeon.getPlayer().dropBomb(this);
-		
-		// put bomb in player coordinates 
-		int x = dungeon.getPlayer().getX();
-		int y = dungeon.getPlayer().getY();
-		
-		this.setX(x);
-		this.setY(y);
-		dungeon.getMap()[x][y].add(this);
+//		
+//		// put bomb in player coordinates 
+//		int x = dungeon.getPlayer().getX();
+//		int y = dungeon.getPlayer().getY();
+//		
+//		this.setX(x);
+//		this.setY(y);
+//		dungeon.getMap()[x][y].add(this);
 		
         /**
          * Bomb timer, controls the state of the bomb after it has been "dropped".
@@ -107,10 +118,10 @@ public class Bomb extends Collectibles {
         MyTimer();
        // System.out.println(state);
 		// remove bomb from map after exploded
-        destroySurroundings();
-		dungeon.getMap()[x][y].remove(this);
-		setX(-2);
-		setY(-2);
+//        destroySurroundings();
+//		dungeon.getMap()[x][y].remove(this);
+//		setX(-2);
+//		setY(-2);
 		
 		return true;
 	}
@@ -128,6 +139,10 @@ public class Bomb extends Collectibles {
      * Will not destroy doors/walls/switches to the immediate top/bottom/left/right of the bomb.
      */
     protected void destroySurroundings() {
+
+		System.out.println(this.getX());
+		System.out.println(this.getY());
+
     	Dictionary<String, List<Entity>> surroundings = getSurrounding();
     	List<Entity> entities = surroundings.get("down");
     	entities.addAll(surroundings.get("up"));
@@ -148,6 +163,9 @@ public class Bomb extends Collectibles {
 			a.setX(-2);
 			a.setY(-2);    			
 		}
+		dungeon.getMap()[this.getX()][this.getY()].remove(this);
+		setX(-2);
+		setY(-2);
 	}
     
     @Override
@@ -159,3 +177,4 @@ public class Bomb extends Collectibles {
 
 
 }
+

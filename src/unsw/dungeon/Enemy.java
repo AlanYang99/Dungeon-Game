@@ -9,6 +9,7 @@ public class Enemy extends MovableEntity implements Observer {
 	
 	MovementBehaviour movement;
 	Player playerTracking;
+	int speed;
 	
     /**
      * Create an enemy positioned in square (x,y)
@@ -19,6 +20,7 @@ public class Enemy extends MovableEntity implements Observer {
         super(dungeon, x, y);
         playerTracking = dungeon.getPlayer();
         movement = new enemyAttacking();
+        speed = 100;
         
         Timer timer = new Timer();
         
@@ -27,7 +29,7 @@ public class Enemy extends MovableEntity implements Observer {
         	public void run() {
         	  move();
         	}
-        }, 0, 2*1000);
+        }, 0, speed);
         
     }
     

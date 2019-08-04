@@ -27,9 +27,9 @@ public interface State {
 	 * Bomb states
 	 * ==============
 	 */
-//    default public State changeToUnlit() {
-//    	throw new UnsupportedOperationException();
-//    }
+    default public State changeToUnlit() {
+    	throw new UnsupportedOperationException();
+    }
 
     
 	default public State changeToLit1() {
@@ -42,6 +42,25 @@ public interface State {
 	
 	default public State changeToExploded() {
 		throw new UnsupportedOperationException();	
+	}
+	
+	
+	/**
+	 * ==============
+	 * State boolean checks
+	 * ==============
+	 */	
+	
+    default public boolean isOpenIndefinitely(Entity e) {
+    	return false;
+    }
+    
+    default public boolean isOpen(Entity e) {
+    	return false;
+    }
+    
+	default public boolean isClosed(Entity e) {
+		return false;
 	}
 	
 }

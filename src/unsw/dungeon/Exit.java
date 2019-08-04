@@ -27,8 +27,6 @@ public class Exit extends ImmovableEntity {
     public void openExit() {
     	this.state.changeToOpenIndefinitely(this);
     }
-        
-    
     
     @Override
 	public void attach(Observer o) {
@@ -48,5 +46,10 @@ public class Exit extends ImmovableEntity {
 		observers.remove(o);
 	}
 
+
+    
+    public State getState() {
+    	return this.state;
+    }
 
 }

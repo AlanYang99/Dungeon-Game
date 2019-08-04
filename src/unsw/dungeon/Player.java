@@ -371,9 +371,12 @@ public class Player extends MovableEntity implements Observer {
     
 	@Override
     public boolean share(Entity item) {
-    	if (item.isSwitch() || item.isExit() || item.isEnemy() || 
+    	if (item.isSwitch() ||item.isEnemy() || 
     			item.isKey() || item.isTreasure() || item.isBomb() ||
     			item.isPotion() || item.isSword()) return true;
+    	
+    	// an open exit can be shared
+    	if (item.isExit() && ((Exit)item).getState().isOpen(item)) return true;
     	
 		return super.share(item);
     }

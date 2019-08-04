@@ -10,7 +10,7 @@ public class TreasureGoal implements Goal {
 	
 	@Override
 	public void update(Subject subject, String tag) {
-		if (subject instanceof Treasure && tag.equals("TreasureCollected")) {
+		if (((Entity)subject).isTreasure() && tag.equals("TreasureCollected")) {
 			treasureLeft--;
 		}
 		evaluate();

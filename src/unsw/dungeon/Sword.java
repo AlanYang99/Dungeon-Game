@@ -42,5 +42,16 @@ public class Sword extends Collectibles {
 		return true;
 	}
 	
+	@Override
+	public boolean isSword() {
+		return true;
+	}
+	
+	@Override
+    public boolean share(Entity item) {
+		if(item.isSwitch()||item.isPlayer()) return true;
+		return super.share(item);
+    }
+	
 
 }
